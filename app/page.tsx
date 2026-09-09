@@ -21,6 +21,7 @@ import BookingDrawer from "./components/BookingDrawer";
 import FloatingBookingBar from "./components/FloatingBookingBar";
 import ImageLightbox, { LightboxImage } from "./components/ImageLightbox";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function Home() {
   const [, setIsLoaded] = useState(false);
@@ -127,6 +128,9 @@ export default function Home() {
 
       {/* Editorial Footer with Architectural Credits & Provenance */}
       <Footer />
+
+      {/* Floating Scroll To Top Button */}
+      <ScrollToTop />
 
       {/* Private Concierge Reservation Desk */}
       <BookingDrawer

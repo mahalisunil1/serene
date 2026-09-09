@@ -170,6 +170,13 @@ export const GooeyTextReveal = React.forwardRef<
             aria: "auto",
           });
 
+          // 1. Apply the threshold filter to the lines so elements inside can melt together
+          split.lines.forEach((line) => {
+            const lineEl = line as HTMLElement;
+            lineEl.style.filter = `url(#${filterId}) blur(${LINE_EDGE_BLUR}px)`;
+          });
+
+          // 2. Wrap and prepare the specific items we want to animate (lines, words, or chars)
           const itemsToAnimate =
             splitBy === "chars"
               ? split.chars
@@ -180,7 +187,6 @@ export const GooeyTextReveal = React.forwardRef<
           itemsToAnimate.forEach((item) => {
             const itemElement = item as HTMLElement;
             itemElement.style.display = "inline-block";
-            itemElement.style.filter = `url(#${filterId}) blur(${LINE_EDGE_BLUR}px)`;
             itemElement.style.willChange = "filter, transform, opacity";
             layers.push(wrapItem(itemElement, blurAmount));
           });
@@ -214,9 +220,11 @@ export const GooeyTextReveal = React.forwardRef<
             // Restore crystal-clear subpixel rendering after reveal completes
             layers.forEach((layer) => {
               layer.style.filter = "none";
-              if (layer.parentElement) {
-                layer.parentElement.style.filter = "none";
-              }
+            });
+            splits.forEach((s) => {
+              s.lines.forEach((line) => {
+                (line as HTMLElement).style.filter = "none";
+              });
             });
             onComplete?.();
           },

@@ -59,7 +59,7 @@ export default function AmenitiesSection() {
               <span className="text-[#b5afa3]">/</span>
               <span>infrastructure & services</span>
             </div>
-            <GooeyTextReveal mode="scroll" start="top 85%" duration={1.6} stagger={0.1}>
+            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.1}>
               <h2 className="font-serif text-3xl sm:text-5xl text-[#111317] font-light tracking-tight">
                 Architectural Appointments <br />
                 <span className="italic font-normal text-[#8c7b68]">& Curated Services</span>

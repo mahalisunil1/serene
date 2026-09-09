@@ -202,7 +202,7 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
               <span>Spatial Traverse</span>
             </div>
 
-            <GooeyTextReveal mode="scroll" start="top 85%" duration={1.6} stagger={0.08}>
+            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light leading-tight mb-5">
                 A Journey Through <br />
                 <span className="italic font-normal text-[#8c7b68]">Proportion & Silence</span>

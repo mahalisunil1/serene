@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Maximize2, Sparkles, Layers, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import GooeyTextReveal from "@/components/ui/gooey-text-reveal";
 import { LightboxImage } from "./ImageLightbox";
 
 interface InteractiveFacadeProps {
@@ -117,10 +118,12 @@ export default function InteractiveFacade({
               <Layers className="w-3.5 h-3.5" />
               <span>Interactive Building Explorer</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light tracking-tight">
-              Vertical Architecture <br />
-              <span className="italic font-normal text-[#b58d5b]">& Elevation Anatomy</span>
-            </h2>
+            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
+              <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light tracking-tight">
+                Vertical Architecture <br />
+                <span className="italic font-normal text-[#b58d5b]">& Elevation Anatomy</span>
+              </h2>
+            </GooeyTextReveal>
           </div>
           <p className="max-w-md text-xs text-[#5a5750] font-mono leading-relaxed">
             Click on any tier of the B+G+5 neoclassical facade to inspect the architectural floor plans, ceiling heights, and interior vignettes designed by Reflections by Ankita.

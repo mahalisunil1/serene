@@ -115,7 +115,7 @@ export default function ArchitectureStory() {
               <Building2 className="w-4 h-4" />
               <span>Architectural Genesis</span>
             </div>
-            <GooeyTextReveal mode="scroll" start="top 85%" duration={1.6} stagger={0.08}>
+            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#111317] font-light tracking-tight">
                 Neoclassical Symmetry <br />
                 <span className="italic font-normal text-[#8c7b68]">Crafted for Eternity</span>

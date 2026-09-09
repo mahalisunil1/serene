@@ -1,160 +1,95 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { ArrowRight, Sparkles, Compass } from "lucide-react";
+import { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Sparkles } from "lucide-react";
 import GooeyTextReveal from "@/components/ui/gooey-text-reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MersiStatement() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeChapter, setActiveChapter] = useState(0);
-
-  const chapters = [
-    {
-      num: "01",
-      tag: "THE MONOGRAPH MANIFESTO",
-      title: "Silence & Classical Symmetry",
-      quote: "Conceived by Reflections by Ankita, where European neoclassical order yields to the sacred stillness of the Bay of Bengal.",
-      subtext: "Structure B+G+5 • Fluted Corinthian Orders • Puri Coastline",
-    },
-    {
-      num: "02",
-      tag: "MATERIAL PROVENANCE",
-      title: "Carved from Sacred Coastal Stone",
-      quote: "Bleached oak joinery, Lingraj natural stone, and Italian Calacatta marble converge in pure, quiet tactile elegance.",
-      subtext: "Natural Minerals • Hand-Painted Ceramic Museum Wall • Lingraj Granite",
-    },
-    {
-      num: "03",
-      tag: "THE SANCTUARY PROMISE",
-      title: "Where Sacred Geometry Meets Infinity",
-      quote: "A timeless haven where morning temple bells meet the eternal whisper of ocean tides.",
-      subtext: "Blue Flag Beach 450m • Rooftop Striped Lap Pool • 30-Seater Gastronomic Atelier",
-    },
-  ];
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const container = containerRef.current;
-      if (!container) return;
+      const section = sectionRef.current;
+      const image = imageRef.current;
 
-      // ScrollTrigger to track scrub progress across 3 chapters
-      ScrollTrigger.create({
-        trigger: container,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.8,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress < 0.33) {
-            setActiveChapter(0);
-          } else if (progress < 0.68) {
-            setActiveChapter(1);
-          } else {
-            setActiveChapter(2);
-          }
+      if (!section || !image) return;
+
+      // Parallax effect on the background image
+      gsap.to(image, {
+        yPercent: 20, // Moves the image down as you scroll past
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom", // Start when the top of the section hits the bottom of the viewport
+          end: "bottom top", // End when the bottom of the section hits the top of the viewport
+          scrub: true,
         },
       });
     },
-    { scope: containerRef }
+    { scope: sectionRef }
   );
-
-  const current = chapters[activeChapter];
 
   return (
     <section
       id="statement"
-      ref={containerRef}
-      className="relative h-[260vh] bg-[#14161b] text-[#f7f4ee] overflow-visible"
+      ref={sectionRef}
+      className="relative h-[110vh] min-h-[800px] w-full overflow-hidden bg-[#0a0b0d] flex items-center justify-center"
     >
-      {/* Pinned Full-Viewport Stage */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-between py-12 px-6 md:px-16 overflow-hidden">
-        {/* Background Atmospheric Lighting & Geometry */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(197,168,128,0.12)_0%,transparent_70%)] rounded-full blur-3xl" />
-          <div className="absolute inset-0 bg-[radial-gradient(#c5a880_1px,transparent_1px)] [background-size:40px_40px] opacity-10" />
+      {/* ── Parallax Background Image ──────────────────────────────────── */}
+      {/* The container is taller than the section (-top-20% and h-140%) 
+          to give GSAP room to move it via yPercent without exposing edges. */}
+      <div
+        ref={imageRef}
+        className="absolute -top-[20%] left-0 w-full h-[140%] will-change-transform z-0"
+      >
+        <Image
+          src="/images/hotel/reception-lounge.jpg"
+          alt="Serene Reception Lounge"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* ── Atmospheric Overlays ───────────────────────────────────────── */}
+      <div className="absolute inset-0 z-10 bg-black/40 pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0a0b0d]/90 via-transparent to-[#0a0b0d]/90 pointer-events-none" />
+
+      {/* ── Foreground Content ─────────────────────────────────────────── */}
+      <div className="relative z-20 max-w-5xl mx-auto w-full px-6 text-center">
+        <div className="inline-flex items-center justify-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#c5a880]/30 text-[#c5a880] text-[10px] font-mono uppercase tracking-[0.3em] mb-10 backdrop-blur-sm shadow-xl">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>The Monograph Manifesto</span>
         </div>
 
-        {/* Top Status Header */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex items-center justify-between pb-6 border-b border-white/10 text-xs font-mono">
-          <div className="flex items-center space-x-3 text-[#c5a880]">
-            <Compass className="w-4 h-4 animate-spin-slow" />
-            <span className="uppercase tracking-[0.3em] font-semibold">
-              The Pinned Manifesto • Chapter {current.num} of 03
-            </span>
-          </div>
+        <GooeyTextReveal
+          mode="scroll"
+          splitBy="words"
+          start="top 85%"
+          duration={1.6}
+          stagger={0.08}
+          blurAmount={0.5}
+          ease="power3.out"
+        >
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white font-light tracking-tight leading-[1.1] max-w-4xl mx-auto italic">
+            &ldquo;Where European neoclassical order yields to the sacred stillness of the Bay of Bengal.&rdquo;
+          </h2>
+        </GooeyTextReveal>
 
-          <div className="flex items-center space-x-2">
-            {[0, 1, 2].map((idx) => (
-              <div
-                key={idx}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  activeChapter === idx ? "w-8 bg-[#c5a880]" : "w-2 bg-white/20"
-                }`}
-              />
-            ))}
-          </div>
+        <div className="mt-12 flex justify-center">
+          <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#c5a880] to-transparent opacity-60" />
         </div>
 
-        {/* Center: Monumental Scrubbed Liquid Gooey Typography Stage */}
-        <div className="relative z-10 max-w-5xl mx-auto w-full my-auto text-center py-8">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#c5a880]/30 text-[#c5a880] text-[10px] font-mono uppercase tracking-[0.3em] mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{current.tag}</span>
-          </div>
-
-          {/* Keyed Gooey Reveal that melts between chapters */}
-          <div key={`title-${activeChapter}`} className="mb-6">
-            <GooeyTextReveal
-              mode="immediate"
-              splitBy="words"
-              duration={1.4}
-              stagger={0.06}
-              blurAmount={0.55}
-            >
-              <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-light tracking-tight leading-[1.05]">
-                {current.title}
-              </h2>
-            </GooeyTextReveal>
-          </div>
-
-          <div key={`quote-${activeChapter}`} className="max-w-2xl mx-auto mb-8">
-            <GooeyTextReveal
-              mode="immediate"
-              splitBy="words"
-              duration={1.2}
-              delay={0.15}
-              stagger={0.04}
-              blurAmount={0.35}
-            >
-              <p className="text-sm sm:text-lg text-white/80 font-serif italic leading-relaxed font-light">
-                &ldquo;{current.quote}&rdquo;
-              </p>
-            </GooeyTextReveal>
-          </div>
-
-          {/* Subtext provenance tag */}
-          <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#c5a880]/90">
-            ✦ {current.subtext}
-          </div>
-        </div>
-
-        {/* Bottom Interactive Navigation */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono uppercase tracking-[0.25em] text-white/50 pt-6 border-t border-white/10 gap-4">
-          <div>Scrub scrollbar to morph through chapters</div>
-          <a
-            href="#architecture"
-            className="text-[#c5a880] hover:text-white transition-colors flex items-center space-x-2"
-          >
-            <span>Explore Building Anatomy</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-          <div>Reflections by Ankita • 2026</div>
-        </div>
+        <p className="mt-6 text-[11px] sm:text-xs font-mono uppercase tracking-[0.4em] text-[#c5a880]/80">
+          Reflections by Ankita
+        </p>
       </div>
     </section>
   );

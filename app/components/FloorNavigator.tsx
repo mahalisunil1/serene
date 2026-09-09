@@ -162,7 +162,7 @@ export default function FloorNavigator() {
               <span className="text-[#b5afa3]">/</span>
               <span>Engineering Dossier</span>
             </div>
-            <GooeyTextReveal mode="scroll" start="top 85%" duration={1.6} stagger={0.08}>
+            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#111317] font-light tracking-tight">
                 Interactive Floor Dossier <br />
                 <span className="italic font-normal text-[#8c7b68]">By Reflections by Ankita</span>

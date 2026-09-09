@@ -193,7 +193,7 @@ export default function PuriDestination({ onOpenBooking }: PuriDestinationProps)
                 <Compass className="w-3.5 h-3.5" />
                 <span>Sacred Puri Cartography & Experiences</span>
               </div>
-              <GooeyTextReveal mode="scroll" start="top 85%" duration={1.6} stagger={0.08} className="mb-4">
+              <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08} className="mb-4">
                 <h2 className="font-serif text-3xl sm:text-5xl text-[#14161b] font-light tracking-tight">
                   Puri: The Ocean of <br />
                   <span className="italic font-normal text-[#b58d5b]">Eternal Grace</span>

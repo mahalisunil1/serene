@@ -167,7 +167,7 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
               <Utensils className="w-3.5 h-3.5" />
               <span>Gastronomic Atelier & Breakfast Buffet</span>
             </div>
-            <GooeyTextReveal mode="scroll" start="top 85%" duration={1.6} stagger={0.08}>
+            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light tracking-tight">
                 The 30-Seater Restaurant <br />
                 <span className="italic font-normal text-[#b58d5b]">& Artisanal Buffet</span>

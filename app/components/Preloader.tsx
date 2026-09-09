@@ -32,18 +32,18 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     tl.to(contentRef.current, {
       opacity: 0,
       y: -10,
-      duration: 0.3,
+      duration: 0.5,
       ease: "power2.inOut",
     })
-      // Pure warm alabaster veil slides up smoothly like fine silk
+      // Cream veil slides up slowly, cinematically
       .to(
         curtainRef.current,
         {
           yPercent: -100,
-          duration: 0.8,
-          ease: "power4.inOut",
+          duration: 1.8,
+          ease: "power3.inOut",
         },
-        "-=0.1"
+        "-=0.2"
       );
   };
 
@@ -82,10 +82,10 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       onClick={dismiss}
       className="fixed inset-0 z-[99999] pointer-events-auto cursor-pointer select-none overflow-hidden"
     >
-      {/* Warm Alabaster Silk Veil (Clean, Minimal, Pure) */}
+      {/* Warm Cream Silk Veil */}
       <div
         ref={curtainRef}
-        className="absolute inset-0 bg-[#f7f4ee] flex flex-col items-center justify-center will-change-transform"
+        className="absolute inset-0 bg-[#f5ede0] flex flex-col items-center justify-center will-change-transform"
       >
         <div
           ref={contentRef}
