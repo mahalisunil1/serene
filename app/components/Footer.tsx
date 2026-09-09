@@ -61,7 +61,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-[#e6dfd4] border-t border-[rgba(17,19,23,0.12)] pt-24 pb-14 px-6 md:px-12 text-[#5e5b54] relative overflow-hidden"
+      className="bg-[#e6dfd4] border-t border-[rgba(17,19,23,0.12)] pt-16 sm:pt-20 pb-10 px-6 md:px-12 text-[#5a5750] relative overflow-hidden"
     >
       {/* Giant Parallax Drifting Architectural Monogram Watermark */}
       <div
@@ -76,7 +76,7 @@ export default function Footer() {
       <div
         ref={watermarkRef}
         aria-hidden="true"
-        className="absolute top-8 left-0 w-full pointer-events-none select-none text-center font-mono text-[9px] uppercase tracking-[0.6em] text-[#14161b] opacity-[0.08] will-change-transform"
+        className="absolute top-6 left-0 w-full pointer-events-none select-none text-center font-mono text-[9px] uppercase tracking-[0.6em] text-[#14161b] opacity-[0.08] will-change-transform"
       >
         19°48&apos;07&quot;N 85°50&apos;22&quot;E • ARCHITECTURE BY REFLECTIONS BY ANKITA • PURI DHAM
       </div>
@@ -85,30 +85,30 @@ export default function Footer() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[rgba(140,123,104,0.08)] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16 pb-16 border-b border-[rgba(17,19,23,0.1)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12 pb-12 border-b border-[rgba(17,19,23,0.1)]">
           {/* Brand & Narrative */}
           <div className="lg:col-span-4">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 rounded-full border border-[rgba(17,19,23,0.25)] flex items-center justify-center bg-[#111317]/5 shadow-xs">
-                <span className="font-serif text-xl text-[#111317] font-light">S</span>
+            <div className="flex items-center space-x-3 mb-5">
+              <div className="w-10 h-10 rounded-full border border-[rgba(17,19,23,0.25)] flex items-center justify-center bg-[#14161b]/5 shadow-xs">
+                <span className="font-serif text-xl text-[#14161b] font-light">S</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-2xl tracking-[0.2em] text-[#111317] font-light">
+                <span className="font-serif text-xl sm:text-2xl tracking-[0.15em] text-[#14161b] font-light">
                   HOTEL SERENE
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.35em] text-[#7a766e] font-mono">
+                <span className="text-[9.5px] uppercase tracking-[0.35em] text-[#7a6e5d] font-mono">
                   puri • sanctuaire b+g+5
                 </span>
               </div>
             </div>
-            <p className="text-xs text-[#5e5b54] font-light leading-relaxed mb-6">
+            <p className="text-xs sm:text-sm text-[#4a4740] font-sans font-light leading-relaxed mb-5">
               A contemporary neoclassical hotel on the shores of Puri, Odisha. Defined by classical Corinthian symmetry, panoramic rooftop lap pool, and mindful coastal quietude.
             </p>
-            <div className="p-4 rounded-xl bg-[#ede7de] border border-[rgba(17,19,23,0.1)] text-[11px] font-mono shadow-xs">
+            <div className="p-3.5 rounded-xl bg-[#ede7de] border border-[rgba(17,19,23,0.1)] text-[11px] font-mono shadow-xs">
               <span className="text-[#8c7b68] font-semibold block mb-1">ARCHITECTURAL PROVENANCE:</span>
-              <span className="text-[#5e5b54]">
+              <span className="text-[#5a5750]">
                 Interior Architecture & 3D Dossier by{" "}
-                <strong className="text-[#111317] font-medium">Reflections by Ankita</strong> (October 25, 2024)
+                <strong className="text-[#14161b] font-medium">Reflections by Ankita</strong> (October 25, 2024)
               </span>
             </div>
           </div>

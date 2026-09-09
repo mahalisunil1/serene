@@ -148,7 +148,7 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
     <section
       ref={sectionRef}
       id="dining"
-      className="py-24 md:py-36 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
     >
       {/* Background Watermark Parallax Drift */}
       <div
@@ -161,23 +161,23 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 pb-8 border-b border-[rgba(20,22,27,0.08)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6 pb-6 border-b border-[rgba(20,22,27,0.08)]">
           <div>
-            <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
+            <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
               <Utensils className="w-3.5 h-3.5" />
               <span>Gastronomic Atelier & Breakfast Buffet</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
-              <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 The 30-Seater Restaurant <br />
                 <span className="italic font-normal text-[#b58d5b]">& Artisanal Buffet</span>
               </h2>
             </GooeyTextReveal>
           </div>
 
-          <div className="flex flex-col text-xs text-[#5a5750] font-mono max-w-md">
+          <div className="flex flex-col text-xs sm:text-sm text-[#4a4740] font-sans font-light max-w-md">
             <GooeyTextReveal mode="scroll" start="top 80%" duration={1.4} delay={0.15} className="mb-4">
-              <p className="leading-relaxed font-light">
+              <p className="leading-relaxed">
                 457 sq. ft. of intimate dining framed by mint vertical fluting, Italian Calacatta marble tables, 
                 and a museum-grade feature wall of monochrome hand-painted ceramic plates.
               </p>

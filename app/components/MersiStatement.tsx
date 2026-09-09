@@ -40,7 +40,7 @@ export default function MersiStatement() {
     <section
       id="statement"
       ref={sectionRef}
-      className="relative h-[110vh] min-h-[800px] w-full overflow-hidden bg-[#0a0b0d] flex items-center justify-center"
+      className="relative h-[85vh] min-h-[600px] w-full overflow-hidden bg-[#0a0b0d] flex items-center justify-center"
     >
       {/* ── Parallax Background Image ──────────────────────────────────── */}
       {/* The container is taller than the section (-top-20% and h-140%) 
@@ -64,7 +64,7 @@ export default function MersiStatement() {
 
       {/* ── Foreground Content ─────────────────────────────────────────── */}
       <div className="relative z-20 max-w-5xl mx-auto w-full px-6 text-center">
-        <div className="inline-flex items-center justify-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#c5a880]/30 text-[#c5a880] text-[10px] font-mono uppercase tracking-[0.3em] mb-10 backdrop-blur-sm shadow-xl">
+        <div className="inline-flex items-center justify-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#c5a880]/30 text-[#c5a880] text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] mb-8 backdrop-blur-sm shadow-xl">
           <Sparkles className="w-3.5 h-3.5" />
           <span>The Monograph Manifesto</span>
         </div>
@@ -78,16 +78,16 @@ export default function MersiStatement() {
           blurAmount={0.5}
           ease="power3.out"
         >
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white font-light tracking-tight leading-[1.1] max-w-4xl mx-auto italic">
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-light tracking-tight leading-[1.2] max-w-4xl mx-auto italic">
             &ldquo;Where European neoclassical order yields to the sacred stillness of the Bay of Bengal.&rdquo;
           </h2>
         </GooeyTextReveal>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-8 flex justify-center">
           <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#c5a880] to-transparent opacity-60" />
         </div>
 
-        <p className="mt-6 text-[11px] sm:text-xs font-mono uppercase tracking-[0.4em] text-[#c5a880]/80">
+        <p className="mt-5 text-[10px] sm:text-xs font-mono uppercase tracking-[0.4em] text-[#c5a880]/80">
           Reflections by Ankita
         </p>
       </div>

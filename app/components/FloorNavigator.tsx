@@ -142,7 +142,7 @@ export default function FloorNavigator() {
     <section
       ref={sectionRef}
       id="blueprints"
-      className="py-24 md:py-36 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)] relative overflow-hidden"
     >
       {/* Background CAD Watermark */}
       <div
@@ -155,23 +155,23 @@ export default function FloorNavigator() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-8 border-b border-[rgba(17,19,23,0.1)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6 pb-6 border-b border-[rgba(17,19,23,0.1)]">
           <div>
-            <div className="flex items-center space-x-3 text-[10px] font-mono uppercase tracking-[0.35em] text-[#8c7b68] mb-3 font-semibold">
+            <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#8c7b68] mb-3 font-semibold">
               <span>Folio VII</span>
               <span className="text-[#b5afa3]">/</span>
               <span>Engineering Dossier</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
-              <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#111317] font-light tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 Interactive Floor Dossier <br />
                 <span className="italic font-normal text-[#8c7b68]">By Reflections by Ankita</span>
               </h2>
             </GooeyTextReveal>
           </div>
           <GooeyTextReveal mode="scroll" start="top 80%" duration={1.4} delay={0.15}>
-            <p className="max-w-md text-xs text-[#5e5b54] font-mono leading-relaxed">
-              [ ARCHIVAL INTERACTION ]: Navigate through the engineering and interior plans across every tier 
+            <p className="max-w-md text-xs sm:text-sm text-[#4a4740] font-sans font-light leading-relaxed">
+              Navigate through the engineering and interior plans across every tier 
               of Hotel Serene, verifying spatial circulation and room dimensions.
             </p>
           </GooeyTextReveal>

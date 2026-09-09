@@ -49,25 +49,25 @@ export default function AmenitiesSection() {
   ];
 
   return (
-    <section className="py-24 md:py-36 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)]">
+    <section className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)]">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-8 border-b border-[rgba(17,19,23,0.1)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6 pb-6 border-b border-[rgba(17,19,23,0.1)]">
           <div>
-            <div className="flex items-center space-x-3 text-[10px] font-mono lowercase tracking-[0.35em] text-[#8c7b68] mb-3 font-medium">
-              <span>folio viii</span>
+            <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#8c7b68] mb-3 font-semibold">
+              <span>Folio VIII</span>
               <span className="text-[#b5afa3]">/</span>
-              <span>infrastructure & services</span>
+              <span>Infrastructure & Services</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.1}>
-              <h2 className="font-serif text-3xl sm:text-5xl text-[#111317] font-light tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 Architectural Appointments <br />
                 <span className="italic font-normal text-[#8c7b68]">& Curated Services</span>
               </h2>
             </GooeyTextReveal>
           </div>
           <GooeyTextReveal mode="scroll" start="top 80%" duration={1.4} delay={0.15}>
-            <p className="max-w-md text-xs text-[#5e5b54] font-mono leading-relaxed">
+            <p className="max-w-md text-xs sm:text-sm text-[#4a4740] font-sans font-light leading-relaxed">
               Every convenience has been structurally integrated into the B+G+5 blueprints 
               to ensure effortless tranquility and discrete operational precision.
             </p>

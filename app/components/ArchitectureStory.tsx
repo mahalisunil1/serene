@@ -97,7 +97,7 @@ export default function ArchitectureStory() {
     <section
       ref={sectionRef}
       id="architecture"
-      className="relative py-24 md:py-32 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)] overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)] overflow-hidden"
     >
       {/* Background Architectural Drafting Coordinate Watermark */}
       <div
@@ -109,22 +109,22 @@ export default function ArchitectureStory() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
           <div>
-            <div className="flex items-center space-x-2 text-xs uppercase tracking-[0.3em] text-[#8c7b68] font-mono mb-3 font-semibold">
-              <Building2 className="w-4 h-4" />
+            <div className="flex items-center space-x-2 text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[#8c7b68] font-mono mb-3 font-semibold">
+              <Building2 className="w-3.5 h-3.5" />
               <span>Architectural Genesis</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
-              <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#111317] font-light tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 Neoclassical Symmetry <br />
                 <span className="italic font-normal text-[#8c7b68]">Crafted for Eternity</span>
               </h2>
             </GooeyTextReveal>
           </div>
           <GooeyTextReveal mode="scroll" start="top 80%" duration={1.4} delay={0.2}>
-            <p className="max-w-md text-sm text-[#5e5b54] leading-relaxed font-light">
-              Conceived by the visionary studio <strong className="text-[#111317] font-normal">Reflections by Ankita</strong>, 
+            <p className="max-w-md text-sm sm:text-base text-[#4a4740] leading-relaxed font-light">
+              Conceived by the visionary studio <strong className="text-[#14161b] font-normal">Reflections by Ankita</strong>, 
               Hotel Serene blends classical European column orders with the sacred spiritual atmosphere 
               of coastal Puri.
             </p>
@@ -132,7 +132,7 @@ export default function ArchitectureStory() {
         </div>
 
         {/* Interactive Facade Blueprint & Elevation Viewer with Parallax Depth */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left: Elevation Board with Parallax Depth */}
           <div className="lg:col-span-7 relative group rounded-2xl overflow-hidden p-3 bg-[#f4efe6] border border-[rgba(17,19,23,0.12)] shadow-xl">
             <div className="relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden rounded-xl bg-[#f8f5ef]">
@@ -149,7 +149,7 @@ export default function ArchitectureStory() {
               {/* Floating Overlay Dimension Tag (Parallax Depth) */}
               <div
                 ref={floatingStampRef}
-                className="absolute top-4 left-4 bg-[#ede7de]/95 backdrop-blur-md px-3.5 py-2 rounded-xl text-[10px] font-mono uppercase text-[#111317] tracking-widest border border-[rgba(17,19,23,0.14)] font-semibold shadow-md flex items-center gap-2 will-change-transform"
+                className="absolute top-4 left-4 bg-[#ede7de]/95 backdrop-blur-md px-3.5 py-2 rounded-xl text-[10px] font-mono uppercase text-[#14161b] tracking-widest border border-[rgba(17,19,23,0.14)] font-semibold shadow-md flex items-center gap-2 will-change-transform"
               >
                 <Compass className="w-3 h-3 text-[#8c7b68]" />
                 <span>STRUCTURE B+G+5 • ELEVATION A2</span>
@@ -162,8 +162,8 @@ export default function ArchitectureStory() {
                     onClick={() => setActiveView("front")}
                     className={`px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
                       activeView === "front"
-                        ? "bg-[#111317] text-[#ede7de] font-semibold shadow-sm"
-                        : "text-[#5e5b54] hover:text-[#111317]"
+                        ? "bg-[#14161b] text-[#ede7de] font-semibold shadow-sm"
+                        : "text-[#5e5b54] hover:text-[#14161b]"
                     }`}
                   >
                     Frontal Elevation
@@ -172,8 +172,8 @@ export default function ArchitectureStory() {
                     onClick={() => setActiveView("side")}
                     className={`px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
                       activeView === "side"
-                        ? "bg-[#111317] text-[#ede7de] font-semibold shadow-sm"
-                        : "text-[#5e5b54] hover:text-[#111317]"
+                        ? "bg-[#14161b] text-[#ede7de] font-semibold shadow-sm"
+                        : "text-[#5e5b54] hover:text-[#14161b]"
                     }`}
                   >
                     3D Perspective
@@ -184,65 +184,65 @@ export default function ArchitectureStory() {
           </div>
 
           {/* Right: Architectural Highlights & Specs (Staggered Parallax Depth) */}
-          <div className="lg:col-span-5 flex flex-col space-y-6">
+          <div className="lg:col-span-5 flex flex-col space-y-5">
             <div
               ref={card1Ref}
-              className="p-6 rounded-2xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-sm hover:shadow-md transition-shadow will-change-transform"
+              className="p-5 sm:p-6 rounded-2xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-sm hover:shadow-md transition-shadow will-change-transform"
             >
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-[#111317]/5 flex items-center justify-center text-[#111317]">
-                  <Ruler className="w-4 h-4" />
+              <div className="flex items-center space-x-3 mb-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#14161b]/5 flex items-center justify-center text-[#14161b]">
+                  <Ruler className="w-4 h-4 text-[#8c7b68]" />
                 </div>
-                <h3 className="font-serif text-xl text-[#111317]">Fluted Corinthian Pilasters</h3>
+                <h3 className="font-serif text-lg sm:text-xl text-[#14161b] font-light">Fluted Corinthian Pilasters</h3>
               </div>
-              <p className="text-xs text-[#5e5b54] leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#4a4740] leading-relaxed font-light">
                 Rising continuously from the 1st through the 5th floor, the classical columns provide soaring vertical cadence, framing cantilevered balconies with wrought-iron railings.
               </p>
             </div>
 
             <div
               ref={card2Ref}
-              className="p-6 rounded-2xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-sm hover:shadow-md transition-shadow will-change-transform"
+              className="p-5 sm:p-6 rounded-2xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-sm hover:shadow-md transition-shadow will-change-transform"
             >
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-[#111317]/5 flex items-center justify-center text-[#111317]">
-                  <Layers className="w-4 h-4" />
+              <div className="flex items-center space-x-3 mb-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#14161b]/5 flex items-center justify-center text-[#14161b]">
+                  <Layers className="w-4 h-4 text-[#8c7b68]" />
                 </div>
-                <h3 className="font-serif text-xl text-[#111317]">Charcoal Granite Spandrels</h3>
+                <h3 className="font-serif text-lg sm:text-xl text-[#14161b] font-light">Charcoal Granite Spandrels</h3>
               </div>
-              <p className="text-xs text-[#5e5b54] leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#4a4740] leading-relaxed font-light">
                 Intricately embossed dark granite panels contrast dramatically against the alabaster white cornice and decorative parapet moldings.
               </p>
             </div>
 
             <div
               ref={card3Ref}
-              className="p-6 rounded-2xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-sm hover:shadow-md transition-shadow will-change-transform"
+              className="p-5 sm:p-6 rounded-2xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-sm hover:shadow-md transition-shadow will-change-transform"
             >
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-[#111317]/5 flex items-center justify-center text-[#111317]">
-                  <Eye className="w-4 h-4" />
+              <div className="flex items-center space-x-3 mb-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#14161b]/5 flex items-center justify-center text-[#14161b]">
+                  <Eye className="w-4 h-4 text-[#8c7b68]" />
                 </div>
-                <h3 className="font-serif text-xl text-[#111317]">Double-Height Glass Lobby</h3>
+                <h3 className="font-serif text-lg sm:text-xl text-[#14161b] font-light">Double-Height Glass Lobby</h3>
               </div>
-              <p className="text-xs text-[#5e5b54] leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#4a4740] leading-relaxed font-light">
                 An illuminated ground entrance flanked by stainless steel glass balustrades welcomes guests directly into a 30-foot waiting salon with 3D geometric blue panels.
               </p>
             </div>
 
             {/* Technical Metadata Matrix */}
-            <div className="grid grid-cols-3 gap-3 pt-2 text-center">
-              <div className="p-3.5 rounded-xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-xs">
-                <span className="block text-xl font-serif text-[#111317]">B+G+5</span>
-                <span className="text-[9px] uppercase tracking-wider text-[#7a766e] font-mono">Floors</span>
+            <div className="grid grid-cols-3 gap-3 pt-1 text-center">
+              <div className="p-3 rounded-xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-xs">
+                <span className="block text-lg sm:text-xl font-serif text-[#14161b]">B+G+5</span>
+                <span className="text-[9px] uppercase tracking-wider text-[#7a6e5d] font-mono">Floors</span>
               </div>
-              <div className="p-3.5 rounded-xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-xs">
-                <span className="block text-xl font-serif text-[#111317]">2 Lifts</span>
-                <span className="text-[9px] uppercase tracking-wider text-[#7a766e] font-mono">Elevators</span>
+              <div className="p-3 rounded-xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-xs">
+                <span className="block text-lg sm:text-xl font-serif text-[#14161b]">2 Lifts</span>
+                <span className="text-[9px] uppercase tracking-wider text-[#7a6e5d] font-mono">Elevators</span>
               </div>
-              <div className="p-3.5 rounded-xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-xs">
-                <span className="block text-xl font-serif text-[#111317]">Rooftop</span>
-                <span className="text-[9px] uppercase tracking-wider text-[#7a766e] font-mono">Pool & Sky</span>
+              <div className="p-3 rounded-xl border border-[rgba(17,19,23,0.08)] bg-[#f4efe6] shadow-xs">
+                <span className="block text-lg sm:text-xl font-serif text-[#14161b]">Rooftop</span>
+                <span className="text-[9px] uppercase tracking-wider text-[#7a6e5d] font-mono">Pool & Sky</span>
               </div>
             </div>
           </div>

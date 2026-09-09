@@ -170,7 +170,7 @@ export default function PuriDestination({ onOpenBooking }: PuriDestinationProps)
     <section
       ref={sectionRef}
       id="destination"
-      className="py-24 md:py-36 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
     >
       {/* Background Cartography Watermark */}
       <div
@@ -182,25 +182,25 @@ export default function PuriDestination({ onOpenBooking }: PuriDestinationProps)
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-12">
           {/* Left Column: Destination Overview (Parallax Lift) */}
           <div
             ref={leftColRef}
             className="lg:col-span-5 flex flex-col space-y-6 will-change-transform"
           >
             <div>
-              <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
+              <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
                 <Compass className="w-3.5 h-3.5" />
                 <span>Sacred Puri Cartography & Experiences</span>
               </div>
               <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08} className="mb-4">
-                <h2 className="font-serif text-3xl sm:text-5xl text-[#14161b] font-light tracking-tight">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                   Puri: The Ocean of <br />
                   <span className="italic font-normal text-[#b58d5b]">Eternal Grace</span>
                 </h2>
               </GooeyTextReveal>
               <GooeyTextReveal mode="scroll" start="top 80%" duration={1.4} delay={0.15}>
-                <p className="text-xs sm:text-sm text-[#5a5750] font-mono leading-relaxed font-light">
+                <p className="text-xs sm:text-sm text-[#4a4740] font-sans leading-relaxed font-light">
                   Nestled between the eternal waters of the Bay of Bengal and the ancient sanctity of Shree Jagannath Dham, Hotel Serene commands an address of transcendent calm.
                 </p>
               </GooeyTextReveal>

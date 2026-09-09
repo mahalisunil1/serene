@@ -135,7 +135,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
     <section
       ref={sectionRef}
       id="rooftop"
-      className="py-24 md:py-36 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
     >
       {/* Deep Background Horizon Watermark Drift */}
       <div
@@ -148,14 +148,14 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-8 border-b border-[rgba(20,22,27,0.08)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6 pb-6 border-b border-[rgba(20,22,27,0.08)]">
           <div>
-            <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
+            <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
               <Waves className="w-3.5 h-3.5" />
               <span>The Sky Sanctuary • Elevation +21.00 M</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
-              <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 Rooftop Striped Pool <br />
                 <span className="italic font-normal text-[#b58d5b]">& Pergola Sky Lounge</span>
               </h2>
