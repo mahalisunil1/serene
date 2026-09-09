@@ -165,14 +165,15 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             {/* Mobile Menu Pill Trigger */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className={`lg:hidden px-3 py-1.5 rounded-full border text-[10px] font-cinzel font-bold uppercase tracking-widest cursor-pointer transition-colors flex items-center space-x-1.5 ${
+              className={`lg:hidden px-5 py-2.5 rounded-full border text-[12px] font-cinzel font-bold uppercase tracking-widest cursor-pointer flex items-center space-x-2 ${
                 scrolled
                   ? "border-[#14161b]/30 text-[#14161b] hover:bg-[#14161b] hover:text-white"
                   : "border-white/40 text-white hover:bg-white hover:text-[#14161b]"
               }`}
               aria-label="Open navigation menu"
+              style={{ touchAction: "manipulation" }}
             >
-              <Menu className="w-3.5 h-3.5" />
+              <Menu className="w-5 h-5" />
               <span className="hidden xs:inline">Menu</span>
             </button>
           </div>

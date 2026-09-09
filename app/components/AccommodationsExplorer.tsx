@@ -23,6 +23,7 @@ export default function AccommodationsExplorer({
 }: AccommodationsExplorerProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const watermarkRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [currency, setCurrency] = useState<"INR" | "USD" | "EUR">("INR");
   const [suiteModes, setSuiteModes] = useState<Record<string, "render" | "blueprint">>({
@@ -118,25 +119,25 @@ export default function AccommodationsExplorer({
         "Independent Guest Powder Room",
       ],
       architectNotes:
-        "An expansive suite designed for prolonged retreats, offering a serene separation between formal hospitality and private rest.",
+        "Designed with flexible spatial zoning for families and long-stay guests, complete with private master spa suite.",
     },
     {
       id: "presidential-504",
       num: "04",
-      title: "Presidential Penthouse 504",
-      category: "Monumental Penthouse • Level 5",
-      code: "5TH FLOOR • MONUMENTAL PENTHOUSE",
-      subtitle: "Palatial primary residence with curved fluted columns, formal living salon & dual master baths.",
+      title: "Presidential Suite 504",
+      category: "Pinnacle Residence • Level 5",
+      code: "5TH FLOOR • PINNACLE RESIDENCE",
+      subtitle: "The ultimate 1,150 sq. ft. sanctuary featuring grand entertaining salon & fluted columns.",
       priceINR: 22000,
-      area: "1,150 sq. ft. Total Private Footprint",
-      capacity: "4 Guests",
-      bed: "Master King Bed Suite + Dressing Salon",
-      bath: "Master Spa Bathroom with Jacuzzi Jet Shower",
+      area: "1,150 sq. ft. • Master Residence Salon",
+      capacity: "4 Adults or Family Suite",
+      bed: "Master King Chamber + Guest Salon",
+      bath: "Spa Bath + Powder Room",
       renderImage: "/images/hotel/suite-504-living.jpg",
       planImage: "/images/hotel/floor-5-plan.jpg",
       materials: [
-        { label: "Floor Surface", val: "Herringbone Oak & Lingraj Granite" },
-        { label: "Columns", val: "Bespoke Curved Fluted Architectural Millwork" },
+        { label: "Salon Flooring", val: "Bleached Oak Chevron Hardwood Parquet" },
+        { label: "Architectural Columns", val: "Custom Fluted Bleached Oak Pilasters" },
         { label: "Stone Elements", val: "Italian Calacatta Gold Marble Tables" },
         { label: "Acoustics", val: "3D Geometric Sound Absorption Wall Fabric" },
       ],
@@ -166,6 +167,26 @@ export default function AccommodationsExplorer({
           end: "bottom top",
           scrub: 0.8,
         },
+      });
+
+      // 3D Card Stacking depth effect
+      cardRefs.current.forEach((card, i) => {
+        if (!card || i >= suites.length - 1) return;
+        const nextCard = cardRefs.current[i + 1];
+        if (!nextCard) return;
+
+        gsap.to(card, {
+          scale: 0.95 - i * 0.015,
+          filter: "brightness(0.92)",
+          transformOrigin: "top center",
+          ease: "none",
+          scrollTrigger: {
+            trigger: nextCard,
+            start: "top 85%",
+            end: "top 110px",
+            scrub: true,
+          },
+        });
       });
     },
     { scope: sectionRef }
@@ -215,7 +236,7 @@ export default function AccommodationsExplorer({
     <section
       ref={sectionRef}
       id="suites"
-      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#f7f4ee] border-t border-[rgba(20,22,27,0.08)] relative overflow-visible"
     >
       {/* Background Watermark Parallax Drift */}
       <div
@@ -267,17 +288,20 @@ export default function AccommodationsExplorer({
         </div>
 
         {/* GSAP Stacking Cards Container */}
-        <div className="relative space-y-10 sm:space-y-12 pb-16">
+        <div className="relative space-y-6 sm:space-y-10 pb-24">
           {suites.map((suite, idx) => {
             const currentMode = suiteModes[suite.id] || "render";
             // Sticky top offset so cards gracefully stack over each other
-            const topOffset = 80 + idx * 20;
+            const topOffset = typeof window !== 'undefined' && window.innerWidth < 640 ? 45 + idx * 15 : 75 + idx * 22;
 
             return (
               <div
                 key={suite.id}
-                style={{ top: `${topOffset}px` }}
-                className="sticky rounded-3xl bg-white border border-[rgba(20,22,27,0.12)] shadow-[0_25px_60px_rgba(20,22,27,0.12)] overflow-hidden transition-all duration-500"
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
+                style={{ top: `${topOffset}px`, zIndex: 10 + idx }}
+                className="sticky rounded-3xl bg-white border border-[rgba(20,22,27,0.12)] shadow-[0_25px_60px_rgba(20,22,27,0.12)] overflow-hidden transition-shadow duration-300 will-change-transform"
               >
                 {/* Card Interior Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 p-6 sm:p-10 items-center">

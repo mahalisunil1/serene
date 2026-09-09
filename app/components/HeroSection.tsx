@@ -339,7 +339,8 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
               style={{ 
                 fontFamily: "'Onyx', 'Bodoni MT Condensed', 'Bauer Bodoni', 'Didot', serif", 
                 transform: "scaleX(0.72) scaleY(1.08)",
-                transformOrigin: "center center"
+                transformOrigin: "center center",
+                fontSize: "clamp(3rem, 10vw, 10rem)"
               }}
             >
               <span className="text-6xl sm:text-8xl md:text-[110px] lg:text-[140px] xl:text-[160px] drop-shadow-md">
