@@ -315,11 +315,11 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
 
         {/* ── Typography ──────────────────────────────────────────────── */}
         <div ref={textContentRef}
-          className="relative z-20 max-w-4xl mx-auto w-full text-center my-auto will-change-transform px-4">
+          className="relative z-20 max-w-6xl mx-auto w-full text-center my-auto will-change-transform px-4">
 
           {/* Tagline */}
           <p ref={taglineRef}
-            className="text-[11px] sm:text-xs font-mono uppercase text-[#c5a880] font-medium mb-7 will-change-transform"
+            className="text-[11px] sm:text-xs font-mono uppercase text-[#c5a880] font-medium mb-5 sm:mb-7 will-change-transform"
             style={{ letterSpacing: "0.55em" }}>
             Coastal Neoclassical Sanctuary • Puri
           </p>
@@ -332,14 +332,32 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             stagger={0.095}
             blurAmount={0.6}
             ease="power3.out"
-            className="mb-7"
+            className="mb-6 sm:mb-8 flex flex-col items-center justify-center overflow-visible"
           >
-            <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white tracking-tight leading-[0.93]">
-              Silence &{" "}
-              <span className="italic font-normal text-[#c5a880]">
-                Symphonie
+            <h1 
+              className="flex flex-col items-center leading-[0.88] tracking-[0.06em] font-normal text-white uppercase text-center select-none"
+              style={{ 
+                fontFamily: "'Onyx', 'Bodoni MT Condensed', 'Bauer Bodoni', 'Didot', serif", 
+                transform: "scaleX(0.72) scaleY(1.08)",
+                transformOrigin: "center center"
+              }}
+            >
+              <span className="text-6xl sm:text-8xl md:text-[110px] lg:text-[140px] xl:text-[160px] drop-shadow-md">
+                HOTEL
+              </span>
+              <span className="text-6xl sm:text-8xl md:text-[110px] lg:text-[140px] xl:text-[160px] drop-shadow-md mt-1 sm:mt-2">
+                SERENE
               </span>
             </h1>
+            <div 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#c5a880] mt-4 sm:mt-6 md:mt-7 z-10 font-normal drop-shadow-[0_4px_12px_rgba(0,0,0,0.85)] select-none"
+              style={{ 
+                fontFamily: "var(--font-script), 'Great Vibes', 'Edwardian Script ITC', 'Bickham Script Pro', cursive", 
+                transform: "rotate(-2deg)" 
+              }}
+            >
+              Silence & Symphony
+            </div>
           </GooeyTextReveal>
 
           {/* Gold draw-line */}
