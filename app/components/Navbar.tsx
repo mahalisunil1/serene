@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import AmbientSoundscape from "./AmbientSoundscape";
 import { ArrowUpRight, X, Menu } from "lucide-react";
-import { FlipText } from "@/components/ui/flip-text";
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -70,7 +69,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         }`}
       >
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 flex items-center justify-between gap-2 sm:gap-4 lg:gap-6">
-          {/* Left: Brand Monogram & Wordmark with 3D FlipText Hero Reveal */}
+          {/* Left: Brand Monogram & Wordmark */}
           <a href="#" className="flex items-center space-x-2.5 sm:space-x-3.5 group flex-shrink-0">
             <div
               className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-200 relative ${
@@ -87,16 +86,13 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             </div>
 
             <div className="flex flex-col">
-              <FlipText
-                duration={1.8}
-                delay={0.25}
-                loop={false}
+              <span
                 className={`font-cinzel text-[13.5px] sm:text-[15.5px] lg:text-[17px] tracking-[0.24em] sm:tracking-[0.28em] font-bold leading-none mb-1 transition-colors whitespace-nowrap ${
                   scrolled ? "text-[#14161b]" : "text-white"
                 }`}
               >
                 HOTEL SERENE
-              </FlipText>
+              </span>
               <span className="hidden sm:flex items-center space-x-1.5 text-[8px] sm:text-[8.5px] font-mono tracking-[0.28em] uppercase transition-colors whitespace-nowrap text-[#c5a880]">
                 <span>PURI</span>
                 <span className="text-[6px] opacity-60">◆</span>
@@ -197,14 +193,9 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                 <span className="font-cinzel text-xs font-bold text-[#c5a880]">S</span>
               </div>
               <div className="flex flex-col">
-                <FlipText
-                  duration={1.8}
-                  delay={0.15}
-                  loop={false}
-                  className="font-cinzel text-sm font-bold tracking-[0.26em] text-white"
-                >
+                <span className="font-cinzel text-sm font-bold tracking-[0.26em] text-white">
                   HOTEL SERENE
-                </FlipText>
+                </span>
                 <span className="text-[8px] font-mono tracking-[0.26em] text-[#c5a880] uppercase">
                   Puri • Bay of Bengal
                 </span>
