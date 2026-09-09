@@ -47,7 +47,7 @@ export default function MersiStatement() {
         trigger: container,
         start: "top top",
         end: "bottom bottom",
-        scrub: true,
+        scrub: 0.8,
         onUpdate: (self) => {
           const progress = self.progress;
           if (progress < 0.33) {

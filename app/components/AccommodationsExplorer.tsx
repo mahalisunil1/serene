@@ -164,7 +164,7 @@ export default function AccommodationsExplorer({
           trigger: sec,
           start: "top bottom",
           end: "bottom top",
-          scrub: 1.0,
+          scrub: 0.8,
         },
       });
     },

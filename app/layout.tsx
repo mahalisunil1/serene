@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Cinzel } from "next/font/google";
 import "./globals.css";
+
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -53,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${plusJakarta.variable} antialiased`}
+      className={`${cormorant.variable} ${plusJakarta.variable} ${cinzel.variable} antialiased`}
     >
       <body className="min-h-screen bg-[#ede7de] text-[#111317] flex flex-col font-sans overflow-x-hidden selection:bg-[#111317] selection:text-[#ede7de]">
         <div className="grain-bg" />

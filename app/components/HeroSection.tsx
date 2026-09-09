@@ -31,21 +31,21 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
       num: "01",
       label: "Facade",
       title: "Neoclassical Symmetrical Facade",
-      image: "/images/hotel/exterior-hero.jpg",
+      image: "/images/hotel/hero-facade-clean.jpg",
     },
     {
       id: "rooftop",
       num: "02",
       label: "Rooftop Pool",
       title: "Rooftop Striped Lap Pool",
-      image: "/images/hotel/rooftop-pool.jpg",
+      image: "/images/hotel/hero-rooftop-clean.jpg",
     },
     {
       id: "penthouse",
       num: "03",
       label: "Penthouse",
       title: "Presidential Penthouse 504",
-      image: "/images/hotel/suite-504-living.jpg",
+      image: "/images/hotel/hero-penthouse-clean.jpg",
     },
   ];
 
@@ -122,22 +122,22 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             trigger: hero,
             start: "top top",
             end: "bottom top",
-            scrub: 0.6,
+            scrub: 0.8,
           },
         });
       }
 
-      // 4. Parallax: Background watermark drift
+      // 4. Parallax: Distinct Background watermark drift
       if (wm) {
         gsap.to(wm, {
-          yPercent: 35,
-          opacity: 0.01,
+          yPercent: 28,
+          opacity: 0,
           ease: "none",
           scrollTrigger: {
             trigger: hero,
             start: "top top",
             end: "bottom top",
-            scrub: 1.0,
+            scrub: 0.8,
           },
         });
       }
@@ -152,7 +152,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             trigger: hero,
             start: "top top",
             end: "30% top",
-            scrub: true,
+            scrub: 0.8,
           },
         });
       }
@@ -165,13 +165,22 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
       ref={heroRef}
       className="relative h-screen min-h-[680px] w-full flex flex-col justify-between pt-28 pb-9 px-6 sm:px-12 md:px-16 overflow-hidden select-none bg-[#14161b]"
     >
-      {/* Subtle Monumental Architectural Watermark */}
+      {/* Subtle Atmospheric Architectural Watermark */}
       <div
         ref={watermarkRef}
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none select-none flex flex-col justify-center items-center opacity-[0.035] z-10 will-change-transform"
+        className="absolute inset-0 pointer-events-none select-none flex flex-col justify-center items-center z-10 will-change-transform"
+        style={{
+          maskImage: "radial-gradient(ellipse 75% 55% at 50% 50%, black 25%, transparent 85%)",
+          WebkitMaskImage: "radial-gradient(ellipse 75% 55% at 50% 50%, black 25%, transparent 85%)",
+        }}
       >
-        <span className="font-serif text-[24vw] font-light leading-none tracking-tighter text-white whitespace-nowrap">
+        <span
+          className="font-cinzel text-[14vw] sm:text-[12.5vw] font-normal leading-none tracking-[0.24em] sm:tracking-[0.28em] uppercase text-transparent whitespace-nowrap select-none opacity-60"
+          style={{
+            WebkitTextStroke: "0.8px rgba(229, 212, 190, 0.22)",
+          }}
+        >
           SERENE
         </span>
       </div>

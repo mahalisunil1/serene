@@ -104,7 +104,7 @@ export default function PuriDestination({ onOpenBooking }: PuriDestinationProps)
             trigger: sec,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.0,
+            scrub: 0.8,
           },
         });
       }
@@ -120,7 +120,7 @@ export default function PuriDestination({ onOpenBooking }: PuriDestinationProps)
               trigger: sec,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.7,
+              scrub: 0.8,
             },
           }
         );
@@ -137,7 +137,7 @@ export default function PuriDestination({ onOpenBooking }: PuriDestinationProps)
               trigger: sec,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.6,
+              scrub: 0.8,
             },
           }
         );

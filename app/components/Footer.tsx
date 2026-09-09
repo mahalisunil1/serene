@@ -49,7 +49,7 @@ export default function Footer() {
               trigger: footer,
               start: "top bottom",
               end: "bottom bottom",
-              scrub: 1.0,
+              scrub: 0.8,
             },
           }
         );

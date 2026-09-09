@@ -61,7 +61,7 @@ export default function ParallaxImage({
               trigger: container,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.6,
+              scrub: 0.8,
             },
           }
         );
@@ -77,7 +77,7 @@ export default function ParallaxImage({
                 trigger: container,
                 start: "top bottom",
                 end: "bottom top",
-                scrub: 0.6,
+                scrub: 0.8,
               },
             }
           );
@@ -95,7 +95,7 @@ export default function ParallaxImage({
               trigger: container,
               start: "left right",
               end: "right left",
-              scrub: 0.6,
+              scrub: 0.8,
             },
           }
         );

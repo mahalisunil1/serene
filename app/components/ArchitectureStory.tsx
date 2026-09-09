@@ -36,7 +36,7 @@ export default function ArchitectureStory() {
               trigger: sec,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.6,
+              scrub: 0.8,
             },
           }
         );
@@ -66,7 +66,7 @@ export default function ArchitectureStory() {
               trigger: sec,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.5,
+              scrub: 0.8,
             },
           }
         );
@@ -84,7 +84,7 @@ export default function ArchitectureStory() {
               trigger: sec,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.5,
+              scrub: 0.8,
             },
           }
         );
