@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Warm Alabaster Linen & Sand Monograph Palette */
+    --canvas-bg: #f7f4ee;
+    --canvas-surface: #f2ece1;
+    --canvas-card: #ffffff;
+    --canvas-elevated: #ffffff;
+    
+    /* Deep Mineral Charcoal Typography */
+    --noir-base: #14161b;
+    --noir-surface: #1e2128;
+    --text-primary: #14161b;
+    --text-secondary: #5a5750;
+    --text-muted: #827e74;
+    
+    /* Burnished Champagne & Warm Bronze Accents */
+    --champagne: #c5a880;
+    --champagne-gold: #b58d5b;
+    --champagne-light: #e5d4be;
+    --champagne-glow: rgba(197, 168, 128, 0.2);
+    --travertin: #8c7b68;
+    --sienne: #ad583d;
+    --sauge: #536958;
+
+    /* Hairlines & Shadows */
+    --border-subtle: rgba(20, 22, 27, 0.08);
+    --border-gold: rgba(197, 168, 128, 0.35);
+    --shadow-luxury: 0 10px 35px -5px rgba(20, 22, 27, 0.06), 0 0 1px rgba(20, 22, 27, 0.1);
+    --shadow-elevated: 0 20px 45px -10px rgba(20, 22, 27, 0.1), 0 0 1px rgba(20, 22, 27, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: auto;
+    background-color: var(--canvas-bg);
+    color: var(--noir-base);
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    overscroll-behavior: none;
+  }
+
+  body {
+    background-color: var(--canvas-bg);
+    color: var(--noir-base);
+    overflow-x: hidden;
+    position: relative;
+    letter-spacing: -0.01em;
+    overscroll-behavior: none;
+  }
+
+  ::selection {
+    background-color: var(--noir-base);
+    color: var(--canvas-bg);
+    text-shadow: none;
+  }
+}
+
+/* Custom Editorial Scrollbar - Hidden for pure minimalism */
+::-webkit-scrollbar {
+  display: none;
+}
+body, html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Editorial Typography */
+.font-serif {
+  font-family: var(--font-serif), "Cormorant Garamond", "Didot", "Bodoni MT", Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), "Plus Jakarta Sans", -apple-system, sans-serif;
+}
+
+/* Luxury Architectural Glassmorphism */
+.luxury-glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(20, 22, 27, 0.08);
+}
+
+.luxury-glass-gold {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(197, 168, 128, 0.4);
+  box-shadow: 0 12px 36px -8px rgba(197, 168, 128, 0.15);
+}
+
+.noir-panel {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(20, 22, 27, 0.08);
+  box-shadow: var(--shadow-luxury);
+}
+
+.hairline-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(20, 22, 27, 0.12), transparent);
+}
+
+/* Organic Paper Grain Texture */
+.grain-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Architectural Split Transition Curtains */
+.transition-curtains {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  display: flex;
+}
+.curtain {
+  width: 50%;
+  height: 0%;
+  background: #14161b;
+  position: absolute;
+}
+.curtain-left {
+  left: 0;
+  bottom: 0;
+}
+.curtain-right {
+  right: 0;
+  top: 0;
+}
+
+/* Custom Cursor Hide for fine pointer */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
