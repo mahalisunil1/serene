@@ -16,6 +16,7 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const bgTrackRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const spaces = [
     {
@@ -126,6 +127,7 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
       {
         x: () => -(section.scrollWidth - window.innerWidth),
         ease: "none",
+        duration: 1,
       },
       0
     );
@@ -137,6 +139,7 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
         {
           x: () => -(section.scrollWidth - window.innerWidth) * 0.35,
           ease: "none",
+          duration: 1,
         },
         0
       );
@@ -148,11 +151,46 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
         tl.fromTo(
           img,
           { xPercent: -6 },
-          { xPercent: 6, ease: "none" },
+          { xPercent: 6, ease: "none", duration: 1 },
           0
         );
       }
     });
+
+    // 4. Wheel-like rotation effect: upcoming cards lean at 45deg and straighten as they enter view
+    const totalScrollWidth = section.scrollWidth - window.innerWidth;
+    if (totalScrollWidth > 0) {
+      cardRefs.current.forEach((card, idx) => {
+        if (!card) return;
+
+        const cardLeft = card.offsetLeft;
+        const enterX = cardLeft - window.innerWidth;
+        const straightX = cardLeft - window.innerWidth * 0.35;
+
+        const pEnter = Math.max(0, enterX / totalScrollWidth);
+        const pStraight = Math.min(1, Math.max(pEnter + 0.1, straightX / totalScrollWidth));
+
+        const initialAngle = idx === 0 ? 0 : 45;
+
+        gsap.set(card, {
+          rotation: initialAngle,
+          transformOrigin: "bottom right",
+          willChange: "transform",
+        });
+
+        if (initialAngle !== 0) {
+          tl.to(
+            card,
+            {
+              rotation: 0,
+              ease: "power1.out",
+              duration: pStraight - pEnter,
+            },
+            pEnter
+          );
+        }
+      });
+    }
 
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
@@ -223,7 +261,10 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
           {spaces.map((space, idx) => (
             <div
               key={space.id}
-              className="w-[85vw] sm:w-[55vw] lg:w-[40vw] xl:w-[34vw] h-[72vh] max-h-[640px] min-h-[500px] flex-shrink-0 px-3 sm:px-4 md:px-5"
+              ref={(el) => {
+                cardRefs.current[idx] = el;
+              }}
+              className="w-[85vw] sm:w-[55vw] lg:w-[40vw] xl:w-[34vw] h-[72vh] max-h-[640px] min-h-[500px] flex-shrink-0 px-3 sm:px-4 md:px-5 will-change-transform"
             >
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-white border border-[rgba(20,22,27,0.08)] shadow-[0_12px_35px_rgba(20,22,27,0.05)] hover:shadow-[0_20px_50px_rgba(20,22,27,0.1)] flex flex-col group transition-all duration-300">
                 {/* 1. Dedicated Upper Photographic Frame (52% height) */}
