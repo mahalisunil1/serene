@@ -110,13 +110,24 @@ export default function BookingDrawer({
       <div className="relative z-10 w-full max-w-xl h-full bg-[#f7f4ee] border-l border-[rgba(20,22,27,0.12)] shadow-2xl flex flex-col justify-between overflow-y-auto text-[#14161b]">
         {/* Header */}
         <div className="sticky top-0 bg-[#f7f4ee]/95 backdrop-blur-md p-6 border-b border-[rgba(20,22,27,0.08)] flex items-center justify-between z-20">
-          <div>
-            <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#b58d5b] block mb-1 font-semibold">
-              Direct Sanctuary Reservations
-            </span>
-            <h3 className="font-serif text-2xl sm:text-3xl text-[#14161b] font-light">
-              Reserve Your Stay
-            </h3>
+          <div className="flex items-center space-x-3.5">
+            <div className="w-10 h-8 flex items-center justify-center flex-shrink-0">
+              <Image
+                src="/images/logo/logo-cropped.png"
+                alt="Hotel Serene Logo"
+                width={48}
+                height={36}
+                className="w-full h-auto object-contain"
+              />
+            </div>
+            <div>
+              <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#b58d5b] block mb-0.5 font-semibold">
+                Direct Sanctuary Reservations
+              </span>
+              <h3 className="font-serif text-xl sm:text-2xl text-[#14161b] font-light">
+                Reserve Your Stay
+              </h3>
+            </div>
           </div>
           <button
             onClick={onClose}
@@ -152,6 +163,18 @@ export default function BookingDrawer({
 
               {/* Printable Voucher Card */}
               <div className="p-6 rounded-2xl bg-white border border-[rgba(20,22,27,0.1)] text-left font-mono text-xs space-y-3 max-w-md mx-auto shadow-xl">
+                <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                  <div className="w-20 h-auto">
+                    <Image
+                      src="/images/logo/logo-cropped.png"
+                      alt="Hotel Serene"
+                      width={80}
+                      height={60}
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                  <span className="text-[10px] text-[#827e74] uppercase tracking-widest">Official Voucher</span>
+                </div>
                 <div className="flex justify-between text-[#827e74] pb-2 border-b border-gray-100">
                   <span>Voucher Reference:</span>
                   <span className="text-[#14161b] font-bold">{bookingRef}</span>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -63,13 +64,19 @@ export default function Footer() {
       ref={footerRef}
       className="bg-[#e6dfd4] border-t border-[rgba(17,19,23,0.12)] pt-16 sm:pt-20 pb-10 px-6 md:px-12 text-[#5a5750] relative overflow-hidden"
     >
-      {/* Giant Parallax Drifting Monogram Watermark */}
+      {/* Giant Parallax Drifting Logo Watermark */}
       <div
         ref={monogramRef}
         aria-hidden="true"
-        className="absolute bottom-0 right-10 pointer-events-none select-none text-[#14161b] font-serif text-[45vw] font-light leading-none tracking-tighter will-change-transform"
+        className="absolute -bottom-10 right-4 md:right-10 pointer-events-none select-none opacity-[0.05] w-[45vw] max-w-[500px] will-change-transform"
       >
-        S
+        <Image
+          src="/images/logo/logo-cropped.png"
+          alt=""
+          width={500}
+          height={375}
+          className="w-full h-auto object-contain"
+        />
       </div>
 
       {/* Drifting Coordinates Strip in Footer Background */}
@@ -88,9 +95,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12 pb-12 border-b border-[rgba(17,19,23,0.1)]">
           {/* Brand & Narrative */}
           <div className="lg:col-span-4">
-            <div className="flex items-center space-x-3 mb-5">
-              <div className="w-10 h-10 rounded-full border border-[rgba(17,19,23,0.25)] flex items-center justify-center bg-[#14161b]/5 shadow-xs">
-                <span className="font-serif text-xl text-[#14161b] font-light">S</span>
+            <div className="flex items-center space-x-3.5 mb-5">
+              <div className="w-12 h-10 flex items-center justify-center flex-shrink-0">
+                <Image
+                  src="/images/logo/logo-cropped.png"
+                  alt="Hotel Serene Logo"
+                  width={60}
+                  height={45}
+                  className="w-full h-auto object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-serif text-xl sm:text-2xl tracking-[0.15em] text-[#14161b] font-light">

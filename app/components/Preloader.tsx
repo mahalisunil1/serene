@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 
 interface PreloaderProps {
@@ -91,10 +92,17 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           ref={contentRef}
           className="flex flex-col items-center text-center space-y-4 px-6 will-change-transform"
         >
-          {/* Subtle Monogram Letter */}
-          <span className="font-serif text-3xl font-light text-[#14161b] tracking-wider">
-            S
-          </span>
+          {/* Brand Logo */}
+          <div className="w-28 sm:w-36 h-auto mb-2 flex items-center justify-center">
+            <Image
+              src="/images/logo/logo-cropped.png"
+              alt="Hotel Serene"
+              width={144}
+              height={108}
+              priority
+              className="w-full h-auto object-contain drop-shadow-sm"
+            />
+          </div>
 
           {/* Master Hotel Title */}
           <h1 className="font-serif text-2xl sm:text-3xl tracking-[0.25em] text-[#14161b] font-light uppercase">

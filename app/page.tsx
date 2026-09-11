@@ -110,8 +110,11 @@ export default function Home() {
         {/* Folio VIII: Curated Resident Privileges & Services */}
         <AmenitiesSection />
 
-        {/* Folio IX: Sacred Puri Cartography & Curated Itinerary */}
-        <PuriDestination onOpenBooking={() => handleOpenBooking()} />
+        {/* Folio IX: Sacred Puri Cultural Showreel */}
+        <PuriDestination
+          onOpenBooking={() => handleOpenBooking()}
+          onOpenLightbox={handleOpenLightbox}
+        />
       </main>
 
       {/* Floating Luxury Quick-Booking Bar */}
