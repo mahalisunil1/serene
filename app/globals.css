@@ -179,3 +179,14 @@ html.lenis, html.lenis body {
     cursor: none !important;
   }
 }
+
+/* Soundbar Equalizer Animation */
+@keyframes soundbar {
+  0%, 100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
