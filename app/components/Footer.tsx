@@ -109,8 +109,11 @@ export default function Footer() {
                 <span className="font-serif text-xl sm:text-2xl tracking-[0.15em] text-[#14161b] font-light">
                   HOTEL SERENE
                 </span>
-                <span className="text-[9.5px] uppercase tracking-[0.35em] text-[#7a6e5d] font-mono">
-                  puri • sanctuary by the sea
+                <span
+                  className="font-script text-xl sm:text-2xl text-[#b58d5b] font-normal leading-tight"
+                  style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+                >
+                  Sanctuary by the Sea
                 </span>
               </div>
             </div>

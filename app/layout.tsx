@@ -70,6 +70,18 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${plusJakarta.variable} ${cinzel.variable} ${greatVibes.variable} antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+              window.scrollTo(0, 0);
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-[#ede7de] text-[#111317] flex flex-col font-sans overflow-x-hidden selection:bg-[#111317] selection:text-[#ede7de]">
         <div className="grain-bg" />
         {children}

@@ -1,17 +1,31 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+interface SmoothScrollProps {
+  children: React.ReactNode;
+  isLocked?: boolean;
+}
+
 export default function SmoothScroll({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  isLocked = false,
+}: SmoothScrollProps) {
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+
+    // Automatic scroll to top on reload
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
 
     const lenis = new Lenis({
       lerp: 0.08,
@@ -23,6 +37,16 @@ export default function SmoothScroll({
       autoRaf: false,
       anchors: true,
     });
+    lenisRef.current = lenis;
+
+    // Immediately snap to top on initialization
+    lenis.scrollTo(0, { immediate: true });
+
+    if (isLocked) {
+      lenis.stop();
+      document.body.style.overflow = "hidden";
+      document.documentElement.classList.add("lenis-stopped");
+    }
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -43,6 +67,19 @@ export default function SmoothScroll({
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
+
+  useEffect(() => {
+    const lenis = lenisRef.current;
+    if (isLocked) {
+      lenis?.stop();
+      document.body.style.overflow = "hidden";
+      document.documentElement.classList.add("lenis-stopped");
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.classList.remove("lenis-stopped");
+      lenis?.start();
+    }
+  }, [isLocked]);
 
   return <>{children}</>;
 }

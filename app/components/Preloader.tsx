@@ -49,6 +49,37 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   };
 
   useEffect(() => {
+    // Scroll to top immediately on mount
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
+
+    const preventScroll = (e: Event) => {
+      e.preventDefault();
+    };
+
+    const preventKeyScroll = (e: KeyboardEvent) => {
+      const blockedKeys = [
+        "Space",
+        " ",
+        "PageUp",
+        "PageDown",
+        "End",
+        "Home",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+      ];
+      if (blockedKeys.includes(e.key) || blockedKeys.includes(e.code)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+    window.addEventListener("keydown", preventKeyScroll, { passive: false });
+
     const ctx = gsap.context(() => {
       // Gentle text entrance
       gsap.fromTo(
@@ -74,13 +105,19 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       }
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+      window.removeEventListener("keydown", preventKeyScroll);
+      ctx.revert();
+    };
   }, []);
 
   return (
     <div
       ref={containerRef}
       onClick={dismiss}
+      data-lenis-prevent
       className="fixed inset-0 z-[99999] pointer-events-auto cursor-pointer select-none overflow-hidden"
     >
       {/* Warm Cream Silk Veil */}

@@ -102,6 +102,10 @@ html.lenis, html.lenis body {
   font-family: var(--font-cinzel), "Cinzel", "Trajan Pro", "Baskerville", serif;
 }
 
+.font-script {
+  font-family: var(--font-script), "Great Vibes", "Edwardian Script ITC", "Bickham Script Pro", cursive;
+}
+
 /* Luxury Architectural Glassmorphism */
 .luxury-glass {
   background: rgba(255, 255, 255, 0.75);

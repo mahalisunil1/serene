@@ -78,8 +78,15 @@ export default function MersiStatement() {
           blurAmount={0.5}
           ease="power3.out"
         >
-          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-light tracking-tight leading-[1.2] max-w-4xl mx-auto italic">
-            &ldquo;Where timeless coastal tranquility meets the sacred stillness of the Bay of Bengal.&rdquo;
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-light tracking-tight leading-[1.3] max-w-4xl mx-auto italic">
+            &ldquo;Where timeless coastal tranquility meets the{" "}
+            <span
+              className="font-script text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-[#c5a880] not-italic px-1 font-normal"
+              style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+            >
+              sacred stillness
+            </span>{" "}
+            of the Bay of Bengal.&rdquo;
           </h2>
         </GooeyTextReveal>
 

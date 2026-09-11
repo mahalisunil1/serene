@@ -142,7 +142,8 @@ export default function PuriDestination({
     tl.to(
       titleChars,
       {
-        yPercent: 130,
+        yPercent: 120,
+        opacity: 0,
         ease: "power1.in",
         stagger: { each: 0.0025, from: "end" },
         duration: 0.09,
@@ -388,8 +389,8 @@ export default function PuriDestination({
             ))}
           </div>
 
-          {/* Master Headline: Letter by Letter Clipped from Bottom */}
-          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#14161b] font-light leading-[1.08] tracking-tight mb-8">
+          {/* Master Headline: Letter by Letter with Unclipped Flourishes */}
+          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#14161b] font-light leading-snug tracking-tight mb-8 overflow-visible">
             {/* Line 1 */}
             <span className="block overflow-hidden py-1">
               {titleLine1.split(" ").map((word, wIdx) => (
@@ -414,21 +415,24 @@ export default function PuriDestination({
               ))}
             </span>
 
-            {/* Line 2 (Italic Bronze) */}
-            <span className="block overflow-hidden py-1 italic font-normal text-[#8c7b68]">
+            {/* Line 2 (Script Gold - Unclipped Flourishes) */}
+            <span
+              className="block font-script text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#b58d5b] font-normal tracking-normal leading-[1.35] sm:leading-[1.25] py-4 sm:py-6 overflow-visible select-none"
+              style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+            >
               {titleLine2.split(" ").map((word, wIdx) => (
                 <span
                   key={wIdx}
-                  className="inline-block whitespace-nowrap mr-[0.26em]"
+                  className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible"
                 >
                   {word.split("").map((char, cIdx) => (
                     <span
                       key={cIdx}
-                      className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]"
+                      className="inline-block overflow-visible align-baseline"
                     >
                       <span
                         data-title-char
-                        className="inline-block"
+                        className="inline-block overflow-visible will-change-transform"
                       >
                         {char}
                       </span>
@@ -542,7 +546,10 @@ export default function PuriDestination({
 
             <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light leading-snug mb-6">
               Experience Puri in <br />
-              <span className="italic font-normal text-[#8c7b68]">
+              <span
+                className="font-script text-4xl sm:text-5xl lg:text-6xl text-[#b58d5b] block font-normal tracking-normal leading-[1.3] py-2 overflow-visible"
+                style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+              >
                 Discreet Luxury
               </span>
             </h3>

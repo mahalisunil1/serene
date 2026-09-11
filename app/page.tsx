@@ -16,6 +16,7 @@ import RooftopSanctuary from "./components/RooftopSanctuary";
 import DiningSection from "./components/DiningSection";
 import WellnessSanctuary from "./components/WellnessSanctuary";
 import AmenitiesSection from "./components/AmenitiesSection";
+import AmbienceStory from "./components/AmbienceStory";
 import PuriDestination from "./components/PuriDestination";
 import BookingDrawer from "./components/BookingDrawer";
 import FloatingBookingBar from "./components/FloatingBookingBar";
@@ -24,7 +25,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
 export default function Home() {
-  const [, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState<string | undefined>(undefined);
 
@@ -53,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <SmoothScroll>
+    <SmoothScroll isLocked={!isLoaded}>
       {/* Luxury Curtain Preloader */}
       <Preloader onComplete={() => setIsLoaded(true)} />
 
@@ -74,41 +75,44 @@ export default function Home() {
         {/* Quiet Luxury Sanctuary Philosophy */}
         <MersiStatement />
 
-        {/* Signature Sanctuaries Collection */}
-        <InteractiveFacade
+        {/* Signature Sanctuaries Collection — Commented out for leaner flow */}
+        {/* <InteractiveFacade
           onOpenBooking={() => handleOpenBooking()}
           onOpenLightbox={handleOpenLightbox}
-        />
+        /> */}
 
-        {/* Folio II: The Coastal Heritage */}
-        <ArchitectureStory />
+        {/* Folio II: The Coastal Heritage — Commented out for leaner flow */}
+        {/* <ArchitectureStory /> */}
 
-        {/* Folio III: GSAP Horizontal Pinned Guest Journey */}
-        <SpatialJourney onOpenBooking={() => handleOpenBooking()} />
+        {/* Folio III: GSAP Horizontal Rooms Showcase (Deluxe, Super Deluxe, Presidential Suite) */}
+        <SpatialJourney onOpenBooking={(roomId) => handleOpenBooking(roomId)} />
 
-        {/* Folio IV: Chambers & Residential Collection */}
-        <AccommodationsExplorer
+        {/* Folio IV: Chambers & Residential Collection — Commented out (subsumed by SpatialJourney) */}
+        {/* <AccommodationsExplorer
           onSelectRoom={(roomId) => handleOpenBooking(roomId)}
           onOpenLightbox={handleOpenLightbox}
-        />
+        /> */}
 
-        {/* Folio V: The Sky Sanctuary: Rooftop Striped Lap Pool & Pergola Lounge */}
-        <RooftopSanctuary
+        {/* Folio V: The Sky Sanctuary: Rooftop Striped Lap Pool & Pergola Lounge — Commented out for leaner flow */}
+        {/* <RooftopSanctuary
           onOpenLightbox={handleOpenLightbox}
           onOpenBooking={() => handleOpenBooking()}
-        />
+        /> */}
 
-        {/* Folio VI: The 30-Seater Restaurant & Artisanal Buffet */}
-        <DiningSection
+        {/* Folio VI: The 30-Seater Restaurant & Artisanal Buffet — Commented out for leaner flow */}
+        {/* <DiningSection
           onReserveTable={() => handleOpenBooking()}
           onOpenLightbox={handleOpenLightbox}
-        />
+        /> */}
 
-        {/* Folio VII: Oceanfront Wellness Sanctuary & Rejuvenation Atelier */}
-        <WellnessSanctuary onBookTreatment={() => handleOpenBooking()} />
+        {/* Folio VII: Oceanfront Wellness Sanctuary & Rejuvenation Atelier — Commented out for leaner flow */}
+        {/* <WellnessSanctuary onBookTreatment={() => handleOpenBooking()} /> */}
 
-        {/* Folio VIII: Curated Resident Privileges & Services */}
-        <AmenitiesSection />
+        {/* Folio IV: The Living Spaces — Explore the Ambience & Curated Amenities — Temporarily commented out */}
+        {/* <AmbienceStory
+          onOpenBooking={() => handleOpenBooking()}
+          onOpenLightbox={handleOpenLightbox}
+        /> */}
 
         {/* Folio IX: Sacred Puri Cultural Showreel */}
         <PuriDestination
@@ -135,12 +139,12 @@ export default function Home() {
       {/* Floating Scroll To Top Button */}
       <ScrollToTop />
 
-      {/* Private Concierge Reservation Desk */}
-      <BookingDrawer
+      {/* Private Concierge Reservation Desk — Temporarily disabled */}
+      {/* <BookingDrawer
         isOpen={bookingOpen}
         onClose={handleCloseBooking}
         preselectedRoomId={selectedRoomId}
-      />
+      /> */}
     </SmoothScroll>
   );
 }

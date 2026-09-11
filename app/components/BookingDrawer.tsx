@@ -17,31 +17,24 @@ export default function BookingDrawer({
 }: BookingDrawerProps) {
   const rooms = [
     {
-      id: "deluxe-103",
-      name: "Deluxe Ocean Chamber (101–404)",
-      spec: "King Bed • Ocean Vista • Custom Vanity & Study Bar",
-      price: 6500,
+      id: "deluxe",
+      name: "Deluxe Ocean Chamber (Levels 1–4)",
+      spec: "King Bed • Ocean Vista • Ensuite Rain Shower & Study Bar",
+      price: 3500,
       image: "/images/hotel/room-typical-render.jpg",
     },
     {
-      id: "suite-501",
-      name: "Balcony Suite 501",
-      spec: "Private Cantilevered Balcony • Direct Bay of Bengal Vista",
-      price: 9800,
-      image: "/images/hotel/room-typical-render.jpg",
+      id: "super-deluxe",
+      name: "Super Deluxe Sanctuary (Levels 3–5)",
+      spec: "Private Cantilevered Balcony • Deep Soaking Bath • Sea Vista",
+      price: 5000,
+      image: "/images/hotel/hero-penthouse-clean.jpg",
     },
     {
-      id: "suite-502-503",
-      name: "Executive Suite 502/503",
-      spec: "Dual Salon • Freestanding Spa Soaking Tub • Bay Window",
-      price: 14500,
-      image: "/images/hotel/suite-bathroom.jpg",
-    },
-    {
-      id: "presidential-504",
-      name: "Presidential Penthouse 504",
-      spec: "Master Residence • Formal Salon • Spa Bath & Butler",
-      price: 22000,
+      id: "presidential",
+      name: "Presidential Penthouse (Level 5)",
+      spec: "Formal Oceanfront Salon • Freestanding Spa Bath & Dedicated Butler",
+      price: 8000,
       image: "/images/hotel/suite-504-living.jpg",
     },
   ];
@@ -60,7 +53,13 @@ export default function BookingDrawer({
 
   if (preselectedRoomId && preselectedRoomId !== prevRoomProp) {
     setPrevRoomProp(preselectedRoomId);
-    const match = rooms.find((r) => r.id === preselectedRoomId);
+    const match = rooms.find(
+      (r) =>
+        r.id === preselectedRoomId ||
+        r.id === preselectedRoomId.split("-")[0] ||
+        (preselectedRoomId.includes("deluxe") && r.id === "deluxe") ||
+        (preselectedRoomId.includes("presidential") && r.id === "presidential")
+    );
     if (match) setSelectedRoom(match.id);
   }
 
@@ -124,8 +123,14 @@ export default function BookingDrawer({
               <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#b58d5b] block mb-0.5 font-semibold">
                 Direct Sanctuary Reservations
               </span>
-              <h3 className="font-serif text-xl sm:text-2xl text-[#14161b] font-light">
-                Reserve Your Stay
+              <h3 className="font-serif text-xl sm:text-2xl text-[#14161b] font-light flex items-center gap-2">
+                Reserve Your Stay{" "}
+                <span
+                  className="font-script text-2xl sm:text-3xl text-[#b58d5b] font-normal leading-none"
+                  style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+                >
+                  & Stillness
+                </span>
               </h3>
             </div>
           </div>
@@ -152,7 +157,13 @@ export default function BookingDrawer({
                   Reservation Voucher Archived
                 </span>
                 <h4 className="font-serif text-3xl sm:text-4xl text-[#14161b] mb-2 font-light">
-                  Welcome to Hotel Serene
+                  Welcome to{" "}
+                  <span
+                    className="font-script text-4xl sm:text-5xl text-[#b58d5b] font-normal block mt-1"
+                    style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+                  >
+                    Hotel Serene
+                  </span>
                 </h4>
                 <p className="text-xs sm:text-sm text-[#5a5750] font-mono max-w-sm mx-auto leading-relaxed">
                   Thank you, <strong className="text-[#14161b]">{name}</strong>. Your luxury stay has been registered under voucher{" "}

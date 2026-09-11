@@ -164,7 +164,7 @@ export default function FloatingBookingBar({ onOpenBooking }: FloatingBookingBar
               Starting From
             </span>
             <span className="text-xs font-mono font-semibold text-[#b58d5b]">
-              ₹6,500 <span className="text-[9px] text-[#827e74] font-normal">/ night</span>
+              ₹3,500 <span className="text-[9px] text-[#827e74] font-normal">/ night</span>
             </span>
           </div>
 
