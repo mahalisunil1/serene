@@ -19,7 +19,7 @@ export default function BookingDrawer({
     {
       id: "deluxe-103",
       name: "Deluxe Ocean Chamber (101–404)",
-      spec: "12'0\" × 11'3\" • Whitewashed Oak Fluting • Sea View",
+      spec: "King Bed • Ocean Vista • Custom Vanity & Study Bar",
       price: 6500,
       image: "/images/hotel/room-typical-render.jpg",
     },
@@ -35,12 +35,12 @@ export default function BookingDrawer({
       name: "Executive Suite 502/503",
       spec: "Dual Salon • Freestanding Spa Soaking Tub • Bay Window",
       price: 14500,
-      image: "/images/hotel/room-typical-render.jpg",
+      image: "/images/hotel/suite-bathroom.jpg",
     },
     {
       id: "presidential-504",
       name: "Presidential Penthouse 504",
-      spec: "1,150 sq. ft. • Formal Living Salon • Master Spa Bath",
+      spec: "Master Residence • Formal Salon • Spa Bath & Butler",
       price: 22000,
       image: "/images/hotel/suite-504-living.jpg",
     },

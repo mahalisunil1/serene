@@ -113,7 +113,7 @@ export default function ImageLightbox({
       {/* Bottom Bar: Caption & Thumbnails */}
       <div className="p-4 sm:p-6 border-t border-white/10 bg-[#0e1014]/80 flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
         <p className="text-xs text-white/70 font-mono max-w-xl text-center sm:text-left">
-          {currentImage.subtitle || "Capturing classical European proportion and sacred coastal light by Reflections by Ankita."}
+          {currentImage.subtitle || "Capturing timeless serenity and sacred coastal light at Hotel Serene."}
         </p>
 
         {/* Thumbnail Filmstrip */}

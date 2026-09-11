@@ -4,7 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Compass, Mail, Phone, MapPin, ArrowUpRight, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,7 +63,7 @@ export default function Footer() {
       ref={footerRef}
       className="bg-[#e6dfd4] border-t border-[rgba(17,19,23,0.12)] pt-16 sm:pt-20 pb-10 px-6 md:px-12 text-[#5a5750] relative overflow-hidden"
     >
-      {/* Giant Parallax Drifting Architectural Monogram Watermark */}
+      {/* Giant Parallax Drifting Monogram Watermark */}
       <div
         ref={monogramRef}
         aria-hidden="true"
@@ -78,7 +78,7 @@ export default function Footer() {
         aria-hidden="true"
         className="absolute top-6 left-0 w-full pointer-events-none select-none text-center font-mono text-[9px] uppercase tracking-[0.6em] text-[#14161b] opacity-[0.08] will-change-transform"
       >
-        19°48&apos;07&quot;N 85°50&apos;22&quot;E • ARCHITECTURE BY REFLECTIONS BY ANKITA • PURI DHAM
+        19°48&apos;07&quot;N 85°50&apos;22&quot;E • HOTEL SERENE • PURI DHAM • BAY OF BENGAL
       </div>
 
       {/* Subtle radial glow */}
@@ -97,18 +97,17 @@ export default function Footer() {
                   HOTEL SERENE
                 </span>
                 <span className="text-[9.5px] uppercase tracking-[0.35em] text-[#7a6e5d] font-mono">
-                  puri • sanctuaire b+g+5
+                  puri • sanctuary by the sea
                 </span>
               </div>
             </div>
             <p className="text-xs sm:text-sm text-[#4a4740] font-sans font-light leading-relaxed mb-5">
-              A contemporary neoclassical hotel on the shores of Puri, Odisha. Defined by classical Corinthian symmetry, panoramic rooftop lap pool, and mindful coastal quietude.
+              An intimate coastal boutique sanctuary on the shores of Puri, Odisha. Defined by tranquil sea horizons, panoramic rooftop lap pool, and heartfelt personalized hospitality.
             </p>
             <div className="p-3.5 rounded-xl bg-[#ede7de] border border-[rgba(17,19,23,0.1)] text-[11px] font-mono shadow-xs">
-              <span className="text-[#8c7b68] font-semibold block mb-1">ARCHITECTURAL PROVENANCE:</span>
+              <span className="text-[#8c7b68] font-semibold block mb-1">COASTAL SANCTUARY:</span>
               <span className="text-[#5a5750]">
-                Interior Architecture & 3D Dossier by{" "}
-                <strong className="text-[#14161b] font-medium">Reflections by Ankita</strong> (October 25, 2024)
+                Direct private path to <strong className="text-[#14161b] font-medium">Blue Flag Golden Beach</strong>, Puri Dham.
               </span>
             </div>
           </div>
@@ -120,13 +119,12 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-xs">
               {[
-                { name: "Neoclassical Facade", href: "#architecture" },
-                { name: "Grand Reception Hall", href: "#spaces" },
-                { name: "Deluxe Ocean Chambers", href: "#suites" },
-                { name: "Presidential Penthouse", href: "#suites" },
-                { name: "Nautical Lap Pool", href: "#rooftop" },
-                { name: "Pergola Sky Lounge", href: "#rooftop" },
+                { name: "Ocean Chambers & Suites", href: "#suites" },
+                { name: "Signature Spaces", href: "#experiences" },
+                { name: "Rooftop Sky Pool", href: "#rooftop" },
                 { name: "30-Seater Restaurant", href: "#dining" },
+                { name: "Wellness & Spa", href: "#wellness" },
+                { name: "Puri Destination", href: "#destination" },
               ].map((item) => (
                 <li key={item.name}>
                   <a href={item.href} className="text-[#5e5b54] hover:text-[#111317] transition-colors">
@@ -137,23 +135,23 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Vendors & Technical Specifications */}
+          {/* Curated Inclusions */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-[#111317] mb-5 font-semibold">
-              Specifications & Materiality
+              Signature Privileges
             </h4>
             <ul className="space-y-3 text-xs">
               <li className="flex flex-col">
-                <span className="text-[#111317] font-medium">Ceramic World</span>
-                <span className="text-[11px] text-[#7a766e]">Chamber tiles, bathroom porcelain & pool mosaics</span>
+                <span className="text-[#111317] font-medium">Shree Jagannath VIP Protocol</span>
+                <span className="text-[11px] text-[#7a766e]">Priority darshan chaperone & transfers</span>
               </li>
               <li className="flex flex-col">
-                <span className="text-[#111317] font-medium">Lingraj Stone</span>
-                <span className="text-[11px] text-[#7a766e]">Terrace natural stone cladding & pavers</span>
+                <span className="text-[#111317] font-medium">Rooftop Striped Lap Pool</span>
+                <span className="text-[11px] text-[#7a766e]">Sheer acoustic waterfall & Pergola Lounge</span>
               </li>
               <li className="flex flex-col">
-                <span className="text-[#111317] font-medium">Dual Vertical Transport</span>
-                <span className="text-[11px] text-[#7a766e]">Stretcher lift (7&apos;6&quot; × 5&apos;3&quot;) + Service lift (4&apos;0&quot; × 5&apos;0&quot;)</span>
+                <span className="text-[#111317] font-medium">Oceanfront Wellness Baths</span>
+                <span className="text-[11px] text-[#7a766e]">In-suite freestanding soaking tubs & salts</span>
               </li>
             </ul>
           </div>
@@ -183,12 +181,12 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[#7a766e] font-mono gap-4">
           <div>
-            © {new Date().getFullYear()} Hotel Serene, Puri. Architecture by Reflections by Ankita.
+            © {new Date().getFullYear()} Hotel Serene, Puri. All rights reserved.
           </div>
           <div className="flex items-center space-x-6">
             <a href="#" className="hover:text-[#111317] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#111317] transition-colors">Architectural Rights</a>
-            <a href="#" className="hover:text-[#111317] transition-colors">Terms of Residence</a>
+            <a href="#" className="hover:text-[#111317] transition-colors">Resident Terms</a>
+            <a href="#" className="hover:text-[#111317] transition-colors">Concierge Desk</a>
           </div>
         </div>
       </div>

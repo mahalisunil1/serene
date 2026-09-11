@@ -66,7 +66,7 @@ export default function MersiStatement() {
       <div className="relative z-20 max-w-5xl mx-auto w-full px-6 text-center">
         <div className="inline-flex items-center justify-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#c5a880]/30 text-[#c5a880] text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] mb-8 backdrop-blur-sm shadow-xl">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>The Monograph Manifesto</span>
+          <span>The Serene Philosophy</span>
         </div>
 
         <GooeyTextReveal
@@ -79,7 +79,7 @@ export default function MersiStatement() {
           ease="power3.out"
         >
           <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-light tracking-tight leading-[1.2] max-w-4xl mx-auto italic">
-            &ldquo;Where European neoclassical order yields to the sacred stillness of the Bay of Bengal.&rdquo;
+            &ldquo;Where timeless coastal tranquility meets the sacred stillness of the Bay of Bengal.&rdquo;
           </h2>
         </GooeyTextReveal>
 
@@ -88,7 +88,7 @@ export default function MersiStatement() {
         </div>
 
         <p className="mt-5 text-[10px] sm:text-xs font-mono uppercase tracking-[0.4em] text-[#c5a880]/80">
-          Reflections by Ankita
+          Hotel Serene • Puri Sanctuary
         </p>
       </div>
     </section>

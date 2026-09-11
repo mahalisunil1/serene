@@ -22,80 +22,74 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
     {
       id: "reception",
       num: "01",
-      plate: "PLATE I",
-      title: "The Grand Reception",
-      elevation: "EL. ±0.00 M",
-      levelName: "GROUND ARRIVAL",
-      category: "Arrival Lobby • 30'-4\" Frontage",
+      plate: "CHAPTER I",
+      title: "The Grand Arrival Salon",
+      levelName: "ARRIVAL SALON",
+      category: "Lobby Salon • Immediate Calm",
       description:
-        "Features 3D geometric acoustic wall panels, curved fluted reception sofa, gilded mirror, and cascading chandelier beneath a double-height glass entrance porch.",
+        "Welcoming guests into soaring ceilings, geometric acoustic wall art, curved reception lounges, and cascading chandeliers.",
       image: "/images/hotel/reception-lounge.jpg",
-      specs: ["13'2\" × 12'8\" Lounge", "12' Linear Counter", "Double-Height Glass", "Geometric Sound Panels"],
+      specs: ["Private Check-In", "Cascading Chandelier", "Coastal Welcome Beverage", "Attentive Concierge"],
     },
     {
       id: "deluxe",
       num: "02",
-      plate: "PLATE II",
-      title: "Deluxe Guest Chambers",
-      elevation: "EL. +3.50 M TO +14.00 M",
-      levelName: "LEVELS 01–04",
-      category: "Typical Suite • 12'-0\" × 11'-3\"",
+      plate: "CHAPTER II",
+      title: "Deluxe Ocean Chambers",
+      levelName: "RESIDENTIAL SUITES",
+      category: "Residential Suite • Seaside Dawn",
       description:
-        "Calming whitewashed fluted cabinetry, arched black-frame vanity mirror, king bed, integrated study bar, and ensuite bathroom with Ceramic World porcelain tiles.",
+        "Warm whitewashed oak cabinetry, arched vanity mirror, plush king size bed, integrated study bar, and private ensuite bath.",
       image: "/images/hotel/room-typical-render.jpg",
-      specs: ["King Size Bed", "Study Bar Console", "Ceramic World Tiles", "Fluted Bleached Oak"],
+      specs: ["Plush King Bed", "Tea & Coffee Study Bar", "Rain Shower Suite", "Acoustic Double Glazing"],
     },
     {
       id: "presidential",
       num: "03",
-      plate: "PLATE III",
-      title: "Presidential Penthouse 504",
-      elevation: "EL. +17.50 M",
+      plate: "CHAPTER III",
+      title: "Presidential Penthouse",
       levelName: "EXECUTIVE TIER",
-      category: "Level 05 • Pinnacle Residence",
+      category: "Executive Haven • Panoramic Views",
       description:
-        "Sprawling entertaining salon with Netflix console, private master bedroom, guest powder toilet, and master spa bath with freestanding soaking bathtub.",
+        "Sprawling formal entertaining salon with bespoke sofas, private master bedroom, and master spa bath with freestanding soaking tub.",
       image: "/images/hotel/suite-504-living.jpg",
-      specs: ["1,150 sq. ft. Footprint", "Freestanding Soaking Tub", "Executive Salon", "Fluted Columns"],
+      specs: ["Oceanfront Balconies", "Freestanding Soaking Tub", "Executive Salon", "Dedicated Butler"],
     },
     {
       id: "rooftop",
       num: "04",
-      plate: "PLATE IV",
+      plate: "CHAPTER IV",
       title: "Rooftop Striped Lap Pool",
-      elevation: "EL. +21.00 M",
       levelName: "SKY SANCTUARY",
-      category: "Terrace Level • Open Sky",
+      category: "Open Sky • Horizon Pool",
       description:
-        "Signature lap pool with navy-and-white nautical striped porcelain tiles, curved submerged entrance steps, and a sheer descent waterfall set against French parapets.",
+        "Signature lap pool with navy-and-white nautical striped porcelain tiles, curved submerged entrance steps, and a sheer descent waterfall.",
       image: "/images/hotel/rooftop-pool.jpg",
-      specs: ["Acoustic Waterfall Wall", "French Parapet Walls", "Submerged Steps", "Underwater Glow"],
+      specs: ["Acoustic Waterfall", "Nautical Mosaic Tiles", "Underwater Glow", "Resident Access Only"],
     },
     {
       id: "pergola",
       num: "05",
-      plate: "PLATE V",
+      plate: "CHAPTER V",
       title: "Pergola Sky Lounge",
-      elevation: "EL. +21.00 M",
-      levelName: "SHADED SANCTUARY",
-      category: "Terrace Level • Coastal Breeze",
+      levelName: "TERRACE RETREAT",
+      category: "Terrace Living • Coastal Breeze",
       description:
-        "Glass-roof pergola with scalloped rafters, marigold outdoor seating, colonial carriage lanterns, and Portuguese motif tiles supplied by Lingraj Stone.",
+        "All-weather glass canopy with cushioned outdoor seating, colonial carriage lanterns, and direct oceanfront sunset cocktails.",
       image: "/images/hotel/pergola-lounge.jpg",
-      specs: ["Clear Glass Canopy", "Lingraj Flamed Stone", "Scalloped Rafters", "Panoramic Sea Vista"],
+      specs: ["Clear Glass Canopy", "Sunset High Tea", "Cocktail Service", "Panoramic Sea Vista"],
     },
     {
       id: "restaurant",
       num: "06",
-      plate: "PLATE VI",
+      plate: "CHAPTER VI",
       title: "The 30-Seater Restaurant",
-      elevation: "EL. +0.00 M",
       levelName: "GASTRONOMY",
-      category: "Dining Level • 457 sq. ft.",
+      category: "Coastal Odia & Global Fare",
       description:
-        "Museum-grade monochrome ceramic plate wall, mint-green vertical fluting, Italian Calacatta marble tables, and a dedicated 12'4\" × 8'10\" buffet room.",
+        "Museum-grade monochrome ceramic plate wall, mint-green vertical fluting, Italian Calacatta marble tables, and chef tasting menus.",
       image: "/images/hotel/restaurant-main.jpg",
-      specs: ["30 Seater Capacity", "Monochrome Plate Art", "Private Buffet Room", "Calacatta Tables"],
+      specs: ["Coastal Seafood", "Monochrome Plate Art", "Artisanal Buffet", "Intimate Dining"],
     },
   ];
 
@@ -216,13 +210,13 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
         >
           <div className="flex items-center space-x-24 whitespace-nowrap text-[#14161b]">
             <span className="font-serif text-[16vw] font-light tracking-tighter">
-              CHRONIQUE SPATIALE
+              HOTEL SERENE
             </span>
             <span className="font-mono text-xl tracking-[0.5em]">
-              [ ELEVATION PROFILE: ±0.00M → +21.00M ]
+              [ PURI • SACRED COASTAL RETREAT ]
             </span>
             <span className="font-serif text-[16vw] font-light tracking-tighter">
-              REFLECTIONS BY ANKITA
+              BAY OF BENGAL
             </span>
           </div>
         </div>
@@ -235,29 +229,29 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
           {/* Section Introduction Column */}
           <div className="w-[85vw] sm:w-[50vw] lg:w-[35vw] flex-shrink-0 pr-10 md:pr-14 flex flex-col justify-center">
             <div className="flex items-center space-x-3 text-[10px] font-mono uppercase tracking-[0.35em] text-[#8c7b68] mb-4 font-semibold">
-              <span>Folio III</span>
+              <span>Curated Horizons</span>
               <span className="text-[#b5afa3]">/</span>
-              <span>Spatial Traverse</span>
+              <span>The Guest Journey</span>
             </div>
 
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light leading-tight mb-5">
                 A Journey Through <br />
-                <span className="italic font-normal text-[#8c7b68]">Proportion & Silence</span>
+                <span className="italic font-normal text-[#8c7b68]">Stillness & Wonder</span>
               </h2>
             </GooeyTextReveal>
 
             <p className="text-xs sm:text-sm text-[#5a5750] leading-relaxed mb-7 font-sans font-light">
-              From the double-height street-level reception to the 5th-floor presidential retreat and sky lap pool overlooking the sacred Bay of Bengal.
+              From the serene arrival lounge to private ocean suites and sunset pergola loungers perched above the Bay of Bengal.
             </p>
 
             <div className="flex items-center space-x-3 text-[10px] font-mono uppercase tracking-widest text-[#14161b] font-medium">
-              <span>Scroll to traverse plates</span>
+              <span>Scroll to traverse chapters</span>
               <ArrowRight className="w-3.5 h-3.5 animate-pulse text-[#b58d5b]" />
             </div>
           </div>
 
-          {/* Precision Architectural Cards */}
+          {/* Precision Experience Cards */}
           {spaces.map((space, idx) => (
             <div
               key={space.id}
@@ -287,7 +281,7 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
                   {/* Clean Corner Badges */}
                   <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10 pointer-events-none">
                     <span className="px-3 py-1 rounded-full bg-[#14161b] text-white font-mono text-[9px] uppercase tracking-[0.2em] shadow-sm">
-                      {space.plate} • {space.elevation}
+                      {space.plate}
                     </span>
                     <span className="px-3 py-1 rounded-full bg-white text-[#14161b] font-mono text-[8.5px] uppercase tracking-wider shadow-sm font-semibold">
                       {space.levelName}

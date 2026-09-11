@@ -26,129 +26,91 @@ export default function AccommodationsExplorer({
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [currency, setCurrency] = useState<"INR" | "USD" | "EUR">("INR");
-  const [suiteModes, setSuiteModes] = useState<Record<string, "render" | "blueprint">>({
-    "deluxe-103": "render",
-    "suite-501": "render",
-    "suite-502-503": "render",
-    "presidential-504": "render",
-  });
 
   const suites = [
     {
       id: "deluxe-103",
       num: "01",
       title: "Deluxe Ocean Chamber",
-      category: "Typical Suite • Levels 1–4",
-      code: "ROOMS 101–404 • TYPICAL RESIDENTIAL SUITE",
-      subtitle: "Effortless minimalism, whitewashed wood fluting & ergonomic study station overlooking the bay.",
+      category: "Ocean Chamber • Levels 1–4",
+      code: "RESIDENCES 101–404 • OCEANFRONT RETREAT",
+      subtitle: "Effortless minimalism, whitewashed wood fluting, and private study bar overlooking the morning bay.",
       priceINR: 6500,
-      area: "420 sq. ft. • 12'0\" × 11'3\" Bed Area",
+      area: "420 sq. ft. • Oceanfront Vista",
       capacity: "2 Guests",
-      bed: "King Size Bed • Dual Nightstands",
-      bath: "Walk-in Rain Shower • Ceramic World Tile",
+      bed: "King Size Bed • Egyptian Cotton",
+      bath: "Walk-in Rain Shower • Vitrified Tile",
       renderImage: "/images/hotel/room-typical-render.jpg",
-      planImage: "/images/hotel/room-typical-plan.jpg",
-      materials: [
-        { label: "Floor Surface", val: "Ceramic World 600×600mm Vitrified Porcelain" },
-        { label: "Joinery / Millwork", val: "Bleached Oak Vertical Architectural Fluting" },
-        { label: "Acoustics", val: "Double Glazed Sea-Facing Soundproof Glass" },
-        { label: "Lighting", val: "Concealed 3000K Warm LED Cove Trough" },
-      ],
+      detailImage: "/images/hotel/suite-bathroom.jpg",
       features: [
-        "Tea/Coffee Station cum Study Bar (3'6\" × 1'8\")",
+        "In-Chamber Pour-Over Coffee Bar & Mini-Fridge",
         "Arched Full-Length Black Frame Vanity Mirror",
-        "Integrated Luggage Credenza & Mini-Fridge",
         "Acoustically Rated Double Glazed Sea-Facing Windows",
+        "Dedicated Tea / Study Station with Ocean Vista",
       ],
-      architectNotes:
-        "Designed with light-washed oak veneers and vertical fluting to evoke the sun-bleached driftwood of Puri's shoreline.",
     },
     {
       id: "suite-501",
       num: "02",
       title: "Balcony Suite 501",
       category: "Private Terrace • Level 5",
-      code: "5TH FLOOR • PRIVATE TERRACE TIER",
-      subtitle: "Corner ocean-facing bedroom with private cantilevered outdoor bistro balcony.",
+      code: "LEVEL 05 • PRIVATE SUNSET BALCONY",
+      subtitle: "Corner ocean-facing bedroom with an expansive private cantilevered outdoor bistro terrace.",
       priceINR: 9800,
-      area: "580 sq. ft. • 12'0\" × 13'1\" + Outdoor Balcony",
+      area: "580 sq. ft. • Private Outdoor Balcony",
       capacity: "2 Adults + 1 Child",
       bed: "King Size Luxury Bed",
-      bath: "Ensuite Private Bath (4'6\" × 7'0\")",
+      bath: "Private Rain Shower Bath",
       renderImage: "/images/hotel/room-typical-render.jpg",
-      planImage: "/images/hotel/floor-5-plan.jpg",
-      materials: [
-        { label: "Terrace Paver", val: "Lingraj Flamed Natural Coastal Stone" },
-        { label: "Joinery / Millwork", val: "Warm Teak & Fluted Oak Veneer" },
-        { label: "Balustrade", val: "Stainless Steel & Toughened Safety Glass" },
-        { label: "Illumination", val: "Architectural Exterior Weatherproof Sconces" },
-      ],
+      detailImage: "/images/hotel/hero-penthouse-clean.jpg",
       features: [
-        "Private Outdoor Balcony with Bistro Seating",
-        "Direct Seaside Ocean Morning Orientation",
-        "Dedicated Coffee Bar & Refrigerator",
-        "Immediate Access to 5th-Floor Sky Gymnasium",
+        "Private Cantilevered Balcony with Bistro Seating",
+        "Direct Seaside Ocean Morning & Sunset Vista",
+        "Dedicated In-Suite Coffee Bar & Refrigerator",
+        "Immediate Access to the Rooftop Sky Pool",
       ],
-      architectNotes:
-        "Features seamless transitional French doors opening to an exclusive cantilevered balcony overlooking the sacred Bay of Bengal.",
     },
     {
       id: "suite-502-503",
       num: "03",
       title: "Executive Suites 502 & 503",
-      category: "Executive Spa • Level 5",
-      code: "5TH FLOOR • FAMILY & EXECUTIVE TIER",
-      subtitle: "Dual-zone salon, bay window seat, master bath with freestanding spa tub & powder room.",
+      category: "Executive Spa Suite • Level 5",
+      code: "LEVEL 05 • SPA SOAKING RETREAT",
+      subtitle: "Dual-zone salon, bay window seat, master bath with freestanding soaking tub & guest powder room.",
       priceINR: 14500,
-      area: "820 sq. ft. • Formal Salon + Master Chamber",
-      capacity: "3 Adults or 2 Adults + 2 Children",
+      area: "820 sq. ft. • Master Suite & Salon",
+      capacity: "3 Adults or Family Suite",
       bed: "King Bed + Separate Living Daybed",
-      bath: "Freestanding Soaking Tub + Dual Vanity + Powder Room",
-      renderImage: "/images/hotel/room-typical-render.jpg",
-      planImage: "/images/hotel/floor-5-plan.jpg",
-      materials: [
-        { label: "Soaking Tub", val: "Freestanding Architectural Resin Tub" },
-        { label: "Bath Finishes", val: "Ceramic World Marble-Bookmatched Vitrified" },
-        { label: "Bay Window", val: "Teak Window Seat with Direct Sea Vista" },
-        { label: "Partitions", val: "Acoustic Fluted Oak Sliding Room Divider" },
-      ],
+      bath: "Freestanding Soaking Tub + Dual Vanity",
+      renderImage: "/images/hotel/suite-bathroom.jpg",
+      detailImage: "/images/hotel/room-typical-render.jpg",
       features: [
+        "Freestanding Oval Soaking Tub overlooking Beach",
         "Bay Window Daybed Seating with Panoramic Sea View",
         "Separate Master Bedroom and Entertaining Salon",
-        "Freestanding Oval Soaking Tub overlooking Beach",
         "Independent Guest Powder Room",
       ],
-      architectNotes:
-        "Designed with flexible spatial zoning for families and long-stay guests, complete with private master spa suite.",
     },
     {
       id: "presidential-504",
       num: "04",
-      title: "Presidential Suite 504",
+      title: "Presidential Penthouse 504",
       category: "Pinnacle Residence • Level 5",
-      code: "5TH FLOOR • PINNACLE RESIDENCE",
-      subtitle: "The ultimate 1,150 sq. ft. sanctuary featuring grand entertaining salon & fluted columns.",
+      code: "LEVEL 05 • PINNACLE PRESIDENTIAL SUITE",
+      subtitle: "The ultimate 1,150 sq. ft. sanctuary featuring grand entertaining salon, fluted columns & butler service.",
       priceINR: 22000,
-      area: "1,150 sq. ft. • Master Residence Salon",
+      area: "1,150 sq. ft. • Sprawling Master Residence",
       capacity: "4 Adults or Family Suite",
-      bed: "Master King Chamber + Guest Salon",
-      bath: "Spa Bath + Powder Room",
+      bed: "Master King Chamber + Entertaining Salon",
+      bath: "Master Spa Bath + Powder Room",
       renderImage: "/images/hotel/suite-504-living.jpg",
-      planImage: "/images/hotel/floor-5-plan.jpg",
-      materials: [
-        { label: "Salon Flooring", val: "Bleached Oak Chevron Hardwood Parquet" },
-        { label: "Architectural Columns", val: "Custom Fluted Bleached Oak Pilasters" },
-        { label: "Stone Elements", val: "Italian Calacatta Gold Marble Tables" },
-        { label: "Acoustics", val: "3D Geometric Sound Absorption Wall Fabric" },
-      ],
+      detailImage: "/images/hotel/hero-penthouse-clean.jpg",
       features: [
         "Formal Entertaining Salon with Dual Plush Sofas",
         "Executive Study Workstation with Direct Sea Vista",
-        "Dedicated Coffee & Champagne Bar (4'0\" × 1'6\")",
-        "Curved Fluted Architectural Column Details",
+        "Dedicated 24/7 Private Butler & In-Suite Dining",
+        "Curved Fluted Architectural Millwork & Bar",
       ],
-      architectNotes:
-        "The premier residence of Hotel Serene. Balanced neoclassical proportions, fluted columns, and custom oak millwork create an ambiance of regal tranquility.",
     },
   ];
 
@@ -204,29 +166,22 @@ export default function AccommodationsExplorer({
     return `₹${priceINR.toLocaleString("en-IN")}`;
   };
 
-  const toggleMode = (suiteId: string) => {
-    setSuiteModes((prev) => ({
-      ...prev,
-      [suiteId]: prev[suiteId] === "render" ? "blueprint" : "render",
-    }));
-  };
-
   const handleOpenSuiteLightbox = (suite: typeof suites[0]) => {
     if (!onOpenLightbox) return;
     const galleryItems: LightboxImage[] = [
       {
         src: suite.renderImage,
         alt: suite.title,
-        title: `${suite.title} • 3D Architectural Visualization`,
+        title: `${suite.title} • Primary Vista`,
         subtitle: suite.subtitle,
         provenance: suite.code,
       },
       {
-        src: suite.planImage,
-        alt: `${suite.title} Blueprint`,
-        title: `${suite.title} • Architectural Floor Blueprint`,
+        src: suite.detailImage,
+        alt: `${suite.title} Living Detail`,
+        title: `${suite.title} • Suite Detail`,
         subtitle: suite.area,
-        provenance: "Reflections by Ankita • CAD Dossier",
+        provenance: "Hotel Serene • Accommodations",
       },
     ];
     onOpenLightbox(galleryItems, 0);
@@ -253,7 +208,7 @@ export default function AccommodationsExplorer({
           <div>
             <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Chambers & Penthouses Deck</span>
+              <span>Chambers & Penthouses</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.06}>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
@@ -282,7 +237,7 @@ export default function AccommodationsExplorer({
             </div>
 
             <p className="max-w-sm text-xs text-[#5a5750] font-sans font-light leading-relaxed">
-              Explore each residence stacking dynamically like an archival luxury dossier.
+              Experience handcrafted calm overlooking the sacred Bay of Bengal.
             </p>
           </div>
         </div>
@@ -290,8 +245,6 @@ export default function AccommodationsExplorer({
         {/* GSAP Stacking Cards Container */}
         <div className="relative space-y-6 sm:space-y-10 pb-24">
           {suites.map((suite, idx) => {
-            const currentMode = suiteModes[suite.id] || "render";
-            // Sticky top offset so cards gracefully stack over each other
             const topOffset = typeof window !== 'undefined' && window.innerWidth < 640 ? 45 + idx * 15 : 75 + idx * 22;
 
             return (
@@ -305,31 +258,18 @@ export default function AccommodationsExplorer({
               >
                 {/* Card Interior Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 p-6 sm:p-10 items-center">
-                  {/* Left Column: Visual Media with Parallax Mode Switcher & Lightbox */}
+                  {/* Left Column: Visual Media with Parallax & Lightbox */}
                   <div className="lg:col-span-7 flex flex-col space-y-4">
                     <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-gray-100 border border-[rgba(20,22,27,0.08)] shadow-inner group">
-                      {currentMode === "render" ? (
-                        <ParallaxImage
-                          src={suite.renderImage}
-                          alt={suite.title}
-                          speed={0.16}
-                          scale={1.16}
-                          className="w-full h-full"
-                          imageClassName="filter brightness-[0.98] contrast-[1.05]"
-                          priority={idx === 0}
-                        />
-                      ) : (
-                        <div className="relative w-full h-full p-6 bg-[#fdfbf7]">
-                          <Image
-                            src={suite.planImage}
-                            alt={`${suite.title} Blueprint`}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 60vw"
-                            className="object-contain p-6"
-                            priority={idx === 0}
-                          />
-                        </div>
-                      )}
+                      <ParallaxImage
+                        src={suite.renderImage}
+                        alt={suite.title}
+                        speed={0.16}
+                        scale={1.16}
+                        className="w-full h-full"
+                        imageClassName="filter brightness-[0.98] contrast-[1.05]"
+                        priority={idx === 0}
+                      />
 
                       {/* Suite Number Stamp */}
                       <div className="absolute top-4 left-4 flex gap-2 z-20">
@@ -350,33 +290,13 @@ export default function AccommodationsExplorer({
                         <Maximize2 className="w-4 h-4" />
                       </button>
 
-                      {/* Interactive View Switcher (Render vs CAD) */}
-                      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center z-20">
-                        <div className="p-1 rounded-xl bg-[#14161b]/80 backdrop-blur-md border border-white/20 flex space-x-1 text-[11px] font-mono text-white shadow-lg">
-                          <button
-                            onClick={() => toggleMode(suite.id)}
-                            className={`px-4 py-1.5 rounded-lg transition-all cursor-pointer ${
-                              currentMode === "render"
-                                ? "bg-[#c5a880] text-[#14161b] font-semibold"
-                                : "text-white/70 hover:text-white"
-                            }`}
-                          >
-                            3D Render
-                          </button>
-                          <button
-                            onClick={() => toggleMode(suite.id)}
-                            className={`px-4 py-1.5 rounded-lg transition-all cursor-pointer ${
-                              currentMode === "blueprint"
-                                ? "bg-[#c5a880] text-[#14161b] font-semibold"
-                                : "text-white/70 hover:text-white"
-                            }`}
-                          >
-                            CAD Plan
-                          </button>
-                        </div>
-
-                        <span className="text-[10px] font-mono text-white/90 bg-black/60 px-3 py-1 rounded-lg backdrop-blur-md hidden sm:inline shadow-sm">
+                      {/* Bottom Info Pill */}
+                      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
+                        <span className="text-[10px] font-mono text-white/90 bg-black/60 px-3 py-1 rounded-lg backdrop-blur-md shadow-sm">
                           {suite.area}
+                        </span>
+                        <span className="text-[10px] font-mono text-white/90 bg-black/60 px-3 py-1 rounded-lg backdrop-blur-md shadow-sm">
+                          {suite.capacity}
                         </span>
                       </div>
                     </div>
@@ -418,7 +338,7 @@ export default function AccommodationsExplorer({
 
                     {/* Features Checklist */}
                     <div className="space-y-1.5 pt-3 border-t border-[rgba(20,22,27,0.08)] font-mono text-xs text-[#5a5750]">
-                      {suite.features.slice(0, 3).map((feat, fIdx) => (
+                      {suite.features.map((feat, fIdx) => (
                         <div key={fIdx} className="flex items-start space-x-2">
                           <Check className="w-3.5 h-3.5 text-[#b58d5b] mt-0.5 flex-shrink-0" />
                           <span>{feat}</span>

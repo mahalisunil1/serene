@@ -33,28 +33,28 @@ const greatVibes = Great_Vibes({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://serenepuri.com"),
-  title: "HOTEL SERENE | Puri — Coastal Neoclassical Luxury",
+  title: "HOTEL SERENE | Puri — Coastal Luxury Sanctuary",
   description:
-    "A sanctuary of classical grandeur and coastal stillness in Puri, Odisha. Featuring an iconic rooftop pool, bespoke luxury suites, and panoramic views of the sacred Bay of Bengal. Architecture and interiors by Reflections by Ankita.",
+    "A sanctuary of coastal grandeur and serene stillness in Puri, Odisha. Featuring an iconic rooftop pool, bespoke luxury suites, fine dining, and panoramic views of the sacred Bay of Bengal.",
   keywords: [
     "Hotel Serene Puri",
     "Luxury Hotel Puri",
     "Boutique Hotel Puri Odisha",
-    "Neoclassical Hotel",
+    "Puri Luxury Resort",
     "Puri Beach Resort",
     "Hotel with Rooftop Pool Puri",
-    "Reflections by Ankita",
+    "Golden Beach Puri Hotel",
   ],
   openGraph: {
-    title: "HOTEL SERENE | Puri — Coastal Neoclassical Luxury",
+    title: "HOTEL SERENE | Puri — Coastal Luxury Sanctuary",
     description:
-      "A sanctuary of classical grandeur and coastal stillness in Puri, Odisha. Featuring an iconic rooftop pool, bespoke luxury suites, and fine dining.",
+      "A sanctuary of coastal grandeur and serene stillness in Puri, Odisha. Featuring an iconic rooftop pool, bespoke luxury suites, and fine dining.",
     images: [
       {
-        url: "/images/hotel/exterior-hero.jpg",
+        url: "/images/hotel/hero-facade-clean.jpg",
         width: 1200,
         height: 800,
-        alt: "Hotel Serene Puri Neoclassical Facade",
+        alt: "Hotel Serene Puri Coastal Sanctuary",
       },
     ],
   },

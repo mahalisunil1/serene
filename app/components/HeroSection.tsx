@@ -34,9 +34,9 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
   const [isPaused,        setIsPaused]        = useState(false);
 
   const heroViews = [
-    { id: "facade",    num: "01", label: "Facade",       title: "Neoclassical Symmetrical Facade", image: "/images/hotel/hero-facade-clean.jpg"    },
-    { id: "rooftop",   num: "02", label: "Rooftop Pool", title: "Rooftop Striped Lap Pool",        image: "/images/hotel/hero-rooftop-clean.jpg"   },
-    { id: "penthouse", num: "03", label: "Penthouse",    title: "Presidential Penthouse 504",      image: "/images/hotel/hero-penthouse-clean.jpg" },
+    { id: "facade",    num: "01", label: "The Sanctuary", title: "The Grand Coastal Sanctuary", image: "/images/hotel/hero-facade-clean.jpg"    },
+    { id: "rooftop",   num: "02", label: "Sky Pool",      title: "Rooftop Striped Lap Pool",    image: "/images/hotel/hero-rooftop-clean.jpg"   },
+    { id: "penthouse", num: "03", label: "Penthouse",     title: "Presidential Penthouse 504",  image: "/images/hotel/hero-penthouse-clean.jpg" },
   ];
 
   const DURATION      = 8000;
@@ -321,7 +321,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
           <p ref={taglineRef}
             className="text-[11px] sm:text-xs font-mono uppercase text-[#c5a880] font-medium mb-5 sm:mb-7 will-change-transform"
             style={{ letterSpacing: "0.55em" }}>
-            Coastal Neoclassical Sanctuary • Puri
+            Coastal Luxury Sanctuary • Puri
           </p>
 
           <GooeyTextReveal
@@ -378,7 +378,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             className="mb-10"
           >
             <p className="max-w-2xl mx-auto text-base sm:text-xl text-white/85 font-serif italic leading-relaxed font-light">
-              &ldquo;Where classical European symmetry yields to the sacred stillness of the Bay of Bengal.&rdquo;
+              &ldquo;Where timeless coastal grace yields to the sacred stillness of the Bay of Bengal.&rdquo;
             </p>
           </GooeyTextReveal>
 

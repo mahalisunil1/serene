@@ -22,14 +22,14 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
   const watermarkRef = useRef<HTMLDivElement>(null);
   const menuCardRef = useRef<HTMLDivElement>(null);
 
-  const [selectedPhoto, setSelectedPhoto] = useState<"main" | "plates" | "fluted" | "plan">("main");
+  const [selectedPhoto, setSelectedPhoto] = useState<"main" | "plates" | "fluted">("main");
   const [activeCategory, setActiveCategory] = useState<"odia" | "global">("odia");
 
   const photos = {
     main: {
       src: "/images/hotel/restaurant-main.jpg",
       title: "The 30-Seater Dining Salon & Buffet",
-      caption: "457 sq. ft. of bespoke dining framed by Italian Calacatta marble tables and mint fluted paneling.",
+      caption: "Bespoke dining framed by Italian Calacatta marble tables, warm ambient lighting, and artisanal cuisine.",
     },
     plates: {
       src: "/images/hotel/restaurant-art-wall.jpg",
@@ -37,14 +37,9 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
       caption: "A curated museum wall featuring handcrafted monochrome ceramic plates celebrating coastal Odisha folklore.",
     },
     fluted: {
-      src: "/images/hotel/restaurant-fluted-wall.jpg",
-      title: "Mint Green Architectural Fluting",
-      caption: "Vertical wooden fluting finished in soft French sauge mint lacquer, softening acoustic reflections.",
-    },
-    plan: {
-      src: "/images/hotel/restaurant-plan.jpg",
-      title: "Restaurant Architectural Blueprint",
-      caption: "Detailed architectural spatial layout of the 30-seater dining hall and private breakfast buffet alcove.",
+      src: "/images/hotel/restaurant-fluted.jpg",
+      title: "Mint Fluted Dining Salon",
+      caption: "Tactile vertical wooden fluting finished in soft coastal sage lacquer, softening sound for private conversation.",
     },
   };
 
@@ -156,7 +151,7 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
         aria-hidden="true"
         className="absolute top-1/3 -right-20 pointer-events-none select-none text-[#14161b] opacity-[0.03] font-serif text-[16vw] font-light leading-none tracking-tighter whitespace-nowrap will-change-transform"
       >
-        GASTRONOMIE • 30 COUVERTS
+        GASTRONOMIE • HOTEL SERENE
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -197,36 +192,23 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
           {/* Left: Interactive Photography Stage with Parallax */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
             <div className="relative aspect-[16/11] w-full rounded-2xl overflow-hidden bg-white border border-[rgba(20,22,27,0.1)] shadow-xl group">
-              {selectedPhoto === "plan" ? (
-                <div className="relative w-full h-full p-6 bg-[#fdfbf7]">
-                  <Image
-                    src={photos.plan.src}
-                    alt={photos.plan.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-contain p-6"
-                    priority
-                  />
-                </div>
-              ) : (
-                <ParallaxImage
-                  src={photos[selectedPhoto].src}
-                  alt={photos[selectedPhoto].title}
-                  speed={0.18}
-                  scale={1.16}
-                  className="w-full h-full"
-                  imageClassName="filter brightness-[0.98] contrast-[1.05]"
-                  priority
-                />
-              )}
+              <ParallaxImage
+                src={photos[selectedPhoto].src}
+                alt={photos[selectedPhoto].title}
+                speed={0.18}
+                scale={1.16}
+                className="w-full h-full"
+                imageClassName="filter brightness-[0.98] contrast-[1.05]"
+                priority
+              />
 
               {/* Floating Badges */}
               <div className="absolute top-4 left-4 flex gap-2 z-20">
                 <span className="px-3 py-1 rounded-full bg-[#14161b]/85 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-wider shadow-sm">
-                  457 sq. ft. • 30 Seats
+                  Artisanal Gastronomy • 30 Seats
                 </span>
                 <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#14161b] text-[10px] font-mono uppercase tracking-wider border border-[rgba(20,22,27,0.08)] shadow-sm">
-                  Ground Floor
+                  Dining Salon
                 </span>
               </div>
 
@@ -259,8 +241,8 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
             </div>
 
             {/* Thumbnail Selectors */}
-            <div className="grid grid-cols-4 gap-2.5">
-              {(["main", "plates", "fluted", "plan"] as const).map((key) => (
+            <div className="grid grid-cols-3 gap-2.5">
+              {(["main", "plates", "fluted"] as const).map((key) => (
                 <button
                   key={key}
                   onClick={() => setSelectedPhoto(key)}
@@ -271,7 +253,7 @@ export default function DiningSection({ onReserveTable, onOpenLightbox }: Dining
                   }`}
                 >
                   <span className="text-[9px] font-mono uppercase text-[#b58d5b] block font-semibold">
-                    {key === "main" ? "Dining Salon" : key === "plates" ? "Ceramic Art" : key === "fluted" ? "Fluted Wall" : "CAD Plan"}
+                    {key === "main" ? "Dining Salon" : key === "plates" ? "Ceramic Art" : "Fluted Salon"}
                   </span>
                   <span className="text-[11px] font-serif text-[#14161b] truncate block">
                     {photos[key].title.split(" ")[0]} {photos[key].title.split(" ")[1]}

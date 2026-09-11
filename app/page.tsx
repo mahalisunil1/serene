@@ -14,7 +14,7 @@ import SpatialJourney from "./components/SpatialJourney";
 import AccommodationsExplorer from "./components/AccommodationsExplorer";
 import RooftopSanctuary from "./components/RooftopSanctuary";
 import DiningSection from "./components/DiningSection";
-import FloorNavigator from "./components/FloorNavigator";
+import WellnessSanctuary from "./components/WellnessSanctuary";
 import AmenitiesSection from "./components/AmenitiesSection";
 import PuriDestination from "./components/PuriDestination";
 import BookingDrawer from "./components/BookingDrawer";
@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      {/* Luxury Awwwards Curtain Preloader with non-linear counter */}
+      {/* Luxury Curtain Preloader */}
       <Preloader onComplete={() => setIsLoaded(true)} />
 
       {/* Trailing Spring Interactive Cursor */}
@@ -66,27 +66,27 @@ export default function Home() {
       {/* Haute Minimalist Header with discrete audio toggle & clock */}
       <Navbar onOpenBooking={() => handleOpenBooking()} />
 
-      {/* Main Archival Monograph Flow */}
+      {/* Main Luxury Resort Flow */}
       <main className="relative z-10 flex flex-col">
-        {/* Folio I: Filmic Archival Hero Section */}
+        {/* Folio I: The Grand Arrival Hero Section */}
         <HeroSection onOpenBooking={() => handleOpenBooking()} />
 
-        {/* Quiet Luxury Architectural Manifesto */}
+        {/* Quiet Luxury Sanctuary Philosophy */}
         <MersiStatement />
 
-        {/* Signature Interactive Neoclassical Facade Elevation Scanner */}
+        {/* Signature Sanctuaries Collection */}
         <InteractiveFacade
           onOpenBooking={() => handleOpenBooking()}
           onOpenLightbox={handleOpenLightbox}
         />
 
-        {/* Folio II: Neoclassical Genesis & Symmetry */}
+        {/* Folio II: The Coastal Heritage */}
         <ArchitectureStory />
 
-        {/* Folio III: GSAP Horizontal Pinned Spatial Journey */}
+        {/* Folio III: GSAP Horizontal Pinned Guest Journey */}
         <SpatialJourney onOpenBooking={() => handleOpenBooking()} />
 
-        {/* Folio IV: Chambers & Residential Collection with Live CAD Blueprint Switcher */}
+        {/* Folio IV: Chambers & Residential Collection */}
         <AccommodationsExplorer
           onSelectRoom={(roomId) => handleOpenBooking(roomId)}
           onOpenLightbox={handleOpenLightbox}
@@ -98,19 +98,19 @@ export default function Home() {
           onOpenBooking={() => handleOpenBooking()}
         />
 
-        {/* Folio VI: The 30-Seater Restaurant & Monochrome Plate Art Wall */}
+        {/* Folio VI: The 30-Seater Restaurant & Artisanal Buffet */}
         <DiningSection
           onReserveTable={() => handleOpenBooking()}
           onOpenLightbox={handleOpenLightbox}
         />
 
-        {/* Folio VII: Interactive Multi-Floor Blueprint Dossier */}
-        <FloorNavigator />
+        {/* Folio VII: Oceanfront Wellness Sanctuary & Rejuvenation Atelier */}
+        <WellnessSanctuary onBookTreatment={() => handleOpenBooking()} />
 
-        {/* Folio VIII: Architectural Appointments Schedule & Curated Services */}
+        {/* Folio VIII: Curated Resident Privileges & Services */}
         <AmenitiesSection />
 
-        {/* Folio IX: Sacred Cartography & Puri Coastal Curated Itinerary */}
+        {/* Folio IX: Sacred Puri Cartography & Curated Itinerary */}
         <PuriDestination onOpenBooking={() => handleOpenBooking()} />
       </main>
 

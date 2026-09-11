@@ -52,10 +52,10 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   const navLinks = [
     { num: "01", label: "Suites", href: "#suites" },
-    { num: "02", label: "Architecture", href: "#architecture" },
+    { num: "02", label: "Experiences", href: "#experiences" },
     { num: "03", label: "Rooftop Pool", href: "#rooftop" },
     { num: "04", label: "Dining", href: "#dining" },
-    { num: "05", label: "Blueprints", href: "#blueprints" },
+    { num: "05", label: "Wellness", href: "#wellness" },
     { num: "06", label: "Destination", href: "#destination" },
   ];
 

@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Sun, Moon, Maximize2, Sparkles, Waves, Calendar, ArrowUpRight } from "lucide-react";
+import { Sun, Moon, Maximize2, Waves, ArrowUpRight } from "lucide-react";
 import GooeyTextReveal from "@/components/ui/gooey-text-reveal";
 import { LightboxImage } from "./ImageLightbox";
 import ParallaxImage from "./ParallaxImage";
@@ -22,57 +22,41 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
   const watermarkRef = useRef<HTMLDivElement>(null);
   const specsCardRef = useRef<HTMLDivElement>(null);
 
-  const [activeTab, setActiveTab] = useState<"pool" | "pergola" | "plan">("pool");
+  const [activeTab, setActiveTab] = useState<"pool" | "pergola">("pool");
   const [ambientMood, setAmbientMood] = useState<"day" | "sunset">("day");
 
   const tabData = {
     pool: {
-      tag: "SIGNATURE FEATURE • ELEVATION +21.00 M",
+      tag: "SIGNATURE SKY SANCTUARY",
       title: "Striped Nautical Lap Pool & Waterfall",
       image: "/images/hotel/rooftop-pool.jpg",
-      elevation: "EL. +21.00 M • OPEN COASTAL HORIZON",
+      elevation: "OPEN HORIZON • BAY OF BENGAL",
       caption: "SIGNATURE STRIPED NAUTICAL MOSAIC • SHEER DESCENT WATERFALL",
       description:
-        "Featuring a striking nautical navy-and-white striped porcelain tile pattern with submerged entrance steps and an integrated sheer descent waterfall wall framed by French neoclassical parapets.",
+        "Featuring a striking nautical navy-and-white striped porcelain tile pattern with submerged entrance steps and an integrated sheer descent acoustic waterfall wall framed by tranquil sea horizons.",
       specs: [
-        { label: "Mosaic Tile", val: "Navy & White Striped Vitrified Porcelain (Ceramic World)" },
-        { label: "Hydraulics", val: "Integrated Sheer Descent Acoustic Waterfall Wall" },
-        { label: "Circulation", val: "Submerged Semicircular Entrance Steps" },
-        { label: "Parapets", val: "French Neoclassical Moldings & Waterproof Sconces" },
+        { label: "Pool Design", val: "Navy & White Striped Vitrified Porcelain" },
+        { label: "Water Feature", val: "Integrated Sheer Descent Acoustic Waterfall Wall" },
+        { label: "Basking Deck", val: "Teak Sun Loungers & Private Resident Service" },
+        { label: "Night Ambiance", val: "Submerged Underwater Architectural Glow" },
       ],
-      schedule: "Hours: 06:00 AM – 10:00 PM • Exclusively for Hotel Residents",
+      schedule: "Pool Hours: 06:00 AM – 10:00 PM • Exclusively for Hotel Residents",
     },
     pergola: {
-      tag: "SHADED SKY RETREAT • ELEVATION +21.00 M",
+      tag: "SHADED SKY RETREAT",
       title: "The Glasshouse Pergola Sky Lounge",
       image: "/images/hotel/pergola-lounge.jpg",
-      elevation: "EL. +21.00 M • ALL-WEATHER RETREAT",
+      elevation: "ALL-WEATHER SKY RETREAT",
       caption: "ALL-WEATHER GLASS CANOPY • SCALLOPED RAFTERS & MOROCCAN TILE FLOOR",
       description:
-        "Protected by an all-weather clear glass canopy supported on scalloped wooden rafters. Furnished with nautical striped outdoor sofas, colonial black carriage sconces, and natural stone from Lingraj.",
+        "Protected by an all-weather clear glass canopy with comfortable nautical striped outdoor sofas, warm lantern sconces, and panoramic sea vistas.",
       specs: [
-        { label: "Canopy Roof", val: "Tempered Laminated Clear Glass on Scalloped Rafters" },
-        { label: "Floor Pattern", val: "Portuguese & Spanish Motif Vitrified Ceramic" },
-        { label: "Stone Accents", val: "Acoustic Natural Textured Stone Wall by Lingraj" },
-        { label: "Lighting", val: "Colonial Black Metal Carriage Lantern Sconces" },
+        { label: "Canopy", val: "Tempered Clear Glass Canopy with Coastal Shade" },
+        { label: "Floor Detail", val: "Artisanal Portuguese Motif Vitrified Ceramic" },
+        { label: "Cocktail Bar", val: "Sunset Coastal Cocktails & High Tea Service" },
+        { label: "Lighting", val: "Candlelit Carriage Lantern Sconces" },
       ],
       schedule: "Sunset High Tea & Evening Cocktails: 04:30 PM – 10:30 PM",
-    },
-    plan: {
-      tag: "ARCHITECTURAL DOSSIER • REFLECTIONS BY ANKITA",
-      title: "Rooftop Terrace Spatial Blueprint",
-      image: "/images/hotel/rooftop-plan.jpg",
-      elevation: "CAD SPECIFICATION • REV-3D",
-      caption: "ZONED DRY SUN DECK & WET LAP POOL CIRCULATION • 457 SFT EQUIV.",
-      description:
-        "Intelligently zoned into a wet swimming deck and a dry shaded pergola lounge, linked by teak transition steps, perimeter landscaped planter boxes, and private lift access.",
-      specs: [
-        { label: "Vertical Core", val: "Dedicated Stretcher & Service Lift Lobby Access" },
-        { label: "Deck Surface", val: "Teak Finish Anti-Skid Vitrified Outdoor Pavers" },
-        { label: "Safety Wall", val: "1,200 mm High Reinforced French Neoclassical Parapet" },
-        { label: "Service Unit", val: "Concealed Overhead Water Reserve Enclosure" },
-      ],
-      schedule: "Drawing Ref: ROOFTOP REV-3D • Scale 1:50",
     },
   };
 
@@ -143,7 +127,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
         aria-hidden="true"
         className="absolute top-1/4 -left-20 pointer-events-none select-none text-[#14161b] opacity-[0.035] font-serif text-[18vw] font-light leading-none tracking-tighter whitespace-nowrap will-change-transform"
       >
-        ELEVATION +21.00M
+        SKY SANCTUARY
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -152,7 +136,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
           <div>
             <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#b58d5b] mb-3 font-semibold">
               <Waves className="w-3.5 h-3.5" />
-              <span>The Sky Sanctuary • Elevation +21.00 M</span>
+              <span>The Sky Sanctuary • Ocean Horizon</span>
             </div>
             <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
@@ -191,7 +175,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
 
             <GooeyTextReveal mode="scroll" start="top 80%" duration={1.4} delay={0.15}>
               <p className="max-w-sm text-xs text-[#5a5750] font-mono leading-relaxed">
-                Perched at Elevation +21.00M, the terrace commands uninterrupted sea breezes where nautical geometry meets the sacred horizon.
+                Perched high above the shoreline, the terrace commands uninterrupted sea breezes where nautical geometry meets the sacred horizon.
               </p>
             </GooeyTextReveal>
           </div>
@@ -199,7 +183,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
 
         {/* Tab Selectors */}
         <div className="flex flex-wrap gap-2.5 mb-10">
-          {(["pool", "pergola", "plan"] as const).map((tab) => (
+          {(["pool", "pergola"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -211,7 +195,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
             >
               <span className={`w-2 h-2 rounded-full ${activeTab === tab ? "bg-[#c5a880]" : "bg-gray-300"}`} />
               <span>
-                {tab === "pool" ? "Nautical Lap Pool" : tab === "pergola" ? "Pergola Sky Lounge" : "Terrace CAD Blueprint"}
+                {tab === "pool" ? "Nautical Lap Pool" : "Pergola Sky Lounge"}
               </span>
             </button>
           ))}
@@ -222,32 +206,19 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
           {/* Left: High-Resolution Photo Display with Parallax Window */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
             <div className="relative aspect-[16/11] w-full rounded-2xl overflow-hidden bg-white border border-[rgba(20,22,27,0.1)] shadow-xl group">
-              {activeTab === "plan" ? (
-                <div className="relative w-full h-full p-6 bg-[#fdfbf7]">
-                  <Image
-                    src={current.image}
-                    alt={current.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-contain p-6"
-                    priority
-                  />
-                </div>
-              ) : (
-                <ParallaxImage
-                  src={current.image}
-                  alt={current.title}
-                  speed={0.18}
-                  scale={1.16}
-                  className="w-full h-full"
-                  imageClassName={`transition-all duration-700 filter ${
-                    ambientMood === "sunset"
-                      ? "brightness-[0.92] contrast-[1.12] sepia-[0.25]"
-                      : "brightness-[0.98] contrast-[1.05]"
-                  }`}
-                  priority
-                />
-              )}
+              <ParallaxImage
+                src={current.image}
+                alt={current.title}
+                speed={0.18}
+                scale={1.16}
+                className="w-full h-full"
+                imageClassName={`transition-all duration-700 filter ${
+                  ambientMood === "sunset"
+                    ? "brightness-[0.92] contrast-[1.12] sepia-[0.25]"
+                    : "brightness-[0.98] contrast-[1.05]"
+                }`}
+                priority
+              />
 
               {/* Floating Badges */}
               <div className="absolute top-4 left-4 flex gap-2 z-20">
@@ -308,10 +279,10 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
                 </p>
               </div>
 
-              {/* Engineering Specifications Matrix */}
+              {/* Specifications Matrix */}
               <div className="space-y-2 pt-4 border-t border-[rgba(20,22,27,0.08)] font-mono text-xs">
                 <span className="text-[10px] uppercase tracking-wider text-[#827e74] font-semibold block mb-2">
-                  Architectural Specifications (Reflections by Ankita)
+                  Sanctuary Amenities
                 </span>
                 {current.specs.map((spec, idx) => (
                   <div key={idx} className="flex justify-between items-center text-[11px] pb-1.5 border-b border-[rgba(20,22,27,0.04)] last:border-0">
