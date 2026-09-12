@@ -195,10 +195,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[#7a766e] font-mono gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between text-xs text-[#7a766e] font-mono gap-4 pt-2">
           <div>
             © {new Date().getFullYear()} Hotel Serene, Puri. All rights reserved.
           </div>
+
+          {/* Exclusive Ownership Signature */}
+          <div className="flex items-center space-x-2 text-[11px] font-mono tracking-widest uppercase">
+            <span className="text-[#8c7b68]">Made by</span>
+            <span className="font-semibold text-[#14161b] tracking-[0.25em] px-2.5 py-1 rounded bg-[#ede7de] border border-[rgba(17,19,23,0.08)] shadow-xs">
+              BWARETA
+            </span>
+          </div>
+
           <div className="flex items-center space-x-6">
             <a href="#" className="hover:text-[#111317] transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-[#111317] transition-colors">Resident Terms</a>

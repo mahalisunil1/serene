@@ -230,9 +230,12 @@ export default function CuratedSanctuarySection({
 
       const wBox = Math.min(680, w * 0.62);
       const hBox = Math.min(480, h * 0.58);
-      const slitW_init = wBox / 10;
-      const gap_init = Math.min(14, w * 0.013);
-      const spreadW = wBox + 9 * gap_init;
+      const slitW_box = wBox / 10;
+
+      // Ultra-thin slit geometry: lean, razor-sharp architectural louvers
+      const slitW_init = Math.min(12, Math.max(6, w * 0.009));
+      const gap_init = Math.min(46, Math.max(22, w * 0.028));
+      const spreadW = 10 * slitW_init + 9 * gap_init;
 
       const xCenter = w / 2;
       const yCenter = (h - hBox) / 2;
@@ -242,17 +245,19 @@ export default function CuratedSanctuarySection({
         const rect = rects[i];
         if (!rect) continue;
 
-        // 1. Separated X
+        // 1. Separated X (Ultra-thin with airy spacing)
         const xSep = xCenter - spreadW / 2 + i * (slitW_init + gap_init);
-        // 2. Converged X
-        const xConv = xCenter - wBox / 2 + i * slitW_init;
-        const currentX_box = xSep + (xConv - xSep) * clipState.converge;
 
-        // 3. Expanded X
-        const xExp = i * (w / 10);
+        // 2. Converged X & Width into unified central window
+        const xConv = xCenter - wBox / 2 + i * slitW_box;
+        const currentX_box = xSep + (xConv - xSep) * clipState.converge;
+        const currentW_box = slitW_init + (slitW_box - slitW_init) * clipState.converge;
+
+        // 3. Expanded X & Width to full bleed
         const slitW_exp = w / 10;
+        const xExp = i * slitW_exp;
         const currentX = currentX_box + (xExp - currentX_box) * clipState.expand;
-        const currentW = slitW_init + (slitW_exp - slitW_init) * clipState.expand;
+        const currentW = currentW_box + (slitW_exp - currentW_box) * clipState.expand;
 
         // Progressive downward diagonal calculation
         const currentDiag = i * diagStep * (1 - clipState.level);
