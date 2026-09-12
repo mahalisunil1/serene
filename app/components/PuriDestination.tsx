@@ -80,8 +80,9 @@ export default function PuriDestination({
 
     // Showreel components
     if (controls) gsap.set(controls, { opacity: 0, y: -10 });
+    gsap.set(track, { x: 0 });
     if (showcaseRef.current) {
-      gsap.set(showcaseRef.current, { scale: 0.90, rotation: 1.5, opacity: 0.25 });
+      gsap.set(showcaseRef.current, { scale: 0.90, opacity: 0.35 });
     }
     if (caption1Ref.current) gsap.set(caption1Ref.current, { yPercent: 120, opacity: 0 });
     if (caption2Ref.current) gsap.set(caption2Ref.current, { yPercent: 120, opacity: 0 });
@@ -164,39 +165,35 @@ export default function PuriDestination({
     }
 
     // ==================================================================
-    // PHASE 2: READING WINDOW APPRECIATION HOLD (0.12 -> 0.20)
+    // PHASE 2: READING WINDOW APPRECIATION HOLD (0.12 -> 0.22)
     // ==================================================================
 
     // ==================================================================
-    // PHASE 3: CLEAN TRANSITION INTO SHOWREEL (NO TITLE EXIT ANIMATION)
+    // PHASE 3: DESTINATION TITLE HORIZONTALLY SCROLLED THROUGH (0.22 -> 0.50)
+    // Destination title scrolls horizontally off to the left without fading out!
+    // Painting showcase scrolls into dead-center!
     // ==================================================================
     if (horizonRef.current) {
       tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.08 }, 0.22);
     }
-    tl.to(intro, { opacity: 0, ease: "power1.inOut", duration: 0.08 }, 0.24);
-    tl.set(intro, { visibility: "hidden" }, 0.32);
 
-    // ==================================================================
-    // PHASE 4: ARCHIVAL HORIZONTAL ARRIVAL — PAINTING AT CENTER (0.26 -> 0.52)
-    // Only the centered painting is in view; the right side is completely clear!
-    // ==================================================================
     if (controls) {
-      tl.to(controls, { opacity: 1, y: 0, duration: 0.08, ease: "power1.out" }, 0.26);
+      tl.to(controls, { opacity: 1, y: 0, duration: 0.08, ease: "power1.out" }, 0.24);
     }
 
     tl.fromTo(
       track,
-      { x: () => window.innerWidth * 0.95 },
-      { x: () => getCenteredX(), ease: "power2.out", duration: 0.24 },
-      0.26
+      { x: 0 },
+      { x: () => getCenteredX(), ease: "power2.inOut", duration: 0.28 },
+      0.22
     );
 
     if (showcaseRef.current) {
       tl.fromTo(
         showcaseRef.current,
-        { scale: 0.90, rotation: 1.5, opacity: 0.25 },
-        { scale: 1.0, rotation: 0, opacity: 1.0, ease: "power2.out", duration: 0.24 },
-        0.26
+        { scale: 0.90, opacity: 0.35 },
+        { scale: 1.0, opacity: 1.0, ease: "power2.out", duration: 0.28 },
+        0.22
       );
     }
 
@@ -364,88 +361,88 @@ export default function PuriDestination({
         </div>
       </div>
 
-      {/* 1. Centered Hero Text Stage: Letter-by-Letter Clipped Bottom Emergence */}
-      <div
-        ref={introRef}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 z-20 pointer-events-none will-change-transform"
-      >
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
-          {/* Folio Tag: Clipped Letter by Letter */}
-          <div className="text-xs sm:text-sm font-mono uppercase tracking-[0.4em] text-[#8c7b68] mb-6 font-medium flex items-center justify-center flex-wrap">
-            {folioTag.split("").map((char, cIdx) => (
-              <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
-                <span data-tag-char className="inline-block">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              </span>
-            ))}
-          </div>
-
-          {/* Master Headline: Letter by Letter with Unclipped Flourishes */}
-          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#14161b] font-light leading-snug tracking-tight mb-8 overflow-visible">
-            {/* Line 1 */}
-            <span className="block overflow-hidden py-1">
-              {titleLine1.split(" ").map((word, wIdx) => (
-                <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em]">
-                  {word.split("").map((char, cIdx) => (
-                    <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]">
-                      <span data-title-char className="inline-block">
-                        {char}
-                      </span>
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </span>
-
-            {/* Line 2 (Script Gold - Unclipped Flourishes) */}
-            <span
-              className="block font-script text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#b58d5b] font-normal tracking-normal leading-[1.35] sm:leading-[1.25] py-4 sm:py-6 overflow-visible select-none"
-              style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
-            >
-              {titleLine2.split(" ").map((word, wIdx) => (
-                <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible">
-                  {word.split("").map((char, cIdx) => (
-                    <span key={cIdx} className="inline-block overflow-visible align-baseline">
-                      <span data-title-char className="inline-block overflow-visible will-change-transform">
-                        {char}
-                      </span>
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </span>
-          </h2>
-
-          {/* Atmospheric Description: Clipped Word by Word Emergence */}
-          <p className="max-w-2xl mx-auto text-center text-base sm:text-lg md:text-xl text-[#5a5750] font-sans font-light leading-relaxed mb-8">
-            {descriptionText.split(" ").map((word, wIdx) => (
-              <span key={wIdx} className="inline-block overflow-hidden align-top pb-[0.12em] -mb-[0.12em] mr-[0.28em] my-0.5">
-                <span data-desc-word className="inline-block">
-                  {word}
-                </span>
-              </span>
-            ))}
-          </p>
-
-          {/* Scroll Prompt: Clipped Emergence */}
-          <div className="overflow-hidden inline-block">
-            <div
-              data-prompt-inner
-              className="flex items-center space-x-3 text-xs sm:text-sm font-mono uppercase tracking-[0.3em] text-[#8c7b68] will-change-transform py-0.5"
-            >
-              <span>Scroll horizontally</span>
-              <ArrowRight className="w-4 h-4 text-[#8c7b68] animate-pulse" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* 2. The Horizontal Showreel Moving on the EXACT SAME Plane */}
       <div
         ref={trackRef}
-        className="absolute inset-0 h-full w-max flex flex-row items-center z-10 will-change-transform pt-12 pb-16"
+        className="absolute inset-0 h-full w-max flex flex-row items-center z-10 will-change-transform pointer-events-auto"
       >
+        {/* SLIDE 1: Centered Hero Text Stage: Horizontally Scrolled Through (Zero Fade Exit) */}
+        <div
+          ref={introRef}
+          className="w-screen h-full flex-shrink-0 flex flex-col items-center justify-center text-center px-6 md:px-16 will-change-transform select-none"
+        >
+          <div className="max-w-4xl mx-auto flex flex-col items-center">
+            {/* Folio Tag: Clipped Letter by Letter */}
+            <div className="text-xs sm:text-sm font-mono uppercase tracking-[0.4em] text-[#8c7b68] mb-6 font-medium flex items-center justify-center flex-wrap">
+              {folioTag.split("").map((char, cIdx) => (
+                <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
+                  <span data-tag-char className="inline-block">
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                </span>
+              ))}
+            </div>
+
+            {/* Master Headline: Letter by Letter with Unclipped Flourishes */}
+            <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#14161b] font-light leading-snug tracking-tight mb-8 overflow-visible">
+              {/* Line 1 */}
+              <span className="block overflow-hidden py-1">
+                {titleLine1.split(" ").map((word, wIdx) => (
+                  <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em]">
+                    {word.split("").map((char, cIdx) => (
+                      <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]">
+                        <span data-title-char className="inline-block">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </span>
+
+              {/* Line 2 (Script Gold - Unclipped Flourishes) */}
+              <span
+                className="block font-script text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#b58d5b] font-normal tracking-normal leading-[1.35] sm:leading-[1.25] py-4 sm:py-6 overflow-visible select-none"
+                style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+              >
+                {titleLine2.split(" ").map((word, wIdx) => (
+                  <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible">
+                    {word.split("").map((char, cIdx) => (
+                      <span key={cIdx} className="inline-block overflow-visible align-baseline">
+                        <span data-title-char className="inline-block overflow-visible will-change-transform">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </span>
+            </h2>
+
+            {/* Atmospheric Description: Clipped Word by Word Emergence */}
+            <p className="max-w-2xl mx-auto text-center text-base sm:text-lg md:text-xl text-[#5a5750] font-sans font-light leading-relaxed mb-8">
+              {descriptionText.split(" ").map((word, wIdx) => (
+                <span key={wIdx} className="inline-block overflow-hidden align-top pb-[0.12em] -mb-[0.12em] mr-[0.28em] my-0.5">
+                  <span data-desc-word className="inline-block">
+                    {word}
+                  </span>
+                </span>
+              ))}
+            </p>
+
+            {/* Scroll Prompt: Clipped Emergence */}
+            <div className="overflow-hidden inline-block">
+              <div
+                data-prompt-inner
+                className="flex items-center space-x-3 text-xs sm:text-sm font-mono uppercase tracking-[0.3em] text-[#8c7b68] will-change-transform py-0.5"
+              >
+                <span>Scroll horizontally</span>
+                <ArrowRight className="w-4 h-4 text-[#8c7b68] animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* THE SACRED CULTURAL SHOWCASE: HORIZONTAL ARRIVAL + WEBGL DISSOLVE */}
         <div
           ref={showcaseRef}

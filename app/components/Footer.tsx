@@ -200,19 +200,18 @@ export default function Footer() {
             © {new Date().getFullYear()} Hotel Serene, Puri. All rights reserved.
           </div>
 
-          {/* Exclusive Ownership Signature */}
-          <div className="flex items-center space-x-2 text-[11px] font-mono tracking-widest uppercase">
-            <span className="text-[#8c7b68]">Made by</span>
-            <span className="font-semibold text-[#14161b] tracking-[0.25em] px-2.5 py-1 rounded bg-[#ede7de] border border-[rgba(17,19,23,0.08)] shadow-xs">
-              BWARETA
-            </span>
-          </div>
-
           <div className="flex items-center space-x-6">
             <a href="#" className="hover:text-[#111317] transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-[#111317] transition-colors">Resident Terms</a>
             <a href="#" className="hover:text-[#111317] transition-colors">Concierge Desk</a>
           </div>
+        </div>
+
+        {/* Clearly Written Ownership Credit */}
+        <div className="mt-6 pt-6 border-t border-[rgba(17,19,23,0.08)] flex items-center justify-center text-center">
+          <p className="text-xs sm:text-sm font-mono text-[#3a3730] tracking-wider">
+            This Website is made by <strong className="font-bold text-[#14161b] tracking-[0.22em] uppercase">BWARETA</strong>
+          </p>
         </div>
       </div>
     </footer>

@@ -189,7 +189,7 @@ export default function CuratedSanctuarySection({
     }
 
     // Destination intro starts clipped below baseline to arise seamlessly after slits submerge
-    gsap.set(destinationIntro, { visibility: "hidden", opacity: 0, y: 0, scale: 1 });
+    gsap.set(destinationIntro, { visibility: "visible", opacity: 1, y: 0, scale: 1 });
     gsap.set(dTagChars, { yPercent: 110, opacity: 0 });
     gsap.set(dTitleChars, { yPercent: 110, opacity: 0 });
     gsap.set(dDescWords, { yPercent: 110, opacity: 0 });
@@ -198,9 +198,9 @@ export default function CuratedSanctuarySection({
 
     // Destination showreel initial states
     if (controls) gsap.set(controls, { opacity: 0, y: -10 });
-    gsap.set(destTrack, { x: () => window.innerWidth * 1.05, opacity: 0 });
+    gsap.set(destTrack, { x: 0, opacity: 0 });
     if (showcaseRef.current) {
-      gsap.set(showcaseRef.current, { scale: 0.90, rotation: 1.5, opacity: 0.25 });
+      gsap.set(showcaseRef.current, { scale: 0.90, opacity: 0.35 });
     }
     if (caption1Ref.current) gsap.set(caption1Ref.current, { yPercent: 120, opacity: 0 });
     if (caption2Ref.current) gsap.set(caption2Ref.current, { yPercent: 120, opacity: 0 });
@@ -328,8 +328,8 @@ export default function CuratedSanctuarySection({
           else if (p < 0.48) setActiveSlide(4);
 
           // Bottom progress bar during destination showreel phase
-          if (progressBarRef.current && p >= 0.75) {
-            const destProgress = Math.max(0, Math.min(1, (p - 0.75) / 0.25));
+          if (progressBarRef.current && p >= 0.72) {
+            const destProgress = Math.max(0, Math.min(1, (p - 0.72) / 0.28));
             progressBarRef.current.style.transform = `scaleX(${destProgress})`;
           }
         },
@@ -480,32 +480,31 @@ export default function CuratedSanctuarySection({
     );
 
     // ==================================================================
-    // ACT IV: DESTINATION TEXT ARISES SEAMLESSLY (0.61 -> 0.76)
+    // ACT IV: DESTINATION TEXT ARISES SEAMLESSLY (0.60 -> 0.72)
     // Directly arising from baseline the moment slits submerge!
     // ==================================================================
-    tl.set(destinationIntro, { visibility: "visible" }, 0.61);
-    tl.to(destinationIntro, { opacity: 1, ease: "power2.out", duration: 0.04 }, 0.61);
+    tl.to(destTrack, { opacity: 1, duration: 0.02 }, 0.60);
 
     tl.to(
       dTagChars,
       { yPercent: 0, opacity: 1, ease: "power2.out", stagger: { each: 0.001 }, duration: 0.04 },
-      0.62
+      0.61
     );
 
     tl.to(
       dTitleChars,
       { yPercent: 0, opacity: 1, ease: "power2.out", stagger: { each: 0.0015 }, duration: 0.05 },
-      0.63
+      0.62
     );
 
     tl.to(
       dDescWords,
       { yPercent: 0, opacity: 1, ease: "power2.out", stagger: { each: 0.001 }, duration: 0.04 },
-      0.64
+      0.63
     );
 
     if (dPromptInner) {
-      tl.to(dPromptInner, { yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.04 }, 0.65);
+      tl.to(dPromptInner, { yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.04 }, 0.64);
     }
 
     if (horizonRef.current) {
@@ -513,41 +512,41 @@ export default function CuratedSanctuarySection({
         horizonRef.current,
         { scaleX: 0, opacity: 0 },
         { scaleX: 1, opacity: 0.45, ease: "power2.out", duration: 0.05 },
-        0.63
+        0.62
       );
     }
 
-    // Reading Window Hold: 0.67 -> 0.73
+    // Reading Window Hold: 0.64 -> 0.72
 
-    // Clean fade-out into showreel with NO title exit drop animation
-    tl.to(destinationIntro, { opacity: 0, ease: "power1.inOut", duration: 0.03 }, 0.73);
+    // ==================================================================
+    // ACT V: DESTINATION TITLE HORIZONTALLY SCROLLED THROUGH (0.72 -> 0.84)
+    // The title does NOT fade exit; it smoothly scrolls horizontally off to the left
+    // as the centered painting showcase glides into dead-center!
+    // ==================================================================
     if (horizonRef.current) {
-      tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.03 }, 0.73);
+      tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.04 }, 0.72);
     }
-    tl.set(destinationIntro, { visibility: "hidden" }, 0.76);
 
-    // ==================================================================
-    // ACT V: SACRED CULTURAL SHOWREEL & ORIGINAL UNTOUCHED CONCIERGE (0.75 -> 1.00)
-    // ==================================================================
     if (controls) {
-      tl.to(controls, { opacity: 1, y: 0, duration: 0.04, ease: "power1.out" }, 0.75);
+      tl.to(controls, { opacity: 1, y: 0, duration: 0.04, ease: "power1.out" }, 0.73);
     }
 
-    // Cultural Showcase Frame enters from right to DEAD-CENTER
-    tl.to(destTrack, { opacity: 1, duration: 0.02 }, 0.75);
+    // Horizontal track translates from x: 0 to getCenteredX()
+    // Slide 1 (Destination Title) horizontally scrolls off-screen to the left!
+    // Slide 2 (Showcase Frame) horizontally scrolls into dead-center!
     tl.fromTo(
       destTrack,
-      { x: () => window.innerWidth * 0.95 },
-      { x: () => getCenteredX(), ease: "power2.out", duration: 0.12 },
-      0.75
+      { x: 0 },
+      { x: () => getCenteredX(), ease: "power2.inOut", duration: 0.12 },
+      0.72
     );
 
     if (showcaseRef.current) {
       tl.fromTo(
         showcaseRef.current,
-        { scale: 0.90, rotation: 1.5, opacity: 0.25 },
-        { scale: 1.0, rotation: 0, opacity: 1.0, ease: "power2.out", duration: 0.12 },
-        0.75
+        { scale: 0.92, opacity: 0.35 },
+        { scale: 1.0, opacity: 1.0, ease: "power2.out", duration: 0.12 },
+        0.72
       );
     }
 
@@ -635,12 +634,14 @@ export default function CuratedSanctuarySection({
 
     let targetP = progress;
     if (direction === "next") {
-      if (progress < 0.82) targetP = 0.87;
-      else if (progress < 0.92) targetP = 0.96;
+      if (progress < 0.72) targetP = 0.84;
+      else if (progress < 0.88) targetP = 0.90;
+      else if (progress < 0.95) targetP = 0.97;
       else targetP = 1.0;
     } else {
       if (progress > 0.94) targetP = 0.89;
-      else if (progress > 0.85) targetP = 0.68;
+      else if (progress > 0.83) targetP = 0.83;
+      else if (progress > 0.68) targetP = 0.64;
       else targetP = 0.40;
     }
 
@@ -879,81 +880,6 @@ export default function CuratedSanctuarySection({
         className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8c7b68]/35 to-transparent pointer-events-none origin-center z-20"
       />
 
-      {/* ── ACT IV: DESTINATION INTRO TEXT (ARISES AFTER SLITS SUBMERGE) ── */}
-      <div
-        ref={destinationIntroRef}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 z-30 pointer-events-none will-change-transform"
-      >
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
-          {/* Destination Folio Tag */}
-          <div className="text-xs sm:text-sm font-mono uppercase tracking-[0.4em] text-[#8c7b68] mb-6 font-medium flex items-center justify-center flex-wrap">
-            {destinationFolioTag.split("").map((char, cIdx) => (
-              <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
-                <span data-dest-tag-char className="inline-block">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              </span>
-            ))}
-          </div>
-
-          {/* Destination Master Headline */}
-          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#14161b] font-light leading-snug tracking-tight mb-8 overflow-visible">
-            <span className="block overflow-hidden py-1">
-              {destinationTitleLine1.split(" ").map((word, wIdx) => (
-                <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em]">
-                  {word.split("").map((char, cIdx) => (
-                    <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]">
-                      <span data-dest-title-char className="inline-block">
-                        {char}
-                      </span>
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </span>
-
-            <span
-              className="block font-script text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#b58d5b] font-normal tracking-normal leading-[1.35] sm:leading-[1.25] py-4 sm:py-6 overflow-visible select-none"
-              style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
-            >
-              {destinationTitleLine2.split(" ").map((word, wIdx) => (
-                <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible">
-                  {word.split("").map((char, cIdx) => (
-                    <span key={cIdx} className="inline-block overflow-visible align-baseline">
-                      <span data-dest-title-char className="inline-block overflow-visible will-change-transform">
-                        {char}
-                      </span>
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </span>
-          </h2>
-
-          {/* Destination Poetic Description */}
-          <p className="max-w-2xl mx-auto text-center text-base sm:text-lg md:text-xl text-[#5a5750] font-sans font-light leading-relaxed mb-8">
-            {destinationDescriptionText.split(" ").map((word, wIdx) => (
-              <span key={wIdx} className="inline-block overflow-hidden align-top pb-[0.12em] -mb-[0.12em] mr-[0.28em] my-0.5">
-                <span data-dest-desc-word className="inline-block">
-                  {word}
-                </span>
-              </span>
-            ))}
-          </p>
-
-          {/* Destination Scroll Prompt */}
-          <div className="overflow-hidden inline-block">
-            <div
-              data-dest-prompt-inner
-              className="flex items-center space-x-3 text-xs sm:text-sm font-mono uppercase tracking-[0.3em] text-[#8c7b68] will-change-transform py-0.5"
-            >
-              <span>Scroll horizontally</span>
-              <ArrowRight className="w-4 h-4 text-[#8c7b68] animate-pulse" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* ── ACT V: DESTINATION TOP CONTROLS BAR ── */}
       <div
         ref={controlsRef}
@@ -987,8 +913,83 @@ export default function CuratedSanctuarySection({
       {/* ── ACT V: DESTINATION HORIZONTAL CULTURAL SHOWREEL TRACK ── */}
       <div
         ref={destinationTrackRef}
-        className="absolute inset-0 h-full w-max flex flex-row items-center z-30 will-change-transform pt-12 pb-16 opacity-0"
+        className="absolute inset-0 h-full w-max flex flex-row items-center z-30 will-change-transform opacity-0 pointer-events-auto"
       >
+        {/* SLIDE 1: DESTINATION INTRO TITLE (Horizontally scrolled through with zero fade exit) */}
+        <div
+          ref={destinationIntroRef}
+          className="w-screen h-full flex-shrink-0 flex flex-col items-center justify-center text-center px-6 md:px-16 will-change-transform select-none"
+        >
+          <div className="max-w-4xl mx-auto flex flex-col items-center">
+            {/* Destination Folio Tag */}
+            <div className="text-xs sm:text-sm font-mono uppercase tracking-[0.4em] text-[#8c7b68] mb-6 font-medium flex items-center justify-center flex-wrap">
+              {destinationFolioTag.split("").map((char, cIdx) => (
+                <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
+                  <span data-dest-tag-char className="inline-block">
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                </span>
+              ))}
+            </div>
+
+            {/* Destination Master Headline */}
+            <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#14161b] font-light leading-snug tracking-tight mb-8 overflow-visible">
+              <span className="block overflow-hidden py-1">
+                {destinationTitleLine1.split(" ").map((word, wIdx) => (
+                  <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em]">
+                    {word.split("").map((char, cIdx) => (
+                      <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]">
+                        <span data-dest-title-char className="inline-block">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </span>
+
+              <span
+                className="block font-script text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#b58d5b] font-normal tracking-normal leading-[1.35] sm:leading-[1.25] py-4 sm:py-6 overflow-visible select-none"
+                style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+              >
+                {destinationTitleLine2.split(" ").map((word, wIdx) => (
+                  <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible">
+                    {word.split("").map((char, cIdx) => (
+                      <span key={cIdx} className="inline-block overflow-visible align-baseline">
+                        <span data-dest-title-char className="inline-block overflow-visible will-change-transform">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </span>
+            </h2>
+
+            {/* Destination Poetic Description */}
+            <p className="max-w-2xl mx-auto text-center text-base sm:text-lg md:text-xl text-[#5a5750] font-sans font-light leading-relaxed mb-8">
+              {destinationDescriptionText.split(" ").map((word, wIdx) => (
+                <span key={wIdx} className="inline-block overflow-hidden align-top pb-[0.12em] -mb-[0.12em] mr-[0.28em] my-0.5">
+                  <span data-dest-desc-word className="inline-block">
+                    {word}
+                  </span>
+                </span>
+              ))}
+            </p>
+
+            {/* Destination Scroll Prompt */}
+            <div className="overflow-hidden inline-block">
+              <div
+                data-dest-prompt-inner
+                className="flex items-center space-x-3 text-xs sm:text-sm font-mono uppercase tracking-[0.3em] text-[#8c7b68] will-change-transform py-0.5"
+              >
+                <span>Scroll horizontally</span>
+                <ArrowRight className="w-4 h-4 text-[#8c7b68] animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Cultural Showcase Frame: Painting + WebGL Fluid Dissolve Canvas */}
         <div
           ref={showcaseRef}
