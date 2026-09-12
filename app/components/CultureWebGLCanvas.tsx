@@ -121,7 +121,7 @@ const fragmentShader = `
     // Soft dissolve mask through organic watercolor dispersion
     float edgeWidth = 0.16;
     float threshold = p * (1.0 + edgeWidth * 2.0) - edgeWidth;
-    float dissolve = smoothstep(threshold - edgeWidth, threshold + edgeWidth, combinedNoise);
+    float dissolve = 1.0 - smoothstep(threshold - edgeWidth, threshold + edgeWidth, combinedNoise);
 
     // Pigment transition: blend textures
     vec4 finalColor = mix(col1, col2, dissolve);
