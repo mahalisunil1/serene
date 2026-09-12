@@ -517,32 +517,13 @@ export default function CuratedSanctuarySection({
       );
     }
 
-    // Reading Window Hold: 0.67 -> 0.71
+    // Reading Window Hold: 0.67 -> 0.73
 
-    // Destination text departure into baseline (0.71 -> 0.77)
-    tl.to(destinationIntro, { y: -24, scale: 0.96, ease: "power2.inOut", duration: 0.05 }, 0.71);
-    if (dPromptInner) {
-      tl.to(dPromptInner, { yPercent: 130, opacity: 0, ease: "power1.in", duration: 0.03 }, 0.71);
-    }
-    tl.to(
-      dDescWords,
-      { yPercent: 130, ease: "power1.in", stagger: { each: 0.001, from: "end" }, duration: 0.03 },
-      0.72
-    );
-    tl.to(
-      dTitleChars,
-      { yPercent: 120, opacity: 0, ease: "power1.in", stagger: { each: 0.0015, from: "end" }, duration: 0.035 },
-      0.72
-    );
-    tl.to(
-      dTagChars,
-      { yPercent: 130, ease: "power1.in", stagger: { each: 0.001, from: "end" }, duration: 0.025 },
-      0.73
-    );
+    // Clean fade-out into showreel with NO title exit drop animation
+    tl.to(destinationIntro, { opacity: 0, ease: "power1.inOut", duration: 0.03 }, 0.73);
     if (horizonRef.current) {
       tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.03 }, 0.73);
     }
-    tl.to(destinationIntro, { opacity: 0, ease: "power1.inOut", duration: 0.03 }, 0.74);
     tl.set(destinationIntro, { visibility: "hidden" }, 0.76);
 
     // ==================================================================

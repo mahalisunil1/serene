@@ -168,31 +168,12 @@ export default function PuriDestination({
     // ==================================================================
 
     // ==================================================================
-    // PHASE 3: CINEMATIC DEPARTURE INTO BASELINE (0.20 -> 0.32)
+    // PHASE 3: CLEAN TRANSITION INTO SHOWREEL (NO TITLE EXIT ANIMATION)
     // ==================================================================
-    tl.to(intro, { y: -30, scale: 0.96, ease: "power2.inOut", duration: 0.12 }, 0.20);
     if (horizonRef.current) {
       tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.08 }, 0.22);
     }
-    if (promptInner) {
-      tl.to(promptInner, { yPercent: 130, opacity: 0, ease: "power1.in", duration: 0.05 }, 0.20);
-    }
-    tl.to(
-      descWords,
-      { yPercent: 130, ease: "power1.in", stagger: { each: 0.0015, from: "end" }, duration: 0.07 },
-      0.21
-    );
-    tl.to(
-      titleChars,
-      { yPercent: 120, opacity: 0, ease: "power1.in", stagger: { each: 0.002, from: "end" }, duration: 0.08 },
-      0.22
-    );
-    tl.to(
-      tagChars,
-      { yPercent: 130, ease: "power1.in", stagger: { each: 0.0015, from: "end" }, duration: 0.06 },
-      0.24
-    );
-    tl.to(intro, { opacity: 0, ease: "power1.inOut", duration: 0.05 }, 0.27);
+    tl.to(intro, { opacity: 0, ease: "power1.inOut", duration: 0.08 }, 0.24);
     tl.set(intro, { visibility: "hidden" }, 0.32);
 
     // ==================================================================
