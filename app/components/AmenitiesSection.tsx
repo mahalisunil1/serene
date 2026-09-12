@@ -56,7 +56,10 @@ export default function AmenitiesSection() {
   ];
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)]">
+    <section
+      id="amenities"
+      className="py-16 sm:py-20 md:py-24 px-6 md:px-12 bg-[#ede7de] border-t border-[rgba(17,19,23,0.1)] relative"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6 pb-6 border-b border-[rgba(17,19,23,0.1)]">
@@ -66,7 +69,7 @@ export default function AmenitiesSection() {
               <span className="text-[#b5afa3]">/</span>
               <span>Services</span>
             </div>
-            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.1}>
+            <GooeyTextReveal mode="scrub" pin={true} splitBy="words" stagger={0.06} blurAmount={0.5}>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 Curated Resident Privileges <br />
                 <span className="italic font-normal text-[#8c7b68]">& Hospitality Amenities</span>

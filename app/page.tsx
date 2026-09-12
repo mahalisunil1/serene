@@ -16,8 +16,8 @@ import RooftopSanctuary from "./components/RooftopSanctuary";
 import DiningSection from "./components/DiningSection";
 import WellnessSanctuary from "./components/WellnessSanctuary";
 import AmenitiesSection from "./components/AmenitiesSection";
-import AmbienceStory from "./components/AmbienceStory";
 import PuriDestination from "./components/PuriDestination";
+import CuratedSanctuarySection from "./components/CuratedSanctuarySection";
 import BookingDrawer from "./components/BookingDrawer";
 import FloatingBookingBar from "./components/FloatingBookingBar";
 import ImageLightbox, { LightboxImage } from "./components/ImageLightbox";
@@ -68,7 +68,7 @@ export default function Home() {
       <Navbar onOpenBooking={() => handleOpenBooking()} />
 
       {/* Main Luxury Resort Flow */}
-      <main className="relative z-10 flex flex-col">
+      <main className="relative z-10 w-full block">
         {/* Folio I: The Grand Arrival Hero Section */}
         <HeroSection onOpenBooking={() => handleOpenBooking()} />
 
@@ -114,8 +114,8 @@ export default function Home() {
           onOpenLightbox={handleOpenLightbox}
         /> */}
 
-        {/* Folio IX: Sacred Puri Cultural Showreel */}
-        <PuriDestination
+        {/* Folio VIII & IX: Unified Resident Sanctuary Louvers, Vertical Amenities & Sacred Puri Cultural Showreel */}
+        <CuratedSanctuarySection
           onOpenBooking={() => handleOpenBooking()}
           onOpenLightbox={handleOpenLightbox}
         />

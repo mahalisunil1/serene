@@ -138,7 +138,7 @@ export default function RooftopSanctuary({ onOpenLightbox, onOpenBooking }: Roof
               <Waves className="w-3.5 h-3.5" />
               <span>The Sky Sanctuary • Ocean Horizon</span>
             </div>
-            <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
+            <GooeyTextReveal mode="scrub" pin={true} splitBy="words" stagger={0.06} blurAmount={0.5}>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#14161b] font-light tracking-tight leading-tight">
                 Rooftop Striped Pool <br />
                 <span className="italic font-normal text-[#b58d5b]">& Pergola Sky Lounge</span>

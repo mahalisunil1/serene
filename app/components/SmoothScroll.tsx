@@ -29,13 +29,11 @@ export default function SmoothScroll({
 
     const lenis = new Lenis({
       lerp: 0.08,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.2,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
       smoothWheel: true,
       syncTouch: true,
-      syncTouchLerp: 0.075,
       autoRaf: false,
-      anchors: true,
     });
     lenisRef.current = lenis;
 

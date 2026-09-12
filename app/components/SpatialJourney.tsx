@@ -5,7 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, BedDouble, Bath, Users, Sparkles, CheckCircle2 } from "lucide-react";
-import GooeyTextReveal from "@/components/ui/gooey-text-reveal";
 
 interface SpatialJourneyProps {
   onOpenBooking: (roomId?: string) => void;
@@ -92,27 +91,31 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
     const bgTrack = bgTrackRef.current;
     if (!trigger || !section) return;
 
-    // Timeline for coordinated horizontal scroll
+    // ── MASTER PINNED HORIZONTAL TRAVERSAL ────────────────────────────────
+    // scrub: 0.8 provides buttery smooth GSAP inertia with Lenis.
+    // anticipatePin: 0 prevents any premature pinning jumps.
+    const horizontalDistance = section.scrollWidth - window.innerWidth;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: trigger,
         start: "top top",
-        end: () => `+=${Math.max(1600, section.scrollWidth - window.innerWidth)}`,
+        end: () => `+=${(sectionRef.current?.scrollWidth || 3000) - window.innerWidth + window.innerWidth * 0.35}`,
         scrub: 0.8,
         pin: true,
         pinSpacing: true,
-        anticipatePin: 1,
+        anticipatePin: 0,
         invalidateOnRefresh: true,
       },
     });
 
-    // 1. Smoothly scroll the midground cards track
+    // 1. Smoothly traverse the midground cards track
     tl.to(
       section,
       {
-        x: () => -(section.scrollWidth - window.innerWidth),
+        x: () => -horizontalDistance,
         ease: "none",
-        duration: 1,
+        duration: 0.88,
       },
       0
     );
@@ -122,9 +125,9 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
       tl.to(
         bgTrack,
         {
-          x: () => -(section.scrollWidth - window.innerWidth) * 0.35,
+          x: () => -horizontalDistance * 0.35,
           ease: "none",
-          duration: 1,
+          duration: 0.88,
         },
         0
       );
@@ -136,15 +139,14 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
         tl.fromTo(
           img,
           { xPercent: -6 },
-          { xPercent: 6, ease: "none", duration: 1 },
+          { xPercent: 6, ease: "none", duration: 0.88 },
           0
         );
       }
     });
 
     // 4. Wheel-like rotation effect: upcoming cards lean slightly and straighten as they enter view
-    const totalScrollWidth = section.scrollWidth - window.innerWidth;
-    if (totalScrollWidth > 0) {
+    if (horizontalDistance > 0) {
       cardRefs.current.forEach((card, idx) => {
         if (!card) return;
 
@@ -152,10 +154,10 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
         const enterX = cardLeft - window.innerWidth;
         const straightX = cardLeft - window.innerWidth * 0.35;
 
-        const pEnter = Math.max(0, enterX / totalScrollWidth);
-        const pStraight = Math.min(1, Math.max(pEnter + 0.1, straightX / totalScrollWidth));
+        const pEnter = Math.max(0, (enterX / horizontalDistance) * 0.88);
+        const pStraight = Math.min(0.88, Math.max(pEnter + 0.06, (straightX / horizontalDistance) * 0.88));
 
-        const initialAngle = idx === 0 ? 0 : 10;
+        const initialAngle = idx === 0 ? 0 : 8;
 
         gsap.set(card, {
           rotation: initialAngle,
@@ -169,7 +171,7 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
             {
               rotation: 0,
               ease: "power1.out",
-              duration: pStraight - pEnter,
+              duration: Math.max(0.04, pStraight - pEnter),
             },
             pEnter
           );
@@ -177,12 +179,21 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
       });
     }
 
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
+    // 5. Exit Transition Hand-off (0.88 -> 1.00):
+    // Soft depth recession and opacity settle as unpinning approaches,
+    // creating a seamless hand-off into PuriDestination.
+    tl.to(
+      section,
+      {
+        scale: 0.985,
+        opacity: 0.92,
+        ease: "power1.in",
+        duration: 0.12,
+      },
+      0.88
+    );
 
     return () => {
-      clearTimeout(timer);
       tl.kill();
     };
   }, []);
@@ -225,17 +236,15 @@ export default function SpatialJourney({ onOpenBooking }: SpatialJourneyProps) {
             <span>Chambers & Suites</span>
           </div>
 
-          <GooeyTextReveal mode="scroll" splitBy="words" start="top 85%" duration={1.6} stagger={0.08}>
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light leading-tight mb-5">
-              Refined Rooms & <br />
-              <span
-                className="font-script text-4xl sm:text-6xl lg:text-7xl text-[#b58d5b] block font-normal tracking-normal leading-[1.3] py-2 overflow-visible"
-                style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
-              >
-                Coastal Sanctuaries
-              </span>
-            </h2>
-          </GooeyTextReveal>
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#14161b] font-light leading-tight mb-5 overflow-visible">
+            Refined Rooms & <br />
+            <span
+              className="font-script text-4xl sm:text-6xl lg:text-7xl text-[#b58d5b] block font-normal tracking-normal leading-[1.3] py-2 overflow-visible"
+              style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
+            >
+              Coastal Sanctuaries
+            </span>
+          </h2>
 
           <p className="text-xs sm:text-sm text-[#5a5750] leading-relaxed mb-7 font-sans font-light">
             Three handcrafted tiers of stillness overlooking the sacred Bay of Bengal. Every residence includes private ensuite baths, acoustic glazing, and direct rooftop pool privileges.

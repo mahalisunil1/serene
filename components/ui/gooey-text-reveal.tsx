@@ -45,9 +45,38 @@ export interface GooeyTextRevealProps
   disabled?: boolean;
   /** Called after the reveal completes. */
   onComplete?: () => void;
+  /** Whether to pin during the reveal, or an element/ref/selector to pin. */
+  pin?: boolean | string | HTMLElement | React.RefObject<HTMLElement | null>;
+  /** Custom trigger element or ref. Defaults to container or pin target. */
+  trigger?: string | HTMLElement | React.RefObject<HTMLElement | null>;
+  /** Whether to add pin spacing when pinned. Defaults to true. */
+  pinSpacing?: boolean;
+  /** Scrub smoothing value in seconds, or true. Defaults to 0.8 in scrub mode. */
+  scrub?: boolean | number;
+  /** Anticipate pin value for smoother scroll start. Defaults to 1 when pinned. */
+  anticipatePin?: number;
+  /** Optional external GSAP Timeline to hook into instead of creating a standalone ScrollTrigger. */
+  timeline?: gsap.core.Timeline | null;
+  /** Position or label on the external timeline where this reveal starts. Defaults to 0. */
+  timelineStart?: number | string;
+  /** Duration of this reveal within the external timeline. Defaults to 1. */
+  timelineDuration?: number;
+  /** Fraction of scroll progress reserved for holding text completely clear and legible before unpinning (0 to 0.5). Defaults to 0.25 when pinned. */
+  readingBuffer?: number;
 }
 
-const LINE_EDGE_BLUR = 0.5;
+const LINE_EDGE_BLUR = 0.3;
+
+function resolveTarget(
+  target?: string | HTMLElement | React.RefObject<HTMLElement | null> | null,
+): HTMLElement | string | undefined {
+  if (!target) return undefined;
+  if (typeof target === "string" || target instanceof HTMLElement) return target;
+  if (typeof target === "object" && "current" in target && target.current) {
+    return target.current;
+  }
+  return undefined;
+}
 
 function wrapItem(item: HTMLElement, blurAmount: number) {
   const inner = document.createElement("span");
@@ -90,14 +119,23 @@ export const GooeyTextReveal = React.forwardRef<
     delay = 0,
     duration = 1.6,
     stagger = 0.08,
-    blurAmount = 0.45,
-    ease = "power3.out",
-    start = "top 85%",
-    end = "bottom 70%",
+    blurAmount = 0.38,
+    ease = "power2.out",
+    start,
+    end,
     scroller,
     once = true,
     disabled = false,
     onComplete,
+    pin,
+    trigger,
+    pinSpacing = true,
+    scrub = 1.5,
+    anticipatePin = 0,
+    timeline,
+    timelineStart = 0,
+    timelineDuration = 1,
+    readingBuffer,
     style,
     ...props
   },
@@ -137,15 +175,19 @@ export const GooeyTextReveal = React.forwardRef<
       }
 
       let splits: SplitText[] = [];
-      let tween: gsap.core.Tween | null = null;
+      let tween: gsap.core.Tween | gsap.core.Timeline | null = null;
       let animationFrame = 0;
       let measuredWidth = container.getBoundingClientRect().width;
       let disposed = false;
 
       const revert = () => {
-        tween?.scrollTrigger?.kill();
-        tween?.kill();
-        tween = null;
+        if (tween) {
+          if ("scrollTrigger" in tween && tween.scrollTrigger) {
+            tween.scrollTrigger.kill();
+          }
+          tween.kill();
+          tween = null;
+        }
 
         splits.forEach((split) => split.revert());
         splits = [];
@@ -170,7 +212,7 @@ export const GooeyTextReveal = React.forwardRef<
             aria: "auto",
           });
 
-          // 1. Apply the threshold filter to the lines so elements inside can melt together
+          // 1. Apply the threshold filter to the lines so elements inside melt together
           split.lines.forEach((line) => {
             const lineEl = line as HTMLElement;
             lineEl.style.filter = `url(#${filterId}) blur(${LINE_EDGE_BLUR}px)`;
@@ -205,62 +247,235 @@ export const GooeyTextReveal = React.forwardRef<
         const fromVars: gsap.TweenVars = {
           filter: `blur(${blurAmount}em)`,
           opacity: 0,
-          y: mode === "scrub" ? 0 : 8,
+          y: 14,
+          scale: 0.96,
+          transformOrigin: "center bottom",
         };
 
         const animationVars: gsap.TweenVars = {
           filter: "blur(0em)",
           opacity: 1,
           y: 0,
+          scale: 1,
           duration,
-          ease: mode === "scrub" ? "none" : ease,
-          stagger: mode === "scrub" ? 0.04 : stagger,
+          ease: "power2.out",
+          stagger: {
+            each: mode === "scrub" || Boolean(timeline) ? 0.04 : stagger,
+            from: "start",
+            ease: "sine.inOut",
+          },
           delay: mode === "immediate" ? delay : 0,
           onComplete: () => {
-            // Restore crystal-clear subpixel rendering after reveal completes
-            layers.forEach((layer) => {
-              layer.style.filter = "none";
-            });
-            splits.forEach((s) => {
-              s.lines.forEach((line) => {
-                (line as HTMLElement).style.filter = "none";
+            if (mode !== "scrub" && !timeline) {
+              layers.forEach((layer) => {
+                layer.style.filter = "none";
               });
-            });
+              splits.forEach((s) => {
+                s.lines.forEach((line) => {
+                  (line as HTMLElement).style.filter = "none";
+                });
+              });
+            }
             onComplete?.();
           },
         };
 
+        // Option A: Hook into an external parent GSAP timeline
+        if (timeline) {
+          const tStart = timelineStart !== undefined ? timelineStart : 0;
+          const tDur = timelineDuration !== undefined ? timelineDuration : 1;
+          const stag = (tDur * 0.58) / Math.max(1, layers.length - 1);
+
+          const tlTween = gsap.fromTo(
+            layers,
+            fromVars,
+            {
+              filter: "blur(0em)",
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: tDur * 0.48,
+              ease: "power2.out",
+              stagger: {
+                each: stag,
+                from: "start",
+                ease: "sine.inOut",
+              },
+            },
+          );
+
+          timeline.add(tlTween, tStart);
+          tween = tlTween;
+          return;
+        }
+
+        // Option B: Standalone Scrub (with optional Pinning and Reading Buffer)
         if (mode === "scrub") {
           const resolvedScroller =
             typeof scroller === "string" || scroller instanceof HTMLElement
               ? scroller
               : scroller?.current ?? undefined;
 
+          const resolvedPinTarget: HTMLElement | string | boolean = (() => {
+            if (!pin) return false;
+            if (typeof pin === "boolean") {
+              const trg = resolveTarget(trigger);
+              return trg || container.closest("section") || container;
+            }
+            return (
+              resolveTarget(pin) || container.closest("section") || container
+            );
+          })();
+
+          const resolvedTrigger: HTMLElement | string = (() => {
+            const trg = resolveTarget(trigger);
+            if (trg) return trg;
+            if (resolvedPinTarget && typeof resolvedPinTarget !== "boolean") {
+              return resolvedPinTarget;
+            }
+            return container.closest("section") || container;
+          })();
+
+          const effectiveStart =
+            start ?? (resolvedPinTarget ? "top top" : "top 85%");
+          const effectiveEnd =
+            end ?? (resolvedPinTarget ? "+=220%" : "bottom 70%");
+          const effectiveScrub =
+            typeof scrub === "number" || typeof scrub === "boolean"
+              ? scrub
+              : 1.5;
+          const effectiveBuffer = resolvedPinTarget
+            ? readingBuffer !== undefined
+              ? readingBuffer
+              : 0.25
+            : 0;
+
+          if (resolvedPinTarget) {
+            const scrubTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: resolvedTrigger,
+                start: effectiveStart,
+                end: effectiveEnd,
+                scrub: effectiveScrub,
+                pin: resolvedPinTarget,
+                pinSpacing,
+                anticipatePin,
+                invalidateOnRefresh: true,
+                scroller: resolvedScroller,
+                onLeave: () => {
+                  splits.forEach((s) => {
+                    s.lines.forEach((line) => {
+                      (line as HTMLElement).style.filter = "none";
+                    });
+                  });
+                  layers.forEach((l) => {
+                    l.style.filter = "none";
+                  });
+                  onComplete?.();
+                },
+                onEnterBack: () => {
+                  splits.forEach((s) => {
+                    s.lines.forEach((line) => {
+                      (line as HTMLElement).style.filter = `url(#${filterId}) blur(${LINE_EDGE_BLUR}px)`;
+                    });
+                  });
+                  layers.forEach((l) => {
+                    l.style.filter = "";
+                  });
+                },
+              },
+            });
+
+            const activeRatio = Math.max(0.2, 1 - effectiveBuffer);
+            const stag = (activeRatio * 0.58) / Math.max(1, layers.length - 1);
+
+            scrubTl.fromTo(
+              layers,
+              fromVars,
+              {
+                filter: "blur(0em)",
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: activeRatio * 0.48,
+                ease: "power2.out",
+                stagger: {
+                  each: stag,
+                  from: "start",
+                  ease: "sine.inOut",
+                },
+              },
+              0,
+            );
+
+            // Reading buffer hold so user can read complete text before unpinning
+            if (effectiveBuffer > 0) {
+              scrubTl.to({}, { duration: effectiveBuffer });
+            }
+
+            tween = scrubTl;
+            return;
+          }
+
+          // Unpinned scrub fallback
           animationVars.scrollTrigger = {
-            trigger: container,
-            start,
-            end,
-            scrub: 0.8,
+            trigger: resolvedTrigger,
+            start: effectiveStart,
+            end: effectiveEnd,
+            scrub: effectiveScrub,
             invalidateOnRefresh: true,
             scroller: resolvedScroller,
           };
-        } else if (mode === "scroll") {
+          tween = gsap.fromTo(layers, fromVars, animationVars);
+          return;
+        }
+
+        // Option C: Traditional Scroll Triggered Reveal
+        if (mode === "scroll") {
           const resolvedScroller =
             typeof scroller === "string" || scroller instanceof HTMLElement
               ? scroller
               : scroller?.current ?? undefined;
 
+          const resolvedPinTarget: HTMLElement | string | boolean = (() => {
+            if (!pin) return false;
+            if (typeof pin === "boolean") {
+              const trg = resolveTarget(trigger);
+              return trg || container.closest("section") || container;
+            }
+            return (
+              resolveTarget(pin) || container.closest("section") || container
+            );
+          })();
+
+          const resolvedTrigger: HTMLElement | string = (() => {
+            const trg = resolveTarget(trigger);
+            if (trg) return trg;
+            if (resolvedPinTarget && typeof resolvedPinTarget !== "boolean") {
+              return resolvedPinTarget;
+            }
+            return container.closest("section") || container;
+          })();
+
           animationVars.delay = delay;
           animationVars.scrollTrigger = {
-            trigger: container,
-            start,
+            trigger: resolvedTrigger,
+            start: start ?? (resolvedPinTarget ? "top top" : "top 85%"),
+            pin: resolvedPinTarget || false,
+            pinSpacing,
+            anticipatePin,
             once,
-            toggleActions: once ? "play none none none" : "play none none reverse",
+            toggleActions: once
+              ? "play none none none"
+              : "play none none reverse",
             invalidateOnRefresh: true,
             scroller: resolvedScroller,
           };
+          tween = gsap.fromTo(layers, fromVars, animationVars);
+          return;
         }
 
+        // Option D: Immediate Reveal (e.g. Hero on page load)
         tween = gsap.fromTo(layers, fromVars, animationVars);
       };
 
@@ -301,6 +516,7 @@ export const GooeyTextReveal = React.forwardRef<
     },
     {
       scope: containerRef,
+      dependencies: [timeline, mode, splitBy, pin, trigger, disabled],
     },
   );
 
@@ -326,7 +542,7 @@ export const GooeyTextReveal = React.forwardRef<
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9"
             />
           </filter>
         </defs>

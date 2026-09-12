@@ -69,25 +69,50 @@ export default function PuriDestination({
     const descWords = intro.querySelectorAll("[data-desc-word]");
     const promptInner = intro.querySelector("[data-prompt-inner]");
 
-    // Text is initially static in resting position. Ensure visible and clean.
+    // ── INITIAL STATES ────────────────────────────────────────────────
+    // Destination intro text starts clipped below baseline to arise seamlessly after submerged slits
     gsap.set(intro, { visibility: "visible", opacity: 1, y: 0, scale: 1 });
-    gsap.set(tagChars, { yPercent: 0 });
-    gsap.set(titleChars, { yPercent: 0 });
-    gsap.set(descWords, { yPercent: 0 });
-    if (promptInner) gsap.set(promptInner, { yPercent: 0, opacity: 1 });
+    gsap.set(tagChars, { yPercent: 110, opacity: 0 });
+    gsap.set(titleChars, { yPercent: 110, opacity: 0 });
+    gsap.set(descWords, { yPercent: 110, opacity: 0 });
+    if (promptInner) gsap.set(promptInner, { yPercent: 60, opacity: 0 });
     if (horizonRef.current) gsap.set(horizonRef.current, { scaleX: 0, opacity: 0 });
+
+    // Showreel components
+    if (controls) gsap.set(controls, { opacity: 0, y: -10 });
     if (showcaseRef.current) {
       gsap.set(showcaseRef.current, { scale: 0.90, rotation: 1.5, opacity: 0.25 });
     }
     if (caption1Ref.current) gsap.set(caption1Ref.current, { yPercent: 120, opacity: 0 });
     if (caption2Ref.current) gsap.set(caption2Ref.current, { yPercent: 120, opacity: 0 });
-    if (conciergeRef.current) gsap.set(conciergeRef.current, { x: 60, scale: 0.94, opacity: 0.25 });
 
-    // ---------------------------------------------------------------------
-    // PINNED STAGE: Static Reading Window -> Clipped Reverse Out -> Horizontal Scroll
-    // ---------------------------------------------------------------------
-    const totalScroll = Math.max(3000, track.scrollWidth + window.innerWidth);
+    // Concierge starts completely hidden with zero opacity and horizontal offset
+    // so that it NEVER peeks onto the screen while the painting is centered!
+    if (conciergeRef.current) {
+      gsap.set(conciergeRef.current, { x: 80, scale: 0.94, opacity: 0 });
+    }
 
+    const totalScroll = Math.max(3400, track.scrollWidth + window.innerWidth);
+
+    // Centered X coordinate calculator for the cultural showcase frame
+    const getCenteredX = () => {
+      if (!showcaseRef.current) return 0;
+      const showcase = showcaseRef.current;
+      return (window.innerWidth - showcase.offsetWidth) / 2 - showcase.offsetLeft;
+    };
+
+    const getConciergeTargetX = () => {
+      if (!conciergeRef.current || !track) return 0;
+      const concierge = conciergeRef.current;
+      const w = window.innerWidth;
+      const targetScreenLeft = w >= 1024
+        ? Math.round(w * 0.48)
+        : Math.max(20, Math.round((w - concierge.offsetWidth) / 2));
+
+      return targetScreenLeft - concierge.offsetLeft;
+    };
+
+    // ── PINNED MASTER SHOWREEL TIMELINE ────────────────────────────────
     const tl = gsap.timeline({
       id: "puri-showreel-tl",
       scrollTrigger: {
@@ -108,172 +133,161 @@ export default function PuriDestination({
       },
     });
 
-    // A. Static Reading Window: Text remains static and centered as scrolling starts (0.0 -> 0.08)
-
-    // B. Cinematic Departure: Camera pushes gently inward as letters cascade down into baseline (0.08 -> 0.24)
-    tl.to(intro, { y: -30, scale: 0.96, ease: "power2.inOut", duration: 0.16 }, 0.08);
-
-    // Subtle golden parchment horizon filament awakens
-    if (horizonRef.current) {
-      tl.fromTo(
-        horizonRef.current,
-        { scaleX: 0, opacity: 0 },
-        { scaleX: 1, opacity: 0.45, ease: "power2.out", duration: 0.12 },
-        0.08
-      );
-      tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.08 }, 0.22);
-    }
-
-    if (promptInner) {
-      tl.to(promptInner, { yPercent: 130, opacity: 0, ease: "power1.in", duration: 0.06 }, 0.08);
-    }
-
-    tl.to(
-      descWords,
-      {
-        yPercent: 130,
-        ease: "power1.in",
-        stagger: { each: 0.002, from: "end" },
-        duration: 0.08,
-      },
-      0.09
-    );
-
-    tl.to(
-      titleChars,
-      {
-        yPercent: 120,
-        opacity: 0,
-        ease: "power1.in",
-        stagger: { each: 0.0025, from: "end" },
-        duration: 0.09,
-      },
-      0.11
-    );
-
+    // ==================================================================
+    // PHASE 1: DESTINATION TEXT ARISES SEAMLESSLY (0.00 -> 0.12)
+    // Directly continuing from the submerged slits of the previous section
+    // ==================================================================
     tl.to(
       tagChars,
-      {
-        yPercent: 130,
-        ease: "power1.in",
-        stagger: { each: 0.002, from: "end" },
-        duration: 0.07,
-      },
-      0.14
+      { yPercent: 0, opacity: 1, ease: "power2.out", stagger: { each: 0.001 }, duration: 0.06 },
+      0.0
     );
-
-    // Fade intro completely as it finishes recess
-    tl.to(intro, { opacity: 0, ease: "power1.inOut", duration: 0.06 }, 0.20);
-    tl.set(intro, { visibility: "hidden" }, 0.265);
-
-    // Top Controls Reveal as Showreel Starts (0.18 -> 0.26)
-    if (controls) {
-      gsap.set(controls, { opacity: 0, y: -10 });
-      tl.to(controls, { opacity: 1, y: 0, duration: 0.08, ease: "power1.out" }, 0.18);
+    tl.to(
+      titleChars,
+      { yPercent: 0, opacity: 1, ease: "power2.out", stagger: { each: 0.0015 }, duration: 0.08 },
+      0.01
+    );
+    tl.to(
+      descWords,
+      { yPercent: 0, opacity: 1, ease: "power2.out", stagger: { each: 0.001 }, duration: 0.06 },
+      0.03
+    );
+    if (promptInner) {
+      tl.to(promptInner, { yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.06 }, 0.05);
+    }
+    if (horizonRef.current) {
+      tl.to(
+        horizonRef.current,
+        { scaleX: 1, opacity: 0.45, ease: "power2.out", duration: 0.08 },
+        0.02
+      );
     }
 
-    // Centered X coordinate calculator for the cultural showcase frame
-    const getCenteredX = () => {
-      if (!showcaseRef.current) return 0;
-      const showcase = showcaseRef.current;
-      return (window.innerWidth - showcase.offsetWidth) / 2 - showcase.offsetLeft;
-    };
+    // ==================================================================
+    // PHASE 2: READING WINDOW APPRECIATION HOLD (0.12 -> 0.20)
+    // ==================================================================
 
-    // ---------------------------------------------------------------------
-    // C. FIRST IMAGE ARCHIVAL HORIZONTAL ARRIVAL (0.16 -> 0.42)
-    // Floats in from depth: scales up, settles tilt, rises to full opacity
-    // ---------------------------------------------------------------------
+    // ==================================================================
+    // PHASE 3: CINEMATIC DEPARTURE INTO BASELINE (0.20 -> 0.32)
+    // ==================================================================
+    tl.to(intro, { y: -30, scale: 0.96, ease: "power2.inOut", duration: 0.12 }, 0.20);
+    if (horizonRef.current) {
+      tl.to(horizonRef.current, { opacity: 0, ease: "power1.in", duration: 0.08 }, 0.22);
+    }
+    if (promptInner) {
+      tl.to(promptInner, { yPercent: 130, opacity: 0, ease: "power1.in", duration: 0.05 }, 0.20);
+    }
+    tl.to(
+      descWords,
+      { yPercent: 130, ease: "power1.in", stagger: { each: 0.0015, from: "end" }, duration: 0.07 },
+      0.21
+    );
+    tl.to(
+      titleChars,
+      { yPercent: 120, opacity: 0, ease: "power1.in", stagger: { each: 0.002, from: "end" }, duration: 0.08 },
+      0.22
+    );
+    tl.to(
+      tagChars,
+      { yPercent: 130, ease: "power1.in", stagger: { each: 0.0015, from: "end" }, duration: 0.06 },
+      0.24
+    );
+    tl.to(intro, { opacity: 0, ease: "power1.inOut", duration: 0.05 }, 0.27);
+    tl.set(intro, { visibility: "hidden" }, 0.32);
+
+    // ==================================================================
+    // PHASE 4: ARCHIVAL HORIZONTAL ARRIVAL — PAINTING AT CENTER (0.26 -> 0.52)
+    // Only the centered painting is in view; the right side is completely clear!
+    // ==================================================================
+    if (controls) {
+      tl.to(controls, { opacity: 1, y: 0, duration: 0.08, ease: "power1.out" }, 0.26);
+    }
+
     tl.fromTo(
       track,
-      {
-        x: () => window.innerWidth * 0.95,
-      },
-      {
-        x: () => getCenteredX(),
-        ease: "power2.out",
-        duration: 0.26,
-      },
-      0.16
+      { x: () => window.innerWidth * 0.95 },
+      { x: () => getCenteredX(), ease: "power2.out", duration: 0.24 },
+      0.26
     );
 
     if (showcaseRef.current) {
       tl.fromTo(
         showcaseRef.current,
         { scale: 0.90, rotation: 1.5, opacity: 0.25 },
-        { scale: 1.0, rotation: 0, opacity: 1.0, ease: "power2.out", duration: 0.26 },
-        0.16
+        { scale: 1.0, rotation: 0, opacity: 1.0, ease: "power2.out", duration: 0.24 },
+        0.26
       );
     }
 
-    // Caption 1 (Shree Mandir) reveals with clipped elevation as painting locks into center (0.34 -> 0.42)
+    // Caption 1 (Shree Mandir) reveals as painting locks dead-center (0.42 -> 0.50)
     if (caption1Ref.current) {
       tl.fromTo(
         caption1Ref.current,
         { yPercent: 120, opacity: 0 },
         { yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.08 },
-        0.34
+        0.42
       );
     }
 
-    // ---------------------------------------------------------------------
-    // D. LIVING HERITAGE WEBGL DISSOLVE TRANSITION (0.42 -> 0.68)
-    // Showcase frame breathes while WebGL shader smoothly dissolves Shree Mandir into Golden Beach
-    // ---------------------------------------------------------------------
+    // ==================================================================
+    // PHASE 5: LIVING HERITAGE WEBGL DISSOLVE TRANSITION (0.52 -> 0.74)
+    // Shree Mandir dissolves smoothly into Golden Beach
+    // ==================================================================
     const dissolveState = { progress: 0 };
     tl.to(
       dissolveState,
       {
         progress: 1,
         ease: "none",
-        duration: 0.26,
+        duration: 0.22,
         onUpdate: () => {
           webglRef.current?.setProgress(dissolveState.progress);
         },
       },
-      0.42
+      0.52
     );
 
-    // Subtle showcase frame breathing cushion during dissolve
     if (showcaseRef.current) {
-      tl.to(showcaseRef.current, { scale: 1.018, ease: "sine.inOut", duration: 0.13 }, 0.42);
-      tl.to(showcaseRef.current, { scale: 1.0, ease: "sine.inOut", duration: 0.13 }, 0.55);
+      tl.to(showcaseRef.current, { scale: 1.018, ease: "sine.inOut", duration: 0.11 }, 0.52);
+      tl.to(showcaseRef.current, { scale: 1.0, ease: "sine.inOut", duration: 0.11 }, 0.63);
     }
 
-    // Captions Crossfade: Shree Mandir glides up and out, Golden Beach glides up and in
+    // Captions Crossfade: Shree Mandir out, Golden Beach in
     if (caption1Ref.current && caption2Ref.current) {
-      tl.to(caption1Ref.current, { y: -10, opacity: 0, ease: "power1.out", duration: 0.10 }, 0.46);
+      tl.to(caption1Ref.current, { y: -10, opacity: 0, ease: "power1.out", duration: 0.08 }, 0.55);
       tl.fromTo(
         caption2Ref.current,
         { y: 12, yPercent: 0, opacity: 0 },
-        { y: 0, yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.12 },
-        0.52
+        { y: 0, yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.10 },
+        0.60
       );
     }
 
-    // ---------------------------------------------------------------------
-    // E. COASTLINE DEPARTURE & SANCTUARY CONCIERGE ARRIVAL (0.68 -> 1.0)
-    // Showcase frame recedes to the left; Concierge arrives with depth elevation
-    // ---------------------------------------------------------------------
+    // ==================================================================
+    // PHASE 6: COASTLINE DEPARTURE & ORIGINAL SANCTUARY CONCIERGE ARRIVAL (0.74 -> 1.00)
+    // Showcase frame recedes left; untouched original concierge slate glides in!
+    // ==================================================================
     tl.to(
       track,
       {
-        x: () => -(track.scrollWidth - window.innerWidth + 60),
+        x: () => getConciergeTargetX(),
         ease: "power2.inOut",
-        duration: 0.32,
+        duration: 0.26,
       },
-      0.68
+      0.74
     );
 
     if (showcaseRef.current) {
-      tl.to(showcaseRef.current, { scale: 0.94, opacity: 0.6, ease: "power1.inOut", duration: 0.30 }, 0.68);
+      tl.to(showcaseRef.current, { scale: 0.94, opacity: 0.6, ease: "power1.inOut", duration: 0.22 }, 0.74);
     }
 
+    // Original Concierge Slate emerges only as the showreel glides to it
     if (conciergeRef.current) {
       tl.fromTo(
         conciergeRef.current,
-        { x: 60, scale: 0.93, opacity: 0.25 },
-        { x: 0, scale: 1.0, opacity: 1.0, ease: "power2.out", duration: 0.28 },
-        0.72
+        { x: 80, scale: 0.93, opacity: 0 },
+        { x: 0, scale: 1.0, opacity: 1.0, ease: "power2.out", duration: 0.22 },
+        0.78
       );
     }
 
@@ -292,12 +306,12 @@ export default function PuriDestination({
 
     let targetP = progress;
     if (direction === "next") {
-      if (progress < 0.30) targetP = 0.42;
-      else if (progress < 0.65) targetP = 0.70;
+      if (progress < 0.25) targetP = 0.45;
+      else if (progress < 0.65) targetP = 0.76;
       else targetP = 1.0;
     } else {
-      if (progress > 0.72) targetP = 0.55;
-      else if (progress > 0.38) targetP = 0.0;
+      if (progress > 0.76) targetP = 0.58;
+      else if (progress > 0.35) targetP = 0.15;
       else targetP = 0.0;
     }
 
@@ -355,14 +369,14 @@ export default function PuriDestination({
           <button
             onClick={() => handleGlide("prev")}
             aria-label="Previous painting"
-            className="w-9 h-9 rounded-full bg-[#f4ebdd]/80 hover:bg-[#14161b] hover:text-[#f4ebdd] text-[#14161b] transition-all flex items-center justify-center backdrop-blur-sm active:scale-95 cursor-pointer"
+            className="w-9 h-9 rounded-full bg-[#f4ebdd]/80 hover:bg-[#14161b] hover:text-[#f4ebdd] text-[#14161b] transition-all flex items-center justify-center backdrop-blur-sm active:scale-95 cursor-pointer shadow-sm"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={() => handleGlide("next")}
             aria-label="Next painting"
-            className="w-9 h-9 rounded-full bg-[#f4ebdd]/80 hover:bg-[#14161b] hover:text-[#f4ebdd] text-[#14161b] transition-all flex items-center justify-center backdrop-blur-sm active:scale-95 cursor-pointer"
+            className="w-9 h-9 rounded-full bg-[#f4ebdd]/80 hover:bg-[#14161b] hover:text-[#f4ebdd] text-[#14161b] transition-all flex items-center justify-center backdrop-blur-sm active:scale-95 cursor-pointer shadow-sm"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -379,10 +393,7 @@ export default function PuriDestination({
           <div className="text-xs sm:text-sm font-mono uppercase tracking-[0.4em] text-[#8c7b68] mb-6 font-medium flex items-center justify-center flex-wrap">
             {folioTag.split("").map((char, cIdx) => (
               <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
-                <span
-                  data-tag-char
-                  className="inline-block"
-                >
+                <span data-tag-char className="inline-block">
                   {char === " " ? "\u00A0" : char}
                 </span>
               </span>
@@ -394,19 +405,10 @@ export default function PuriDestination({
             {/* Line 1 */}
             <span className="block overflow-hidden py-1">
               {titleLine1.split(" ").map((word, wIdx) => (
-                <span
-                  key={wIdx}
-                  className="inline-block whitespace-nowrap mr-[0.26em]"
-                >
+                <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em]">
                   {word.split("").map((char, cIdx) => (
-                    <span
-                      key={cIdx}
-                      className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]"
-                    >
-                      <span
-                        data-title-char
-                        className="inline-block"
-                      >
+                    <span key={cIdx} className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em]">
+                      <span data-title-char className="inline-block">
                         {char}
                       </span>
                     </span>
@@ -421,19 +423,10 @@ export default function PuriDestination({
               style={{ fontFamily: "var(--font-script), 'Great Vibes', cursive" }}
             >
               {titleLine2.split(" ").map((word, wIdx) => (
-                <span
-                  key={wIdx}
-                  className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible"
-                >
+                <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.26em] overflow-visible">
                   {word.split("").map((char, cIdx) => (
-                    <span
-                      key={cIdx}
-                      className="inline-block overflow-visible align-baseline"
-                    >
-                      <span
-                        data-title-char
-                        className="inline-block overflow-visible will-change-transform"
-                      >
+                    <span key={cIdx} className="inline-block overflow-visible align-baseline">
+                      <span data-title-char className="inline-block overflow-visible will-change-transform">
                         {char}
                       </span>
                     </span>
@@ -446,14 +439,8 @@ export default function PuriDestination({
           {/* Atmospheric Description: Clipped Word by Word Emergence */}
           <p className="max-w-2xl mx-auto text-center text-base sm:text-lg md:text-xl text-[#5a5750] font-sans font-light leading-relaxed mb-8">
             {descriptionText.split(" ").map((word, wIdx) => (
-              <span
-                key={wIdx}
-                className="inline-block overflow-hidden align-top pb-[0.12em] -mb-[0.12em] mr-[0.28em] my-0.5"
-              >
-                <span
-                  data-desc-word
-                  className="inline-block"
-                >
+              <span key={wIdx} className="inline-block overflow-hidden align-top pb-[0.12em] -mb-[0.12em] mr-[0.28em] my-0.5">
+                <span data-desc-word className="inline-block">
                   {word}
                 </span>
               </span>
@@ -534,10 +521,10 @@ export default function PuriDestination({
           </div>
         </div>
 
-        {/* SLIDE 3: Concluding Concierge Slate */}
+        {/* SLIDE 3: Concluding Concierge Slate — Exact Original Editorial Design (Untouched!) */}
         <div
           ref={conciergeRef}
-          className="w-[75vw] sm:w-[45vw] lg:w-[35vw] flex-shrink-0 pl-8 md:pl-16 pr-12 flex flex-col justify-center will-change-transform"
+          className="w-[85vw] sm:w-[50vw] lg:w-[42vw] max-w-[580px] flex-shrink-0 ml-8 sm:ml-12 lg:ml-16 pr-6 flex flex-col justify-center will-change-transform"
         >
           <div className="flex flex-col justify-center">
             <div className="text-[10px] font-mono uppercase tracking-[0.35em] text-[#8c7b68] mb-4 font-semibold">
